@@ -12,7 +12,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
 
     public CreateDatabase(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
@@ -50,9 +50,6 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "price integer )";
         db.execSQL(tb_product);
 
-        String tb_bill = "create table Bill (" +
-                "id integer primary key, " +
-                "";
 
     }
 
