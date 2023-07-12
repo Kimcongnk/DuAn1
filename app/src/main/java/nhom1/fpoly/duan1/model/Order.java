@@ -1,19 +1,19 @@
 package nhom1.fpoly.duan1.model;
 
-public class Oder {
-    private int idOder, idUser;
+public class Order {
+    private int orderId, idUser;
     private String dateOder, Status;
     private double totalMoney;
 
-    public Oder() {
+    public Order() {
     }
 
-    public int getIdOder() {
-        return idOder;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setIdOder(int idOder) {
-        this.idOder = idOder;
+    public void setOrderId(int oderId) {
+        this.orderId = oderId;
     }
 
     public int getIdUser() {
