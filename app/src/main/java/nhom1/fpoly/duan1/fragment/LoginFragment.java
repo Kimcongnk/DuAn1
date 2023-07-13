@@ -31,13 +31,15 @@ public class LoginFragment extends Fragment {
         btn_login = view.findViewById(R.id.btn_login);
 
         btn_login.setOnClickListener(login -> {
-            String username = edt_login_username.getText().toString().trim();
-            if (username.equals("admin")){
-                startActivity(new Intent(requireActivity(), AdminActivity.class));
-            } else if (username.equals("customer")){
-                startActivity(new Intent(requireActivity(), CustomerActivity.class));
-            };
+//            String username = edt_login_username.getText().toString().trim();
+//            if (username.equals("admin")){
+//                startActivity(new Intent(requireActivity(), AdminActivity.class));
+//            } else if (username.equals("customer")){
+//                startActivity(new Intent(requireActivity(), CustomerActivity.class));
+//            };
+            startActivity(new Intent(requireActivity(), CustomerActivity.class));
         });
+
 
         txt_register.setOnClickListener(register -> {
             FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
