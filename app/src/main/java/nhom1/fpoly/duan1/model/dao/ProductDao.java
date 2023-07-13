@@ -1,4 +1,4 @@
-package nhom1.fpoly.duan1.dao;
+package nhom1.fpoly.duan1.model.dao;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
