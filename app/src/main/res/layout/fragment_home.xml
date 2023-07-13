@@ -68,9 +68,10 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/addDanhMuc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Xem thêm"
+                android:text="Thêm"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -108,10 +109,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_more_product"
+                android:id="@+id/addProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Xem thêm"
+                android:text="Thêm"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
         </LinearLayout>
