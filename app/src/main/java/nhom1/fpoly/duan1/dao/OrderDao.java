@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import nhom1.fpoly.duan1.database.DBHelper;
 import nhom1.fpoly.duan1.model.Order;
 
 public class OrderDao {
@@ -59,7 +60,7 @@ public class OrderDao {
             Order order = new Order();
             order.setOrderId(cursor.getInt(cursor.getColumnIndex("order_id")));
             order.setIdUser(cursor.getInt(cursor.getColumnIndex("user_id")));
-            order.setIdUser(cursor.getString(cursor.getColumnIndex("order_date")));
+            order.setDateOder(cursor.getString(cursor.getColumnIndex("order_date")));
             order.setTotalMoney(cursor.getDouble(cursor.getColumnIndex("total_money")));
             order.setStatus(cursor.getString(cursor.getColumnIndex("status")));
             orderList.add(order);
