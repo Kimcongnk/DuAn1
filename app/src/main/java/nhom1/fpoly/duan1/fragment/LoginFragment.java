@@ -16,6 +16,8 @@ import android.widget.TextView;
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.admin.AdminActivity;
 import nhom1.fpoly.duan1.customer.CustomerActivity;
+import nhom1.fpoly.duan1.model.Admin;
+import nhom1.fpoly.duan1.model.User;
 
 public class LoginFragment extends Fragment {
     EditText edt_login_username, edt_login_password;
@@ -32,11 +34,8 @@ public class LoginFragment extends Fragment {
 
         btn_login.setOnClickListener(login -> {
             String username = edt_login_username.getText().toString().trim();
-            if (username.equals("admin")){
-                startActivity(new Intent(requireActivity(), AdminActivity.class));
-            } else if (username.equals("customer")){
-                startActivity(new Intent(requireActivity(), CustomerActivity.class));
-            };
+            String password = edt_login_password.getText().toString().trim();
+
         });
 
         txt_register.setOnClickListener(register -> {

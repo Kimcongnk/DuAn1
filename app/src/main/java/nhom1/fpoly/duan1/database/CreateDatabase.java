@@ -11,7 +11,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
     private static final String DB_NAME = "Delivery.db";
     private static final int DB_VERSION = 1;
 
-    public CreateDatabase(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public CreateDatabase(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -26,6 +26,8 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "address text, " +
                 "phone text )";
         db.execSQL(tb_user);
+        String insert_user = "insert into User values (0, 'Nguyen Duong', 'duongnd', 'test@123', 'duongnd@gmail.com', 'Hà Nội', '012345687' ) ";
+        db.execSQL(insert_user);
 
         String tb_admin = "create table Admin ( " +
                 "id_admin integer primary key autoincrement, " +
@@ -33,6 +35,8 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "username text, " +
                 "password text )";
         db.execSQL(tb_admin);
+        String insert_admin = "insert into Admin values (0, 'Nguyễn Dương', 'admin', 'admin') ";
+        db.execSQL(insert_admin);
 
         String tb_category = "create table Category ( " +
                 "id_category integer primary key autoincrement, " +

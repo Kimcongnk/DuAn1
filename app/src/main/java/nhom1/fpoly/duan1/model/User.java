@@ -14,6 +14,10 @@ public class User {
         this.address = address;
     }
 
+    public User() {
+
+    }
+
     public int getUser_id() {
         return user_id;
     }
