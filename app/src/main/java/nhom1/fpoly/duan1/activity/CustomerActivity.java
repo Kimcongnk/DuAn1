@@ -11,9 +11,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import nhom1.fpoly.duan1.R;
+import nhom1.fpoly.duan1.customer.fragment.HomeFragment;
 import nhom1.fpoly.duan1.fragment.AccountFragment;
 import nhom1.fpoly.duan1.fragment.CartFragment;
-import nhom1.fpoly.duan1.fragment.HomeFragment;
 import nhom1.fpoly.duan1.fragment.OrderFragment;
 
 public class CustomerActivity extends AppCompatActivity {
