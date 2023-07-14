@@ -40,15 +40,15 @@ public class LoginFragment extends Fragment {
             String password = edt_login_password.getText().toString();
             if (username.isEmpty() || password.isEmpty()){
                 Toast.makeText(requireActivity(), "", Toast.LENGTH_SHORT).show();
-            } else {
-                boolean checkAdmin = adminDao.checkUserPassword(username, password);
-                if (checkAdmin){
+            } else
+                    adminDao = new AdminDao(getContext());
+                if (adminDao.checkUserPassword(username,password)){
                     Toast.makeText(requireActivity(), "login admin success", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(requireActivity(), "login admin failed", Toast.LENGTH_SHORT).show();
                 }
 
-            }
+
         });
 
         txt_register.setOnClickListener(register -> {
