@@ -15,9 +15,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import nhom1.fpoly.duan1.R;
-import nhom1.fpoly.duan1.fragment.ThongKeFragment;
 import nhom1.fpoly.duan1.view.admin.fragment.AddCategoriesFragment;
 import nhom1.fpoly.duan1.view.admin.fragment.AddProductFragment;
+import nhom1.fpoly.duan1.view.admin.fragment.ThongKeFragment;
 import nhom1.fpoly.duan1.view.admin.fragment.ViewOrderFragment;
 
 public class AdminActivity extends AppCompatActivity {
@@ -30,26 +30,40 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin2);
-//        initViews()
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView_admin);
-//        if (savedInstanceState == null) {
-//            replaceFragment(new ThongKeFragment());
-//        }
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.nav_statistic){
+        setContentView(R.layout.activity_admin);
+//        setContentView(R.layout.activity_admin2);
+//        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView_admin);
+        initViews();
+        if (savedInstanceState == null) {
+            replaceFragment(new ThongKeFragment());
+        }
+        navigationView.setNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.nav_statistic) {
                 replaceFragment(new ThongKeFragment());
-            } else if (item.getItemId() == R.id.nav_view_order){
+            } else if (item.getItemId() == R.id.nav_view_order) {
                 replaceFragment(new ViewOrderFragment());
-            } else if (item.getItemId() == R.id.nav_add_product){
+            } else if (item.getItemId() == R.id.nav_add_product) {
                 replaceFragment(new AddProductFragment());
-            } else if (item.getItemId() == R.id.nav_add_category){
+            } else if (item.getItemId() == R.id.nav_add_category) {
                 replaceFragment(new AddCategoriesFragment());
             }
-//            setTitle(item.getTitle());
-//            drawerLayout.closeDrawer(GravityCompat.START);
+            setTitle(item.getTitle());
+            drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
+
+//        bottomNavigationView.setOnItemSelectedListener(item -> {
+//            if (item.getItemId() == R.id.nav_statistic){
+//                replaceFragment(new ThongKeFragment());
+//            } else if (item.getItemId() == R.id.nav_view_order){
+//                replaceFragment(new ViewOrderFragment());
+//            } else if (item.getItemId() == R.id.nav_add_product){
+//                replaceFragment(new AddProductFragment());
+//            } else if (item.getItemId() == R.id.nav_add_category){
+//                replaceFragment(new AddCategoriesFragment());
+//            }
+//            return true;
+//        });
     }
 
     private void initViews() {
@@ -66,7 +80,7 @@ public class AdminActivity extends AppCompatActivity {
         FragmentManager fragmentManager;
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_admin2, fragment);
+        fragmentTransaction.replace(R.id.fragment_admin, fragment);
         fragmentTransaction.commit();
     }
 

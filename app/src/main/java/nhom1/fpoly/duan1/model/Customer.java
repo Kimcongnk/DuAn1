@@ -1,11 +1,11 @@
 package nhom1.fpoly.duan1.model;
 
-public class User {
-    private int user_id;
+public class Customer {
+    private int id_customer;
     private String fullName, username, password, email, phoneNumber, address;
 
-    public User(int user_id, String fullName, String username, String password, String email, String phoneNumber, String address) {
-        this.user_id = user_id;
+    public Customer(int id_customer, String fullName, String username, String password, String email, String phoneNumber, String address) {
+        this.id_customer = id_customer;
         this.fullName = fullName;
         this.username = username;
         this.password = password;
@@ -14,16 +14,16 @@ public class User {
         this.address = address;
     }
 
-    public User() {
+    public Customer() {
 
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getid_customer() {
+        return id_customer;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setid_customer(int id_customer) {
+        this.id_customer = id_customer;
     }
 
     public String getFullName() {

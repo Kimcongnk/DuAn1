@@ -16,6 +16,7 @@ import java.util.List;
 
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.admin.AddCategoriesAdapter;
+import nhom1.fpoly.duan1.dao.CategoryDao;
 import nhom1.fpoly.duan1.dialog.Dialog_Add_Category;
 import nhom1.fpoly.duan1.model.Categories;
 
@@ -25,6 +26,8 @@ public class AddCategoriesFragment extends Fragment {
     RecyclerView recyclerView_category_admin;
     Button btn_add_category;
     AddCategoriesAdapter adapter;
+    CategoryDao categoryDao;
+    List<Categories> categoriesList;
 
 
     @SuppressLint("MissingInflatedId")
@@ -38,6 +41,10 @@ public class AddCategoriesFragment extends Fragment {
         recyclerView_category_admin.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)); // set layout recycler view
         recyclerView_category_admin.setHasFixedSize(true);
 
+        categoryDao = new CategoryDao(requireContext());
+
+        categoriesList = new ArrayList<>();
+//        categoriesList = categoryDao.getAllCategories();
         // fake data for category
         List<Categories> categoriesList = new ArrayList<>();
         categoriesList.add(new Categories(0, "Cà phê", "https://vi.m.wikipedia.org/wiki/T%E1%BA%ADp_tin:Caf%C3%A9_con_leche.jpg"));
@@ -53,6 +60,7 @@ public class AddCategoriesFragment extends Fragment {
             // show dialog add category
             Dialog_Add_Category dialog_add_category = new Dialog_Add_Category();
             dialog_add_category.show(getParentFragmentManager(), dialog_add_category.getTag());
+            adapter.notifyDataSetChanged();
         });
 
         return view;

@@ -62,14 +62,10 @@ public class AdminDao {
         return listAdmin;
     }
 
-    public boolean checkUserPassword(String username, String password) {
+    public boolean checkUserPasswordAdmin(String username, String password) {
         SQLiteDatabase sqLiteDatabase = createDatabase.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from Admin where username=? and password=?", new String[]{username, password});
-        if(cursor.getCount() != 0) {
-            return true;
-        }else{
-            return false;
-        }
+        return cursor.getCount() != 0;
     }
 
 }

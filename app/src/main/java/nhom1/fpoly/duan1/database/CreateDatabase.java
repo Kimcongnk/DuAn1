@@ -17,8 +17,8 @@ public class CreateDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String tb_user = "create table User ( " +
-                "id_user integer primary key autoincrement, " +
+        String tb_user = "create table Customer ( " +
+                "id_customer integer primary key autoincrement, " +
                 "fullName text, " +
                 "username text, " +
                 "password text, " +
@@ -26,7 +26,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "address text, " +
                 "phone text )";
         db.execSQL(tb_user);
-        String insert_user = "insert into User values " +
+        String insert_user = "insert into Customer values " +
                 "(0, 'Nguyễn Văn A', 'user_test', 'test@123', 'user@gmail.com', 'Hà Nội', '012345687' ), " +
                 "(1, 'Nguyễn Văn B', 'user_test1', 'test@123', 'user1@gmail.com', 'Hà Nội', '012345687' ), " +
                 "(2, 'Nguyễn Văn C', 'user_test2', 'test@123', 'user2@gmail.com', 'Hà Nội', '012345687' ), " +
@@ -61,7 +61,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "image_url text, " +
                 "price integer )";
         db.execSQL(tb_product);
-        String insert_product = "insert into Product values " +
+        String insert_product = "insert into Products values " +
                 "(0, 0, 'Cà phê sữa đá', 'Cà phê sữa đá là một loại thức uống thông dụng ở Việt Nam. Cà phê sữa đá truyền thống được làm từ cà phê nguyên chất đựng trong phin với sữa đặc có đường và bỏ đá vào trong một cái ly bằng thủy tinh rồi thưởng thức.', 'https://conducmegiadinh.myharavan.com/products/ca-phe-sua', 150000), " +
                 "(1, 1, 'Trà sữa chân châu đường đen', 'Trà sữa trân châu đường đen được yêu thích nhờ sự kết hợp hết sức hoàn hảo giữa vị trà sữa thơm béo và trân châu đường đen mềm, ngọt.', 'https://tiki.vn/tra-sua-tran-chau-duong-den-leader-22g-6-goi-bot-tran-chau-an-lien-50g-6-goi-hop-2-hop-p93748472.html', 250000), " +
                 "(2,2, 'Sting', 'Sting là sản phẩm nước tăng lực với mùi vị thơm ngon, sảng khoái. Nước tăng lực Sting giúp cơ thể bù đắp nước, bổ sung năng lượng, vitamin C và E, giúp xua tan cơn khát và cảm giác mệt mỏi.', 'https://sieuthiducthanh.com/nn-s-ting-dau-pet-330ml', 10000), " +

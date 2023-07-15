@@ -10,6 +10,10 @@ public class Categories {
         this.img_categories = img_categories;
     }
 
+    public Categories() {
+
+    }
+
     public int getId() {
         return id;
     }

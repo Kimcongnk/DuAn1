@@ -1,6 +1,7 @@
 package nhom1.fpoly.duan1.adapter.admin;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +15,15 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.model.Categories;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
 
 public class AddCategoriesAdapter extends RecyclerView.Adapter<AddCategoriesAdapter.ViewHolder> {
 

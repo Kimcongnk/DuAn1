@@ -13,15 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ỨngDụngĐặtĐồUống"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".view.activity.SplashActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.customer.CustomerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.admin.AdminActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,10 +25,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.customer.CustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.admin.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activity.LoginAndRegisterActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

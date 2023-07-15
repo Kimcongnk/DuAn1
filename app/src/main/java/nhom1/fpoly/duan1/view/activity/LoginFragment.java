@@ -16,13 +16,16 @@ import androidx.fragment.app.FragmentTransaction;
 
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.dao.AdminDao;
+import nhom1.fpoly.duan1.dao.CustomerDao;
 import nhom1.fpoly.duan1.view.admin.AdminActivity;
+import nhom1.fpoly.duan1.view.customer.CustomerActivity;
 
 public class LoginFragment extends Fragment {
     EditText edt_login_username, edt_login_password;
     Button btn_login;
     TextView txt_register;
     AdminDao adminDao;
+    CustomerDao customerDao;
 
     @SuppressLint("SuspiciousIndentation")
     @Override
@@ -39,19 +42,25 @@ public class LoginFragment extends Fragment {
             String password = edt_login_password.getText().toString().trim();
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(requireActivity(), "", Toast.LENGTH_SHORT).show();
-            } else
-                adminDao = new AdminDao(getContext());
-            if (adminDao.checkUserPassword(username, password)) {
-                Toast.makeText(requireActivity(), "login admin success", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(requireActivity(), AdminActivity.class));
             } else {
-                Toast.makeText(requireActivity(), "login admin failed", Toast.LENGTH_SHORT).show();
+                adminDao = new AdminDao(getContext());
+                customerDao = new CustomerDao(getContext());
+                if (adminDao.checkUserPasswordAdmin(username, password)) {
+                    Toast.makeText(requireActivity(), "login admin success", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(requireActivity(), AdminActivity.class));
+                } else if (customerDao.checkUserPasswordCustomer(username, password)){
+                    Toast.makeText(requireActivity(), "login customer success", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(requireActivity(), CustomerActivity.class));
+                }else {
+                    Toast.makeText(requireActivity(), "login failed", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         txt_register.setOnClickListener(register -> {
             FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.login_and_register, new RegisterFragment());
+            transaction.addToBackStack(RegisterFragment.TAG);
             transaction.commit();
         });
 
