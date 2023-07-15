@@ -1,4 +1,4 @@
-package nhom1.fpoly.duan1.fragment;
+package nhom1.fpoly.duan1.view.customer.fragment;
 
 import android.os.Bundle;
 

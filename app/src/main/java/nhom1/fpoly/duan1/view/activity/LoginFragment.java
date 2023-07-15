@@ -1,11 +1,8 @@
-package nhom1.fpoly.duan1.fragment;
+package nhom1.fpoly.duan1.view.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +11,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import nhom1.fpoly.duan1.R;
-import nhom1.fpoly.duan1.admin.AdminActivity;
-import nhom1.fpoly.duan1.customer.CustomerActivity;
 import nhom1.fpoly.duan1.dao.AdminDao;
-import nhom1.fpoly.duan1.model.Admin;
-import nhom1.fpoly.duan1.model.User;
+import nhom1.fpoly.duan1.view.admin.AdminActivity;
 
 public class LoginFragment extends Fragment {
     EditText edt_login_username, edt_login_password;
     Button btn_login;
     TextView txt_register;
     AdminDao adminDao;
+
+    @SuppressLint("SuspiciousIndentation")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,19 +35,18 @@ public class LoginFragment extends Fragment {
         btn_login = view.findViewById(R.id.btn_login);
 
         btn_login.setOnClickListener(login -> {
-            String username = edt_login_username.getText().toString();
-            String password = edt_login_password.getText().toString();
-            if (username.isEmpty() || password.isEmpty()){
+            String username = edt_login_username.getText().toString().trim();
+            String password = edt_login_password.getText().toString().trim();
+            if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(requireActivity(), "", Toast.LENGTH_SHORT).show();
             } else
-                    adminDao = new AdminDao(getContext());
-                if (adminDao.checkUserPassword(username,password)){
-                    Toast.makeText(requireActivity(), "login admin success", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(requireActivity(), "login admin failed", Toast.LENGTH_SHORT).show();
-                }
-
-
+                adminDao = new AdminDao(getContext());
+            if (adminDao.checkUserPassword(username, password)) {
+                Toast.makeText(requireActivity(), "login admin success", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(requireActivity(), AdminActivity.class));
+            } else {
+                Toast.makeText(requireActivity(), "login admin failed", Toast.LENGTH_SHORT).show();
+            }
         });
 
         txt_register.setOnClickListener(register -> {

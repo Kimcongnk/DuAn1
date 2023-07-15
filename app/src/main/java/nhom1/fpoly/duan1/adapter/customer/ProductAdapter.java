@@ -1,4 +1,4 @@
-package nhom1.fpoly.duan1.adapter;
+package nhom1.fpoly.duan1.adapter.customer;
 
 import android.app.Activity;
 import android.content.Context;

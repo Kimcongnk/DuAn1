@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:id="@+id/category_image"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_alignStart="@id/card_view_category"
+                android:layout_alignTop="@id/card_view_category"
+                android:layout_alignBottom="@id/card_view_category"
+                android:scaleType="fitXY"
+                tools:ignore="NotSibling" />
+
+            <ProgressBar
+                android:id="@+id/progressbar_category"
+                android:layout_width="60dp"
+                android:layout_height="36dp"
+                android:layout_alignStart="@id/category_image"
+                android:layout_alignTop="@id/category_image"
+                android:layout_alignEnd="@+id/category_image"
+                android:layout_alignBottom="@id/category_image"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp" />
+
+            <TextView
+                android:id="@+id/category_name"
+                android:layout_width="127dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="67dp"
+                android:layout_marginEnd="33dp"
+                android:layout_toEndOf="@+id/category_image"
+                android:gravity="center"
+                android:text="Coffee"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
