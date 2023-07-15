@@ -22,14 +22,15 @@ public class CategoryDao {
 
     public long addCategory(Category category) {
         ContentValues values = new ContentValues();
-        values.put("name", category.getNameType());
+        values.put("nameType", category.getNameType());
+        values.put("imageCategory", category.getImageCategory());
         long categoryId = db.insert("Category", null, values);
         db.close();
         return categoryId;
     }
     @SuppressLint("Range")
     public Category getCategoryById(long categoryId) {
-        String[] projection = {"menu_id", "nameType"};
+        String[] projection = {"menu_id", "nameType", "imageCategory"};
         String selection = "menu_id = ?";
         String[] selectionArgs = {String.valueOf(categoryId)};
         Cursor cursor = db.query("Category", projection, selection, selectionArgs, null, null, null);
@@ -39,6 +40,7 @@ public class CategoryDao {
             category = new Category();
             category.setMenuId(cursor.getInt(cursor.getColumnIndex("menu_id")));
             category.setNameType(cursor.getString(cursor.getColumnIndex("nameType")));
+            category.setImageCategory(cursor.getString(cursor.getColumnIndex("imageCategory")));
         }
         cursor.close();
         db.close();
@@ -46,13 +48,14 @@ public class CategoryDao {
     }
     @SuppressLint("Range")
     public List<Category> getAllCategories() {
-        String[] projection = {"menu_id", "nameType"};
+        String[] projection = {"menu_id", "nameType", "imageCategory"};
         Cursor cursor = db.query("Category", projection, null, null, null, null, null);
         List<Category> categoryList = new ArrayList<>();
         while (cursor.moveToNext()) {
             Category category = new Category();
             category.setMenuId(cursor.getInt(cursor.getColumnIndex("menu_id")));
             category.setNameType(cursor.getString(cursor.getColumnIndex("nameType")));
+            category.setImageCategory(cursor.getString(cursor.getColumnIndex("imageCategory")));
             categoryList.add(category);
         }
         cursor.close();
@@ -62,7 +65,8 @@ public class CategoryDao {
 
     public int updateCategory(Category category) {
         ContentValues values = new ContentValues();
-        values.put("name", category.getNameType());
+        values.put("nameType", category.getNameType());
+        values.put("imageCategory", category.getImageCategory());
         String whereClause = "menu_id = ?";
         String[] whereArgs = {String.valueOf(category.getMenuId())};
         int rowsAffected = db.update("Category", values, whereClause, whereArgs);

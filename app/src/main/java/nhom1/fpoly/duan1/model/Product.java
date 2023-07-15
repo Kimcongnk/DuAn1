@@ -2,7 +2,7 @@ package nhom1.fpoly.duan1.model;
 
 public class Product {
     private int productId, menuId;
-    private String nameProduct, Image, Describe, Price;
+    private String nameProduct, imageProduct, describe, price;
 
     public Product() {
     }
@@ -31,27 +31,27 @@ public class Product {
         this.nameProduct = nameProduct;
     }
 
-    public String getImage() {
-        return Image;
+    public String getImageProduct() {
+        return imageProduct;
     }
 
-    public void setImage(String image) {
-        Image = image;
+    public void setImageProduct(String imageProduct) {
+        this.imageProduct = imageProduct;
     }
 
     public String getDescribe() {
-        return Describe;
+        return describe;
     }
 
     public void setDescribe(String describe) {
-        Describe = describe;
+        this.describe = describe;
     }
 
     public String getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(String price) {
-        Price = price;
+        this.price = price;
     }
 }

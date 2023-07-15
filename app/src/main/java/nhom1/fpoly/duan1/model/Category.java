@@ -2,7 +2,7 @@ package nhom1.fpoly.duan1.model;
 
 public class Category {
     private int menuId;
-    private String nameType;
+    private String nameType,imageCategory;
 
     public Category() {
     }
@@ -21,5 +21,13 @@ public class Category {
 
     public void setNameType(String nameType) {
         this.nameType = nameType;
+    }
+
+    public String getImageCategory() {
+        return imageCategory;
+    }
+
+    public void setImageCategory(String imageCategory) {
+        this.imageCategory = imageCategory;
     }
 }

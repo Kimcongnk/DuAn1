@@ -21,17 +21,18 @@ public class ProductDao {
 
     public long addProduct(Product product) {
         ContentValues values = new ContentValues();
-        values.put("name", product.getNameProduct());
-        values.put("price", product.getPrice());
+        values.put("nameProducts", product.getNameProduct());
         values.put("menu_id", product.getMenuId());
-        values.put("img", product.getImage());
+        values.put("price", product.getPrice());
+        values.put("imageProduct", product.getImageProduct());
+        values.put("description", product.getDescribe());
         long productId = db.insert("Product", null, values);
         db.close();
         return productId;
     }
     @SuppressLint("Range")
     public Product getProductById(long productId) {
-        String[] projection = {"product_id", "name", "price", "category_id", "img"};
+        String[] projection = {"product_id", "nameProducts", "price", "category_id", "imageProduct","description"};
         String selection = "product_id = ?";
         String[] selectionArgs = {String.valueOf(productId)};
         Cursor cursor = db.query("Product", projection, selection, selectionArgs, null, null, null);
@@ -40,10 +41,11 @@ public class ProductDao {
         if (cursor.moveToFirst()) {
             product = new Product();
             product.setProductId(cursor.getInt(cursor.getColumnIndex("product_id")));
-            product.setNameProduct(cursor.getString(cursor.getColumnIndex("name")));
+            product.setNameProduct(cursor.getString(cursor.getColumnIndex("nameProducts")));
             product.setPrice(cursor.getString(cursor.getColumnIndex("price")));
             product.setMenuId(cursor.getInt(cursor.getColumnIndex("category_id")));
-            product.setImage(cursor.getString(cursor.getColumnIndex("img")));
+            product.setImageProduct(cursor.getString(cursor.getColumnIndex("imageProduct")));
+            product.setDescribe(cursor.getString(cursor.getColumnIndex("description")));
         }
         cursor.close();
         db.close();
@@ -51,16 +53,17 @@ public class ProductDao {
     }
     @SuppressLint("Range")
     public List<Product> getAllProducts() {
-        String[] projection = {"product_id", "name", "price", "category_id", "img"};
+        String[] projection = {"product_id", "nameProducts", "price", "category_id", "imageProduct","description"};
         Cursor cursor = db.query("Product", projection, null, null, null, null, null);
         List<Product> productList = new ArrayList<>();
         while (cursor.moveToNext()) {
             Product product = new Product();
             product.setProductId(cursor.getInt(cursor.getColumnIndex("product_id")));
-            product.setNameProduct(cursor.getString(cursor.getColumnIndex("name")));
+            product.setNameProduct(cursor.getString(cursor.getColumnIndex("nameProducts")));
             product.setPrice(cursor.getString(cursor.getColumnIndex("price")));
             product.setMenuId(cursor.getInt(cursor.getColumnIndex("category_id")));
-            product.setImage(cursor.getString(cursor.getColumnIndex("img")));
+            product.setImageProduct(cursor.getString(cursor.getColumnIndex("imageProduct")));
+            product.setDescribe(cursor.getString(cursor.getColumnIndex("description")));
             productList.add(product);
         }
         cursor.close();
@@ -70,10 +73,11 @@ public class ProductDao {
 
     public int updateProduct(Product product) {
         ContentValues values = new ContentValues();
-        values.put("name", product.getNameProduct());
-        values.put("price", product.getPrice());
+        values.put("nameProducts", product.getNameProduct());
         values.put("menu_id", product.getMenuId());
-        values.put("img", product.getImage());
+        values.put("price", product.getPrice());
+        values.put("imageProduct", product.getImageProduct());
+        values.put("description", product.getDescribe());
         String whereClause = "product_id = ?";
         String[] whereArgs = {String.valueOf(product.getProductId())};
         int rowsAffected = db.update("Product", values, whereClause, whereArgs);

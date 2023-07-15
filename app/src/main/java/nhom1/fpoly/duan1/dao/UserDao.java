@@ -24,13 +24,15 @@ public class UserDao {
         ContentValues values = new ContentValues();
         values.put("nameUser", user.getNameUser());
         values.put("password", user.getPassword());
+        values.put("phone", user.getPhone());
+        values.put("address", user.getAddress());
         long userId = db.insert("User", null, values);
         db.close();
         return userId;
     }
     @SuppressLint("Range")
     public User getUserById(long userId) {
-        String[] projection = {"user_id", "nameUser", "password"};
+        String[] projection = {"user_id", "nameUser", "password", "phone", "address"};
         String selection = "user_id = ?";
         String[] selectionArgs = {String.valueOf(userId)};
         Cursor cursor = db.query("User", projection, selection, selectionArgs, null, null, null);
@@ -41,6 +43,8 @@ public class UserDao {
             user.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
             user.setNameUser(cursor.getString(cursor.getColumnIndex("nameUser")));
             user.setPassword(cursor.getString(cursor.getColumnIndex("password")));
+            user.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+            user.setAddress(cursor.getString(cursor.getColumnIndex("address")));
         }
         cursor.close();
         db.close();
@@ -48,7 +52,7 @@ public class UserDao {
     }
     @SuppressLint("Range")
     public List<User> getAllUsers() {
-        String[] projection = {"user_id", "nameUser", "password"};
+        String[] projection = {"user_id", "nameUser", "password", "phone", "address"};
         Cursor cursor = db.query("User", projection, null, null, null, null, null);
         List<User> userList = new ArrayList<>();
         while (cursor.moveToNext()) {
@@ -56,6 +60,8 @@ public class UserDao {
             user.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
             user.setNameUser(cursor.getString(cursor.getColumnIndex("nameUser")));
             user.setPassword(cursor.getString(cursor.getColumnIndex("password")));
+            user.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+            user.setAddress(cursor.getString(cursor.getColumnIndex("address")));
             userList.add(user);
         }
         cursor.close();
@@ -67,6 +73,8 @@ public class UserDao {
         ContentValues values = new ContentValues();
         values.put("nameUser", user.getNameUser());
         values.put("password", user.getPassword());
+        values.put("phone", user.getPhone());
+        values.put("address", user.getAddress());
         String whereClause = "user_id = ?";
         String[] whereArgs = {String.valueOf(user.getUserId())};
         int rowsAffected = db.update("User", values, whereClause, whereArgs);

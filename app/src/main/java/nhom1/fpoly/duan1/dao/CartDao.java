@@ -21,14 +21,14 @@ public class CartDao {
         ContentValues values = new ContentValues();
         values.put("user_id", cart.getUserId());
         values.put("product_id", cart.getProductId());
-        values.put("total_items", cart.getTotalTems());
+        values.put("totaItem", cart.getTotalTems());
         long cartId = db.insert("Cart", null, values);
         db.close();
         return cartId;
     }
     @SuppressLint("Range")
     public Cart getCartById(long cartId) {
-        String[] projection = {"cart_id", "user_id", "product_id", "total_items"};
+        String[] projection = {"cart_id", "user_id", "product_id", "totaItem"};
         String selection = "cart_id = ?";
         String[] selectionArgs = {String.valueOf(cartId)};
         Cursor cursor = db.query("Cart", projection, selection, selectionArgs, null, null, null);
@@ -39,7 +39,7 @@ public class CartDao {
             cart.setCartId(cursor.getInt(cursor.getColumnIndex("cart_id")));
             cart.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
             cart.setProductId(cursor.getInt(cursor.getColumnIndex("product_id")));
-            cart.setTotalTems(cursor.getInt(cursor.getColumnIndex("total_items")));
+            cart.setTotalTems(cursor.getInt(cursor.getColumnIndex("totaItem")));
         }
         cursor.close();
         db.close();
@@ -47,7 +47,7 @@ public class CartDao {
     }
     @SuppressLint("Range")
     public List<Cart> getAllCarts() {
-        String[] projection = {"cart_id", "user_id", "product_id", "total_items"};
+        String[] projection = {"cart_id", "user_id", "product_id", "totaItem"};
         Cursor cursor = db.query("Cart", projection, null, null, null, null, null);
         List<Cart> cartList = new ArrayList<>();
         while (cursor.moveToNext()) {
@@ -55,7 +55,7 @@ public class CartDao {
             cart.setCartId(cursor.getInt(cursor.getColumnIndex("cart_id")));
             cart.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
             cart.setProductId(cursor.getInt(cursor.getColumnIndex("product_id")));
-            cart.setTotalTems(cursor.getInt(cursor.getColumnIndex("total_items")));
+            cart.setTotalTems(cursor.getInt(cursor.getColumnIndex("totaItem")));
             cartList.add(cart);
         }
         cursor.close();
@@ -67,7 +67,7 @@ public class CartDao {
         ContentValues values = new ContentValues();
         values.put("user_id", cart.getUserId());
         values.put("product_id", cart.getProductId());
-        values.put("total_items", cart.getTotalTems());
+        values.put("totaItem", cart.getTotalTems());
         String whereClause = "cart_id = ?";
         String[] whereArgs = {String.valueOf(cart.getCartId())};
         int rowsAffected = db.update("Cart", values, whereClause, whereArgs);
