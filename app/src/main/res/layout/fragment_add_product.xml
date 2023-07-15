@@ -9,7 +9,7 @@
         android:id="@+id/recyclerView_category"
         android:layout_width="351dp"
         android:layout_height="649dp"
-        android:layout_above="@+id/btn_add_category"
+        android:layout_above="@+id/btn_add_product"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -23,7 +23,7 @@
 
 
     <Button
-        android:id="@+id/btn_add_category"
+        android:id="@+id/btn_add_product"
         android:layout_width="wrap_content"
         android:layout_height="53dp"
         android:layout_alignParentStart="true"
