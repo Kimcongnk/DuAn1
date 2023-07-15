@@ -18,19 +18,21 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String tb_user = "create table User ( " +
                 "id_user integer primary key autoincrement, " +
-                "namUser text, " +
+                "nameUser text, " +
+                "phone text, " +
+                "address text, " +
                 "password text)";
         sqLiteDatabase.execSQL(tb_user);
 
         String tb_admin = "create table Admin ( " +
                 "id_admin integer primary key autoincrement, " +
-                "fullName text, " +
-                "username text, " +
+                "nameAdmin text, " +
                 "password text )";
         sqLiteDatabase.execSQL(tb_admin);
 
         String tb_category = "create table Category ( " +
                 "id_menu integer primary key autoincrement, " +
+                "imageCategory text, " +
                 "nameType text)";
         sqLiteDatabase.execSQL(tb_category);
 
@@ -38,7 +40,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "id_product integer primary key autoincrement, " +
                 "id_menu integer references Category(id_menu), " +
                 "nameProducts text, " +
-                "image_url text, " +
+                "imageProduct text, " +
+                "description text, " +
                 "price integer )";
         sqLiteDatabase.execSQL(tb_product);
 
@@ -46,7 +49,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "cart_id integer primary key autoincrement, " +
                 "id_product integer references Category(id_product), " +
                 "id_user integer references Category(id_user), " +
-                "totaITEM text)";
+                "totaItem text)";
         sqLiteDatabase.execSQL(tb_cart);
 
         String tb_Oder = "create table Oder ( " +
@@ -58,7 +61,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(tb_Oder);
 
 
-        String tb_OderDetail = "create table Cart ( " +
+        String tb_OderDetail = "create table OrderDetail ( " +
                 "id_OderDetail integer primary key autoincrement, " +
                 "id_Oder integer references Category(id_product), " +
                 "id_product integer references Category(id_product), " +
