@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.dialog.Dialog_Add_Product;

@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import nhom1.fpoly.duan1.R;
-import nhom1.fpoly.duan1.admin.AdminActivity;
+
 import nhom1.fpoly.duan1.customer.CustomerActivity;
 
 public class LoginFragment extends Fragment {

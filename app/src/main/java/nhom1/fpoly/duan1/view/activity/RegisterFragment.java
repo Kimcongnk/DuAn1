@@ -35,7 +35,7 @@ public class RegisterFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         edt_register_fullName = view.findViewById(R.id.edt_register_fullName);
-        edt_register_username = view.findViewById(R.id.edt_register_username);
+//        edt_register_username = view.findViewById(R.id.edt_register_username);
         edt_register_password = view.findViewById(R.id.edt_register_password);
         edt_register_confirmPassword = view.findViewById(R.id.edt_register_confirm_pass);
         txt_login = (TextView) view.findViewById(R.id.txt_register_login);

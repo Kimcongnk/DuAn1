@@ -49,7 +49,7 @@ public class CustomerActivity extends AppCompatActivity {
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.replace(R.id.fragment_customer, fragment);
         fragmentTransaction.commit();
     }
 

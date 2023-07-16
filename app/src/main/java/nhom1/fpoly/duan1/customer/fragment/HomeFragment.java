@@ -3,35 +3,47 @@ package nhom1.fpoly.duan1.customer.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import nhom1.fpoly.duan1.R;
+import nhom1.fpoly.duan1.adapter.customer.ProductHomeAdapter;
+import nhom1.fpoly.duan1.model.Product;
 
 public class HomeFragment extends Fragment {
-private TextView addCategory, addProduct;
+    RecyclerView recyclerView;
+    ProductHomeAdapter productHomeAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_home, container, false);
-        addCategory = view.findViewById(R.id.addDanhMuc);
-        addProduct = view.findViewById(R.id.addProduct);
-        addCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-            }
-        });
-        addProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_san_pham_home);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
 
-            }
-        });
+
+//        List<Product> products = new ArrayList<>();
+//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
+//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
+//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
+//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
+//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
+//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
+//        productHomeAdapter = new ProductHomeAdapter(requireActivity(), products);
+//        recyclerView.setAdapter(productHomeAdapter);
+//        productHomeAdapter.notifyDataSetChanged();
+
         return view;
     }
 }
