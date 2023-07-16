@@ -7,6 +7,12 @@ public class Admin {
     public Admin() {
     }
 
+    public Admin(int id_Admin, String nameAdmin, String password) {
+        this.id_Admin = id_Admin;
+        this.nameAdmin = nameAdmin;
+        this.password = password;
+    }
+
     public int getId_Admin() {
         return id_Admin;
     }

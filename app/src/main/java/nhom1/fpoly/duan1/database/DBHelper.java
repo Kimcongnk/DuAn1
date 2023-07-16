@@ -30,6 +30,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "nameAdmin text, " +
                 "password text )";
         sqLiteDatabase.execSQL(tb_admin);
+        String insert_admin = "insert into Admin values (0,'admin', 'admin') ";
+        sqLiteDatabase.execSQL(insert_admin);
 
         String tb_category = "create table Category ( " +
                 "id_menu integer primary key autoincrement, " +

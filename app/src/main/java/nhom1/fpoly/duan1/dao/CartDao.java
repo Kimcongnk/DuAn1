@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
+
+import nhom1.fpoly.duan1.database.DBHelper;
 import nhom1.fpoly.duan1.model.Cart;
 
 public class CartDao {

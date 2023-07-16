@@ -10,13 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import nhom1.fpoly.duan1.database.DBHelper;
 import nhom1.fpoly.duan1.model.Admin;
 
 public class AdminDao {
     private final SQLiteDatabase database;
     DBHelper createDatabase;
     public AdminDao(Context context) {
-        createDatabase = new CreateDatabase(context);
+        createDatabase = new DBHelper(context);
         database = createDatabase.getWritableDatabase();
     }
 
@@ -59,14 +60,10 @@ public class AdminDao {
         return listAdmin;
     }
 
-    public boolean checkUserPassword(String username, String password) {
+    public boolean checkUserPasswordAdmin(String username, String password) {
         SQLiteDatabase sqLiteDatabase = createDatabase.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from Admin where nameAdmin=? and password=?", new String[]{username, password});
-        if(cursor.getCount() != 0) {
-            return true;
-        }else{
-            return false;
-        }
+        return cursor.getCount() != 0;
     }
 
 }

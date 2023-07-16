@@ -4,7 +4,15 @@ public class User {
     private int userId;
     private String nameUser, password, address, phone;
 
-    public User() {
+    public  User() {
+    }
+
+    public User(int userId, String nameUser, String password, String address, String phone) {
+        this.userId = userId;
+        this.nameUser = nameUser;
+        this.password = password;
+        this.address = address;
+        this.phone = phone;
     }
 
     public int getUserId() {

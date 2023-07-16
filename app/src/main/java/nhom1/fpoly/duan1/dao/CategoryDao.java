@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import nhom1.fpoly.duan1.database.DBHelper;
+import nhom1.fpoly.duan1.model.Categories;
 import nhom1.fpoly.duan1.model.Category;
 
 public class CategoryDao {
@@ -20,13 +22,12 @@ public class CategoryDao {
         db = dbHelper.getWritableDatabase();
     }
 
-    public long addCategory(Category category) {
+    public boolean addCategory(Categories category) {
         ContentValues values = new ContentValues();
-        values.put("nameType", category.getNameType());
-        values.put("imageCategory", category.getImageCategory());
-        long categoryId = db.insert("Category", null, values);
-        db.close();
-        return categoryId;
+        values.put("nameType", category.getName_categories());
+        values.put("imageCategory", category.getImg_categories());
+        long check = db.insert("Category", null, values);
+        return check != -1;
     }
     @SuppressLint("Range")
     public Category getCategoryById(long categoryId) {

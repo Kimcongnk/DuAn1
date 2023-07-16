@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import nhom1.fpoly.duan1.database.DBHelper;
 import nhom1.fpoly.duan1.model.User;
 
 public class UserDao {
@@ -20,15 +21,14 @@ public class UserDao {
         db = dbHelper.getWritableDatabase();
     }
 
-    public long addUser(User user) {
+    public boolean addUser(User user) {
         ContentValues values = new ContentValues();
         values.put("nameUser", user.getNameUser());
         values.put("password", user.getPassword());
         values.put("phone", user.getPhone());
         values.put("address", user.getAddress());
-        long userId = db.insert("User", null, values);
-        db.close();
-        return userId;
+        long check = db.insert("User", null, values);
+        return check != -1;
     }
     @SuppressLint("Range")
     public User getUserById(long userId) {
@@ -88,5 +88,18 @@ public class UserDao {
         int rowsAffected = db.delete("User", whereClause, whereArgs);
         db.close();
         return rowsAffected;
+    }
+    @SuppressLint("Range")
+    public boolean checkUserPasswordUser(String username, String password) {
+        String[] projection = { "nameUser", "password"};
+        String selection = "nameUser = ? AND password = ?";
+        String[] selectionArgs = {username, password};
+        Cursor cursor = db.query("User", projection, selection, selectionArgs, null, null, null);
+
+        boolean isPasswordCorrect = cursor.moveToFirst();
+
+        cursor.close();
+        db.close();
+        return isPasswordCorrect;
     }
 }
