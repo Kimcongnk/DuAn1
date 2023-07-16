@@ -31,16 +31,16 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
 
-//        List<Product> products = new ArrayList<>();
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
-//        productHomeAdapter = new ProductHomeAdapter(requireActivity(), products);
-//        recyclerView.setAdapter(productHomeAdapter);
-//        productHomeAdapter.notifyDataSetChanged();
+        List<Product> products = new ArrayList<>();
+        products.add(new Product(0, 1,  "abc", "q", "ầ", "1"));
+        products.add(new Product(1, 1,  "abc", "q", "ầ", "200"));
+        products.add(new Product(2, 1,  "abc", "q", "ầ", "500"));
+        products.add(new Product(3, 1,  "abc", "q", "ầ", "600"));
+        products.add(new Product(4, 1,  "abc", "q", "ầ", "900"));
+        products.add(new Product(5, 1, "abc", "q", "ầ", "900"));
+        productHomeAdapter = new ProductHomeAdapter(requireActivity(), products);
+        recyclerView.setAdapter(productHomeAdapter);
+        productHomeAdapter.notifyDataSetChanged();
 
         return view;
     }

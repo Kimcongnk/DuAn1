@@ -34,8 +34,8 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
-        edt_register_fullName = view.findViewById(R.id.edt_register_fullName);
-//        edt_register_username = view.findViewById(R.id.edt_register_username);
+//        edt_register_fullName = view.findViewById(R.id.edt_register_fullName);
+        edt_register_username = view.findViewById(R.id.edt_register_fullName);
         edt_register_password = view.findViewById(R.id.edt_register_password);
         edt_register_confirmPassword = view.findViewById(R.id.edt_register_confirm_pass);
         txt_login = (TextView) view.findViewById(R.id.txt_register_login);
@@ -60,18 +60,18 @@ public class RegisterFragment extends Fragment {
     }
 
     private void doRegister() {
-        String fullName = edt_register_fullName.getText().toString();
+//        String fullName = edt_register_fullName.getText().toString();
         String username = edt_register_username.getText().toString();
         String password = edt_register_password.getText().toString();
         String confirmPass = edt_register_confirmPassword.getText().toString();
 
-        if (fullName.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPass.isEmpty()) {
+        if ( username.isEmpty() || password.isEmpty() || confirmPass.isEmpty()) {
             Toast.makeText(requireContext(), "", Toast.LENGTH_SHORT).show();
         } else if (!confirmPass.equals(password)) {
             Toast.makeText(requireContext(), "password do not match", Toast.LENGTH_SHORT).show();
         } else {
             User customer = new User();
-            customer.setNameUser(fullName);
+            customer.setNameUser(username);
             customer.setPassword(password);
             if (customerDao.addUser(customer)) {
                 Toast.makeText(requireContext(), "Register successfully", Toast.LENGTH_SHORT).show();
