@@ -54,15 +54,15 @@ public class ProductDao {
     }
     @SuppressLint("Range")
     public List<Product> getAllProducts() {
-        String[] projection = {"product_id", "nameProducts", "price", "category_id", "imageProduct","description"};
-        Cursor cursor = db.query("Product", projection, null, null, null, null, null);
+        String[] projection = {"id_product", "id_menu", "nameProducts", "description","imageProduct","price"};
+        Cursor cursor = db.query("Products", projection, null, null, null, null, null);
         List<Product> productList = new ArrayList<>();
         while (cursor.moveToNext()) {
             Product product = new Product();
-            product.setProductId(cursor.getInt(cursor.getColumnIndex("product_id")));
+            product.setProductId(cursor.getInt(cursor.getColumnIndex("id_product")));
             product.setNameProduct(cursor.getString(cursor.getColumnIndex("nameProducts")));
             product.setPrice(cursor.getString(cursor.getColumnIndex("price")));
-            product.setMenuId(cursor.getInt(cursor.getColumnIndex("category_id")));
+            product.setMenuId(cursor.getInt(cursor.getColumnIndex("id_menu")));
             product.setImageProduct(cursor.getString(cursor.getColumnIndex("imageProduct")));
             product.setDescribe(cursor.getString(cursor.getColumnIndex("description")));
             productList.add(product);
