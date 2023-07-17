@@ -49,9 +49,9 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txt_name_product_home = (TextView) itemView.findViewById(R.id.txt_name_product_home);
-            txt_price_product_home = (TextView) itemView.findViewById(R.id.txt_price_product_home);
-            img_product_home = (ImageView) itemView.findViewById(R.id.image_product_home);
+            txt_name_product_home = (TextView) itemView.findViewById(R.id.txt_name_product);
+            txt_price_product_home = (TextView) itemView.findViewById(R.id.txt_price_product);
+            img_product_home = (ImageView) itemView.findViewById(R.id.image_product);
         }
     }
 }

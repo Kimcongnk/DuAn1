@@ -29,7 +29,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_sanpham,parent,false);
+        View view = inflater.inflate(R.layout.item_product,parent,false);
         return new ViewHolder(view);
     }
 
@@ -50,9 +50,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgProduct = itemView.findViewById(R.id.image_product_home);
-            txtNameProduct = imgProduct.findViewById(R.id.txt_name_product_home);
-            txtPriceProduct = imgProduct.findViewById(R.id.txt_price_product_home);
+            imgProduct = itemView.findViewById(R.id.image_product);
+            txtNameProduct = imgProduct.findViewById(R.id.txt_name_product);
+            txtPriceProduct = imgProduct.findViewById(R.id.txt_price_product);
         }
     }
 }

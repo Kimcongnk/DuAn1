@@ -14,6 +14,10 @@ public class Product {
         this.img_product = img_product;
     }
 
+    public Product() {
+
+    }
+
     public int getId_product() {
         return id_product;
     }
