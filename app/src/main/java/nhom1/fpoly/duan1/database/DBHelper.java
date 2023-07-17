@@ -37,6 +37,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 "id_menu integer primary key autoincrement, " +
                 "imageCategory text, " +
                 "nameType text)";
+        String insert_category  = "insert into Category values "+
+        "(0,'admin', 'admin') ";
+        sqLiteDatabase.execSQL(insert_category);
         sqLiteDatabase.execSQL(tb_category);
 
         String tb_product = "create table Products ( " +
