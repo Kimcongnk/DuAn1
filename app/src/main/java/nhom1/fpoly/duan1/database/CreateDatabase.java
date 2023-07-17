@@ -71,6 +71,29 @@ public class CreateDatabase extends SQLiteOpenHelper {
         db.execSQL(insert_product);
 
 
+        String tb_cart = "create table Cart ( " +
+                "cart_id integer primary key autoincrement, " +
+                "id_product integer references Products(id_product), " +
+                "id_customer integer references Customer(id_customer), " +
+                "totaItem text)";
+        db.execSQL(tb_cart);
+
+        String tb_Oder = "create table Oder ( " +
+                "id_oder integer primary key autoincrement, " +
+                "id_customer integer references Customer(id_customer), " +
+                "dateOder text, " +
+                "totalMoney text, " +
+                "status text )";
+        db.execSQL(tb_Oder);
+
+
+        String tb_OderDetail = "create table OrderDetail ( " +
+                "id_oderDetail integer primary key autoincrement, " +
+                "id_oder integer references Oder(id_oder), " +
+                "id_product integer references Products(id_product), " +
+                "quantyti integer)";
+        db.execSQL(tb_OderDetail);
+
     }
 
     @Override
