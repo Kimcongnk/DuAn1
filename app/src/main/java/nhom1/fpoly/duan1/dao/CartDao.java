@@ -23,8 +23,8 @@ public class CartDao {
 
     public long addCart(Cart cart) {
         ContentValues values = new ContentValues();
-        values.put("user_id", cart.getUserId());
-        values.put("product_id", cart.getId_product());
+        values.put("id_customer", cart.getUserId());
+        values.put("id_product", cart.getId_product());
         values.put("totaItem", cart.getTotalTems());
         long cartId = db.insert("Cart", null, values);
         db.close();
@@ -37,7 +37,7 @@ public class CartDao {
 //        String selection = "cart_id = ?";
 //        String[] selectionArgs = {String.valueOf(cartId)};
 //        Cursor cursor = db.query("Cart", projection, selection, selectionArgs, null, null, null);
-//
+//c
 //        Cart cart = null;
 //        if (cursor.moveToFirst()) {
 //            cart = new Cart();

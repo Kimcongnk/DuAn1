@@ -101,13 +101,19 @@ public class OrderDao {
         return orders;
     }
     @SuppressLint("Range")
-    public List<Order> getAllOrdersWithDetails() {
-        String[] projection = {"nameCustomerOder", "phoneNumber", "address"};
-        Cursor cursor = db.query("Oder", projection, null, null, null, null, null);
+    public List<Order> getAllOrdersWithDetailsById(int orderId) {
+        String[] projection = {"id_oder", "id_customer", "nameCustomerOder", "phoneNumber", "address"};
+        String selection = "id_oder = ?";
+        String[] selectionArgs = {String.valueOf(orderId)};
+
+        Cursor cursor = db.query("Oder", projection, selection, selectionArgs, null, null, null);
         List<Order> orderList = new ArrayList<>();
+
         while (cursor.moveToNext()) {
             Order order = new Order();
 
+            order.setOrderId(cursor.getInt(cursor.getColumnIndex("id_oder")));
+            order.setIdUser(cursor.getInt(cursor.getColumnIndex("id_customer")));
             order.setNameOder(cursor.getString(cursor.getColumnIndex("nameCustomerOder")));
             order.setPhoneNumber(cursor.getString(cursor.getColumnIndex("phoneNumber")));
             order.setAddress(cursor.getString(cursor.getColumnIndex("address")));
@@ -115,9 +121,9 @@ public class OrderDao {
             orderList.add(order);
         }
         cursor.close();
-        db.close();
         return orderList;
     }
+
 
 
     public int updateOrder(Order order) {

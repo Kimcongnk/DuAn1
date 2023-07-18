@@ -4,15 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.customer.ProductHomeAdapter;
@@ -24,6 +32,7 @@ import nhom1.fpoly.duan1.my_interface.ProductInterface;
 public class HomeFragment extends Fragment {
     RecyclerView recyclerView, recyclerView_category;
     ProductHomeAdapter productHomeAdapter;
+    ImageSlider imageViewSlider;
     ProductsDao productsDao;
     CategoryDao categoryDao;
 
@@ -38,9 +47,16 @@ public class HomeFragment extends Fragment {
         recyclerView_category.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 2)); // set layout recycler view
         recyclerView.setHasFixedSize(true);
-        recyclerView.setHasFixedSize(true);
         productsDao = new ProductsDao(getContext());
 
+        imageViewSlider = view.findViewById(R.id.imageSlider);
+
+        ArrayList<SlideModel> slideModels = new ArrayList<SlideModel>();
+        slideModels.add(new SlideModel(R.drawable.img1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.img2, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.img3, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.img5, ScaleTypes.FIT));
+        imageViewSlider.setImageList(slideModels, ScaleTypes.FIT);
 
         List<Product> products = new ArrayList<>();
         products = productsDao.getAllProducts();
@@ -58,10 +74,23 @@ public class HomeFragment extends Fragment {
         productHomeAdapter.showProduct(new ProductInterface() {
             @Override
             public void showDetails(Product product) {
-                Toast.makeText(getContext(), product.getName_product(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),  String.valueOf(product.getId_product()), Toast.LENGTH_SHORT).show();
+                goToDetails(product);
             }
         });
 
         return view;
+    }
+
+    private void goToDetails(Product product){
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        DetailProductFragment detailProductFragment = new DetailProductFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("product", product);
+        detailProductFragment.setArguments(bundle);
+        transaction.addToBackStack(HomeFragment.class.getName());
+        transaction.replace(R.id.fragment_customer, detailProductFragment);
+        transaction.commit();
     }
 }

@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import nhom1.fpoly.duan1.R;
+import nhom1.fpoly.duan1.model.Cart;
 import nhom1.fpoly.duan1.model.OrderDetail;
 
 public class OrderDetailAdapter extends BaseAdapter {
@@ -55,9 +57,20 @@ public class OrderDetailAdapter extends BaseAdapter {
 
         // Set the data to the views
         tvProductName.setText(orderDetail.getProductName());
-        tvProductPrice.setText("Price: $" + orderDetail.getPrice());
-        tvQuantity.setText("Quantity: " + orderDetail.getQuantity());
+        tvProductPrice.setText(String.valueOf(orderDetail.getPrice()));
+        tvQuantity.setText("SL: " + orderDetail.getQuantity());
 
         return view;
+    }
+    public double totalOrderDetail() {
+        double totalPrice = 0;
+        for (OrderDetail item : orderDetailList) {
+            int quantity = item.getQuantity();
+            int price = item.getPrice();
+            totalPrice += quantity * price;
+        }
+
+
+        return totalPrice;
     }
 }

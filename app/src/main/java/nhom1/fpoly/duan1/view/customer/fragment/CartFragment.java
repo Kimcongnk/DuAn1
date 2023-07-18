@@ -147,7 +147,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
         }
         DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
         String formattedPrice = decimalFormat.format(totalPrice);
-        txtTotalPrice.setText( formattedPrice);
+        txtTotalPrice.setText( formattedPrice+ "VND");
 
     }
 }

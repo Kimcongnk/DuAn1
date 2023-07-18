@@ -61,7 +61,7 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.Vi
             super(itemView);
             img_product = (ImageView) itemView.findViewById(R.id.image_product);
             txt_name_product = (TextView) itemView.findViewById(R.id.txt_name_product);
-            progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar_product);
+//            progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar_product);
         }
     }
 }

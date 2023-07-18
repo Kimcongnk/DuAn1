@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:text="Thông tin đơn hàng"
+            android:text="Thanh toán"
             android:textColor="@color/black"
             android:textSize="30sp" />
     </LinearLayout>
@@ -98,27 +98,38 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/txt_order_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:text="Sửa"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
     </LinearLayout>
 
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView_order"
-        android:layout_width="381dp"
-        android:layout_height="278dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/layout_order_header"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:fillViewport="true">
 
-        <ListView
-            android:id="@+id/lisview_view_order"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_order"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="5dp" />
     </androidx.core.widget.NestedScrollView>
+
 
     <LinearLayout
         android:id="@+id/layout_sum_order"
@@ -137,7 +148,6 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txtTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -145,6 +155,16 @@
             android:textColor="#6D001F"
             android:textSize="20sp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_thanh_toan_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_sum_order"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:text="Thanh toán" />
 
 
 </RelativeLayout>
