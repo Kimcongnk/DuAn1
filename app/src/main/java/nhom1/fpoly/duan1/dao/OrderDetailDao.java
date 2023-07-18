@@ -24,7 +24,7 @@ public class OrderDetailDao {
     public long addOrderDetail(OrderDetail orderDetail) {
         ContentValues values = new ContentValues();
         values.put("id_oder", orderDetail.getOderId());
-        values.put("product_id", orderDetail.getProductId());
+        values.put("id_product", orderDetail.getProductId());
         values.put("quantity", orderDetail.getQuantity());
         long detailId = db.insert("OrderDetail", null, values);
         db.close();
@@ -42,7 +42,7 @@ public class OrderDetailDao {
             orderDetail = new OrderDetail();
             orderDetail.setIdOderDetail(cursor.getInt(cursor.getColumnIndex("detail_id")));
             orderDetail.setOderId(cursor.getInt(cursor.getColumnIndex("id_oder")));
-            orderDetail.setProductId(cursor.getInt(cursor.getColumnIndex("product_id")));
+            orderDetail.setProductId(cursor.getInt(cursor.getColumnIndex("id_product")));
             orderDetail.setQuantity(cursor.getInt(cursor.getColumnIndex("quantity")));
         }
         cursor.close();
@@ -58,7 +58,7 @@ public class OrderDetailDao {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setIdOderDetail(cursor.getInt(cursor.getColumnIndex("detail_id")));
             orderDetail.setOderId(cursor.getInt(cursor.getColumnIndex("id_oder")));
-            orderDetail.setProductId(cursor.getInt(cursor.getColumnIndex("product_id")));
+            orderDetail.setProductId(cursor.getInt(cursor.getColumnIndex("id_product")));
             orderDetail.setQuantity(cursor.getInt(cursor.getColumnIndex("quantity")));
             orderDetailList.add(orderDetail);
         }
