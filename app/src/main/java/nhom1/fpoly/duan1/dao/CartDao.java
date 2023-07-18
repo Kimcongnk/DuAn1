@@ -84,4 +84,43 @@ public class CartDao {
         db.close();
         return rowsAffected;
     }
+    @SuppressLint("Range")
+    public List<Cart> getAllCartItemsWithProductInfo() {
+        List<Cart> cartItems = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String query = "SELECT c.cart_id, p.name, p.price, c.totaItem " +
+                "FROM Cart c " +
+                "INNER JOIN Products p ON c.id_product = p.id_product";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int cartId = cursor.getInt(cursor.getColumnIndex("cart_id"));
+                String productName = cursor.getString(cursor.getColumnIndex("name"));
+                int price = cursor.getInt(cursor.getColumnIndex("price"));
+                int quantity = cursor.getInt(cursor.getColumnIndex("totaItem"));
+
+                Cart cartItem = new Cart(cartId, productName, price, quantity);
+                cartItems.add(cartItem);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return cartItems;
+    }
+    public void updateCartItem(Cart cartItem) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        // Update the "totalItem" column with the new quantity
+        values.put("totaItem", cartItem.getTotalTems());
+
+        // Update the cart item in the database based on its ID
+        db.update("Cart", values, "cart_id=?", new String[]{String.valueOf(cartItem.getCartId())});
+        db.close();
+    }
+
+
 }

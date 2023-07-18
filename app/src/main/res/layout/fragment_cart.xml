@@ -32,7 +32,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:orientation="vertical"
-                android:visibility="gone">
+              >
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView_cart"
@@ -60,6 +60,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/txt_total_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -87,9 +88,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                android:visibility="visible">
+                android:layout_marginBottom="10dp"                android:orientation="vertical"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/animationView"
@@ -97,6 +97,10 @@
                     android:layout_height="150dp"
                     android:layout_gravity="center"
                     android:layout_margin="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="30dp"
                     android:importantForAccessibility="no"
                     android:scaleType="centerCrop"
                     android:src="@drawable/img_cart_null" />
