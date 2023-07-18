@@ -2,14 +2,13 @@ package nhom1.fpoly.duan1.model;
 
 public class Customer {
     private int id_customer;
-    private String fullName, username, password, email, phoneNumber, address;
+    private String fullName, username, password, phoneNumber, address;
 
-    public Customer(int id_customer, String fullName, String username, String password, String email, String phoneNumber, String address) {
+    public Customer(int id_customer, String fullName, String username, String password, String phoneNumber, String address) {
         this.id_customer = id_customer;
         this.fullName = fullName;
         this.username = username;
         this.password = password;
-        this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
@@ -50,13 +49,6 @@ public class Customer {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
