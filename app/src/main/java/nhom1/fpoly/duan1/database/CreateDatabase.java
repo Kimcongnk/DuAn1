@@ -70,6 +70,17 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "(5,2, 'Pepsi', 'Thức uống có gas Pepsi có hương vị lôi cuốn, vị ngọt nhẹ, không gắt, mang đến cảm giác sảng khoái trong những ngày hè nóng bức và sau những giờ hoạt động mạnh.', 'https://farmersmarket.vn/products/nuoc-ngot-pepsi', '10.000')";
         db.execSQL(insert_product);
 
+        String tb_order = "create table Orders ( " +
+                "id_order integer primary key autoincrement, " +
+                "id_customer integer references Customer(id_customer), " +
+                "totalMoney text, " +
+                "status integer )";
+
+        String insert_order = "insert into Orders values (0, 1, '10.000', 1) ";
+        db.execSQL(insert_order);
+
+        db.execSQL(tb_order);
+
 
     }
 
