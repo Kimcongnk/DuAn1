@@ -1,11 +1,17 @@
 package nhom1.fpoly.duan1.model;
 
 public class Cart {
-private int cartId, productId, userId, totalTems;
+private int cartId, productId, userId, totalTems, price;
+private String productName;
 
     public Cart() {
     }
-
+    public Cart(int cartId, String productName, int price, int totalTems) {
+        this.cartId = cartId;
+        this.productName = productName;
+        this.price = price;
+        this.totalTems = totalTems;
+    }
     public int getCartId() {
         return cartId;
     }
@@ -36,5 +42,22 @@ private int cartId, productId, userId, totalTems;
 
     public void setTotalTems(int totalTems) {
         this.totalTems = totalTems;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 }
