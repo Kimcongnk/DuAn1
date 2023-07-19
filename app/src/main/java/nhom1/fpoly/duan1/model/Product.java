@@ -1,21 +1,22 @@
 package nhom1.fpoly.duan1.model;
 
-public class Product {
-    private int id_product, status, price;
-    private String  name_product, category, desc_product, img_product;
+import java.io.Serializable;
 
-    public Product(int id_product, int status, int price, String name_product, String category, String desc_product, String img_product) {
+public class Product implements Serializable {
+    private int id_product, status;
+    private String  name_product, category, desc_product, img_product, price;
+
+    public Product() {
+    }
+
+    public Product(int id_product, int status, String name_product, String category, String desc_product, String img_product, String price) {
         this.id_product = id_product;
         this.status = status;
-        this.price = price;
         this.name_product = name_product;
         this.category = category;
         this.desc_product = desc_product;
         this.img_product = img_product;
-    }
-
-    public Product() {
-
+        this.price = price;
     }
 
     public int getId_product() {
@@ -32,14 +33,6 @@ public class Product {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     public String getName_product() {
@@ -72,5 +65,13 @@ public class Product {
 
     public void setImg_product(String img_product) {
         this.img_product = img_product;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

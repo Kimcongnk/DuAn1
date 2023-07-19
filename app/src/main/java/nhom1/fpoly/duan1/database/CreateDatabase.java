@@ -22,14 +22,15 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "fullName text, " +
                 "username text, " +
                 "password text, " +
+                "email text, " +
                 "address text, " +
                 "phone text )";
         db.execSQL(tb_user);
         String insert_user = "insert into Customer values " +
-                "(0, 'Nguyễn Văn A', 'user_test', 'test@123',  'Hà Nội', '012345687' ), " +
-                "(1, 'Nguyễn Văn B', 'user_test1', 'test@123', 'Hà Nội', '012345687' ), " +
-                "(2, 'Nguyễn Văn C', 'user_test2', 'test@123',  'Hà Nội', '012345687' ), " +
-                "(3, 'Nguyễn Văn D', 'user_test3', 'test@123',  'Hà Nội', '012345687' ) ";
+                "(0, 'Nguyễn Văn A', 'user_test', 'test@123', 'user@gmail.com', 'Hà Nội', '012345687' ), " +
+                "(1, 'Nguyễn Văn B', 'user_test1', 'test@123', 'user1@gmail.com', 'Hà Nội', '012345687' ), " +
+                "(2, 'Nguyễn Văn C', 'user_test2', 'test@123', 'user2@gmail.com', 'Hà Nội', '012345687' ), " +
+                "(3, 'Nguyễn Văn D', 'user_test3', 'test@123', 'user3@gmail.com', 'Hà Nội', '012345687' ) ";
         db.execSQL(insert_user);
 
         String tb_admin = "create table Admin ( " +
@@ -70,45 +71,6 @@ public class CreateDatabase extends SQLiteOpenHelper {
         db.execSQL(insert_product);
 
 
-        String tb_cart = "create table Cart ( " +
-                "cart_id integer primary key autoincrement, " +
-                "id_product integer references Products(id_product), " +
-                "id_customer integer references Customer(id_customer), " +
-                "totaItem text)";
-        db.execSQL(tb_cart);
-        String insert_Cart = "insert into Cart values " +
-                "(0, 2, 0, 1), " +
-                "(1, 3, 0, 1), " +
-                "(2, 1, 0, 1) ";
-        db.execSQL(insert_Cart);
-
-        String tb_Oder = "create table Oder ( " +
-                "id_oder integer primary key autoincrement, " +
-                "id_customer integer references Customer(id_customer), " +
-                "dateOder text, " +
-                "totalMoney integer, " +
-                "status text )";
-        db.execSQL(tb_Oder);
-        String insertOder = "INSERT INTO Oder VALUES " +
-                "(0, 0, '2023-07-17', 300000, 'Đang giao hàng'), " +
-                "(1, 0, '2023-07-16', 450000, 'Giao thành công'), " +
-                "(2, 0, '2023-07-16', 450000, 'Giao thành công'), " +
-                "(3, 0, '2023-07-15', 200000, 'Đang giao hàng') ";
-        db.execSQL(insertOder);
-
-        String tb_OderDetail = "create table OrderDetail ( " +
-                "id_oderDetail integer primary key autoincrement, " +
-                "id_oder integer references Oder(id_oder), " +
-                "id_product integer references Products(id_product), " +
-                "quantyti integer)";
-        db.execSQL(tb_OderDetail);
-        String insertOrderDetail = "INSERT INTO OrderDetail  VALUES " +
-                "(0, 0, 2, 1), " +
-                "(1, 0, 1, 1), " +
-                "(2, 1, 3, 4), " +
-                "(3, 1, 1, 4), " +
-                "(4, 3, 2, 2) ";
-        db.execSQL(insertOrderDetail);
     }
 
     @Override

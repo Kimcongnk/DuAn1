@@ -31,7 +31,7 @@ public class ProductsDao {
                 products.setName_product(cursor.getString(cursor.getColumnIndex("name")));
                 products.setDesc_product(cursor.getString(cursor.getColumnIndex("description")));
                 products.setImg_product(cursor.getString(cursor.getColumnIndex("image_url")));
-                products.setPrice(Integer.parseInt(cursor.getString(cursor.getColumnIndex("price"))));
+                products.setPrice(cursor.getString(cursor.getColumnIndex("price")));
                 productList.add(products);
             } while (cursor.moveToNext());
         }
