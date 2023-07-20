@@ -42,7 +42,7 @@ public class ThanhToan extends AppCompatActivity {
     private TextView txtTotal;
     private CustomerDao customerDao;
     private Customer customerArrayList;
-    private List<Cart> selectedItems;
+    private ArrayList<Cart> selectedItems;
     private Button btnOder;
     private OrderDao orderDao;
     private OrderDetailDao orderDetailDao;
@@ -121,12 +121,13 @@ public class ThanhToan extends AppCompatActivity {
                         orderDetail.setOderId(randomOrderId);
                         orderDetail.setProductId(cartItem.getId_product());
                         orderDetail.setQuantity(cartItem.getTotalTems());
-                    }
-                    if (orderDetailDao.addOrderDetail(orderDetail) > 0) {
-                        cartDao.deleteCarts(selectedItems);
-                        Toast.makeText(ThanhToan.this, "Hàng đang được giao", Toast.LENGTH_SHORT).show();
+                        if (orderDetailDao.addOrderDetail(orderDetail) > 0) {
+                            cartDao.deleteCarts(selectedItems);
+                            Toast.makeText(ThanhToan.this, "Hàng đang được giao", Toast.LENGTH_SHORT).show();
 
+                        }
                     }
+
                 }
             }
         });

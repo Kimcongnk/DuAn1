@@ -1,20 +1,17 @@
 package nhom1.fpoly.duan1.adapter.customer;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import nhom1.fpoly.duan1.R;
@@ -91,9 +88,9 @@ private CartDao cartDao;
             itemImage = itemView.findViewById(R.id.image);
             decrease = itemView.findViewById(R.id.tru);
             increase = itemView.findViewById(R.id.cong);
-            txtItemName = itemView.findViewById(R.id.txt_item_cart_name);
-            txtItemPrice = itemView.findViewById(R.id.tienx1);
-            txtTotalItems = itemView.findViewById(R.id.sl);
+            txtItemName = itemView.findViewById(R.id.tvProductName);
+            txtItemPrice = itemView.findViewById(R.id.tvProductPrice);
+            txtTotalItems = itemView.findViewById(R.id.tvQuantity);
             checkODer = itemView.findViewById(R.id.checkbox_item);
         }
     }

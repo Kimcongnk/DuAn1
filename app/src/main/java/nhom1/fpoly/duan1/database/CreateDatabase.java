@@ -92,8 +92,8 @@ public class CreateDatabase extends SQLiteOpenHelper {
         db.execSQL(tb_Oder);
         String insertOder = "INSERT INTO Oder VALUES " +
                 "(0, 0, '2023-07-17', 300000, 'Đang giao hàng'), " +
-                "(1, 0, '2023-07-16', 450000, 'Giao thành công'), " +
-                "(2, 0, '2023-07-16', 450000, 'Giao thành công'), " +
+                "(1, 0, '2023-07-16', 450000, 'Đã giao hàng'), " +
+                "(2, 0, '2023-07-16', 450000, 'Đã giao hàng'), " +
                 "(3, 0, '2023-07-15', 200000, 'Đang giao hàng') ";
         db.execSQL(insertOder);
 

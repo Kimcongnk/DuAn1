@@ -70,6 +70,34 @@ public class OrderDao {
         db.close();
         return orderList;
     }
+    @SuppressLint("Range")
+
+    public ArrayList<Order> getOrdersByStatus(String status) {
+        ArrayList<Order> orders = new ArrayList<>();
+
+
+        String[] columns = {"id_oder", "id_customer", "dateOder", "totalMoney", "status"};
+        String selection = "status = ?";
+        String[] selectionArgs = {status};
+
+        Cursor cursor = db.query("Oder", columns, selection, selectionArgs, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Order order = new Order();
+                order.setOrderId(cursor.getInt(cursor.getColumnIndex("id_oder")));
+                order.setIdUser(cursor.getInt(cursor.getColumnIndex("id_customer")));
+                order.setDateOder(cursor.getString(cursor.getColumnIndex("dateOder")));
+                order.setTotalMoney(cursor.getDouble(cursor.getColumnIndex("totalMoney")));
+                order.setStatus(cursor.getString(cursor.getColumnIndex("status")));
+                orders.add(order);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return orders;
+    }
+
 
     public int updateOrder(Order order) {
         ContentValues values = new ContentValues();

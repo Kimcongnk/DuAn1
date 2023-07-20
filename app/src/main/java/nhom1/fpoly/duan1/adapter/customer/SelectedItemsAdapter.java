@@ -59,9 +59,9 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
         public SelectedItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            txtSelectedItemName = itemView.findViewById(R.id.txt_item_cart_name);
-            txtSelectedItemPrice = itemView.findViewById(R.id.tienx1);
-            txtTotalItems = itemView.findViewById(R.id.sl);
+            txtSelectedItemName = itemView.findViewById(R.id.tvProductName);
+            txtSelectedItemPrice = itemView.findViewById(R.id.tvProductPrice);
+            txtTotalItems = itemView.findViewById(R.id.tvQuantity);
 
         }
     }

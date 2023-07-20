@@ -1,9 +1,20 @@
 package nhom1.fpoly.duan1.model;
 
 public class OrderDetail {
-    private int idOderDetail, oderId, productId, quantity;
+    private int idOderDetail, oderId, productId, quantity, price;
+    private String productName;
+
 
     public OrderDetail() {
+    }
+
+    public OrderDetail(int oderId, int productId, String productName, int price, int quantity) {
+
+        this.oderId = oderId;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.price = price;
+        this.productName = productName;
     }
 
     public int getIdOderDetail() {
@@ -36,5 +47,21 @@ public class OrderDetail {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 }
