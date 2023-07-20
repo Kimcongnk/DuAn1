@@ -3,6 +3,7 @@ package nhom1.fpoly.duan1.adapter.customer;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nhom1.fpoly.duan1.R;
@@ -19,6 +21,7 @@ import nhom1.fpoly.duan1.my_interface.ProductInterface;
 public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.ViewHolder> {
     Context context;
     List<Product> productList;
+    List<Product> mproductList;
 
     ProductInterface detailOnClick;
     public void showProduct(ProductInterface detailOnClick){
@@ -29,6 +32,7 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
     public ProductHomeAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
+        this.mproductList = productList;
     }
 
     @NonNull
@@ -37,6 +41,7 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
         View view = View.inflate(context, R.layout.item_product, null);
         return new ViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ProductHomeAdapter.ViewHolder holder, int position) {
@@ -67,4 +72,35 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
             cardView = (CardView) itemView.findViewById(R.id.cardView_product);
         }
     }
+
+//    @Override
+//    public Filter getFilter() {
+//        return new Filter() {
+//            @Override
+//            protected FilterResults performFiltering(CharSequence charSequence) {
+//                String strSearch = charSequence.toString();
+//                if(strSearch.isEmpty()){
+//                    productList = mproductList;
+//                }else {
+//                    ArrayList<Product> mListOld = new ArrayList<>();
+//                    for (Product Product: mproductList){
+//                        if(Product.getName_product().toLowerCase().contains(strSearch.toLowerCase())){
+//                            mListOld.add(Product);
+//                        }
+//                    }
+//                    productList = mListOld;
+//                }
+//                FilterResults results = new FilterResults();
+//                results.values = productList;
+//                return results;
+//            }
+//
+//            @Override
+//            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+//                productList = (ArrayList<Product>) filterResults.values;
+//                notifyDataSetChanged();
+//
+//            }
+//        };
+//    }
 }

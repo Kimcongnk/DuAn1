@@ -18,20 +18,25 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import nhom1.fpoly.duan1.R;
+import nhom1.fpoly.duan1.adapter.customer.CategoryHomeAdapter;
 import nhom1.fpoly.duan1.adapter.customer.ProductHomeAdapter;
 import nhom1.fpoly.duan1.dao.CategoryDao;
 import nhom1.fpoly.duan1.dao.ProductsDao;
+import nhom1.fpoly.duan1.model.Categories;
 import nhom1.fpoly.duan1.model.Product;
+import nhom1.fpoly.duan1.my_interface.CategoriesInterface;
 import nhom1.fpoly.duan1.my_interface.ProductInterface;
 
 public class HomeFragment extends Fragment {
     RecyclerView recyclerView, recyclerView_category;
     ProductHomeAdapter productHomeAdapter;
+    CategoryHomeAdapter categoryHomeAdapter;
     ImageSlider imageViewSlider;
     ProductsDao productsDao;
     CategoryDao categoryDao;
@@ -48,7 +53,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 2)); // set layout recycler view
         recyclerView.setHasFixedSize(true);
         productsDao = new ProductsDao(getContext());
-
+        categoryDao = new CategoryDao(getContext());
         imageViewSlider = view.findViewById(R.id.imageSlider);
 
         ArrayList<SlideModel> slideModels = new ArrayList<SlideModel>();
@@ -60,7 +65,9 @@ public class HomeFragment extends Fragment {
         imageViewSlider.setImageList(slideModels, ScaleTypes.FIT);
 
         List<Product> products = new ArrayList<>();
+        List<Categories> categories = new ArrayList<>();
         products = productsDao.getAllProducts();
+        categories = categoryDao.getAllCategories();
 //
 //        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
 //        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
@@ -71,12 +78,21 @@ public class HomeFragment extends Fragment {
         productHomeAdapter = new ProductHomeAdapter(requireActivity(), products);
         recyclerView.setAdapter(productHomeAdapter);
         productHomeAdapter.notifyDataSetChanged();
-
         productHomeAdapter.showProduct(new ProductInterface() {
             @Override
             public void showDetails(Product product) {
                 Toast.makeText(getContext(), product.getName_product(), Toast.LENGTH_SHORT).show();
                 goToDetails(product);
+            }
+        });
+        categoryHomeAdapter = new CategoryHomeAdapter(requireActivity(), categories);
+        recyclerView_category.setAdapter(categoryHomeAdapter);
+        categoryHomeAdapter.notifyDataSetChanged();
+        categoryHomeAdapter.showProduct(new CategoriesInterface() {
+            @Override
+            public void showDetails(Categories categories1) {
+                Toast.makeText(getContext(), categories1.getName_categories(), Toast.LENGTH_SHORT).show();
+                goToDetails2(categories1);
             }
         });
 
@@ -92,6 +108,16 @@ public class HomeFragment extends Fragment {
         detailProductFragment.setArguments(bundle);
         transaction.addToBackStack(HomeFragment.class.getName());
         transaction.replace(R.id.fragment_customer, detailProductFragment);
+        transaction.commit();
+    }
+    private void goToDetails2(Categories categories){
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        CategoriesFragment categoriesFragment = new CategoriesFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("categories",categories);
+        categoriesFragment.setArguments(bundle);
+        transaction.addToBackStack(HomeFragment.class.getName());
+        transaction.replace(R.id.fragment_customer, categoriesFragment);
         transaction.commit();
     }
 }
