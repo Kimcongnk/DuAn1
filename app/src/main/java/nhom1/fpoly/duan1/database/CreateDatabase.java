@@ -84,7 +84,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
         db.execSQL(insert_Cart);
 
         String tb_Oder = "create table Oder ( " +
-                "id_oder integer primary key autoincrement, " +
+                "id_oder integer primary key , " +
                 "id_customer integer references Customer(id_customer), " +
                 "dateOder text, " +
                 "totalMoney integer, " +

@@ -23,11 +23,12 @@ public class OrderDao {
 
     public long addOrder(Order order) {
         ContentValues values = new ContentValues();
+        values.put("id_oder", order.getOrderId());
         values.put("id_customer", order.getIdUser());
         values.put("dateOder", order.getDateOder());
         values.put("totalMoney", order.getTotalMoney());
         values.put("status", order.getStatus());
-        long orderId = db.insert("Order", null, values);
+        long orderId = db.insert("Oder", null, values);
         db.close();
         return orderId;
     }
@@ -72,7 +73,7 @@ public class OrderDao {
 
     public int updateOrder(Order order) {
         ContentValues values = new ContentValues();
-        values.put("id_customer", order.getIdUser());
+        values.put("id_customer", order.getOrderId());
         values.put("orderDate", order.getDateOder());
         values.put("totalMoney", order.getTotalMoney());
         values.put("status", order.getStatus());

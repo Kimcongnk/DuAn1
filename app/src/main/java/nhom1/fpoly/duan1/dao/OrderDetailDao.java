@@ -25,7 +25,7 @@ public class OrderDetailDao {
         ContentValues values = new ContentValues();
         values.put("id_oder", orderDetail.getOderId());
         values.put("id_product", orderDetail.getProductId());
-        values.put("quantity", orderDetail.getQuantity());
+        values.put("quantyti", orderDetail.getQuantity());
         long detailId = db.insert("OrderDetail", null, values);
         db.close();
         return detailId;

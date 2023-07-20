@@ -1,9 +1,11 @@
 package nhom1.fpoly.duan1.dao;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class CartDao {
         db.close();
         return cartId;
     }
+
     @SuppressLint("Range")
     public Cart getCartById(long cartId) {
         String[] projection = {"cart_id", "user_id", "product_id", "totaItem"};
@@ -47,6 +50,7 @@ public class CartDao {
         db.close();
         return cart;
     }
+
     @SuppressLint("Range")
     public List<Cart> getAllCarts() {
         String[] projection = {"cart_id", "user_id", "product_id", "totaItem"};
@@ -77,18 +81,19 @@ public class CartDao {
         return rowsAffected;
     }
 
-    public int deleteCart(long cartId) {
+    public int deleteCart(int cartId) {
         String whereClause = "cart_id = ?";
         String[] whereArgs = {String.valueOf(cartId)};
         int rowsAffected = db.delete("Cart", whereClause, whereArgs);
         db.close();
         return rowsAffected;
     }
+
     @SuppressLint("Range")
     public List<Cart> getAllCartItemsWithProductInfo() {
         List<Cart> cartItems = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String query = "SELECT c.cart_id, p.name, p.price, c.totaItem " +
+        String query = "SELECT c.cart_id, p.id_product, p.name, p.price, c.totaItem " +
                 "FROM Cart c " +
                 "INNER JOIN Products p ON c.id_product = p.id_product";
 
@@ -97,11 +102,12 @@ public class CartDao {
         if (cursor.moveToFirst()) {
             do {
                 int cartId = cursor.getInt(cursor.getColumnIndex("cart_id"));
+                int productId = cursor.getInt(cursor.getColumnIndex("id_product"));
                 String productName = cursor.getString(cursor.getColumnIndex("name"));
                 int price = cursor.getInt(cursor.getColumnIndex("price"));
                 int quantity = cursor.getInt(cursor.getColumnIndex("totaItem"));
 
-                Cart cartItem = new Cart(cartId, productName, price, quantity);
+                Cart cartItem = new Cart(cartId, productId, productName, price, quantity);
                 cartItems.add(cartItem);
             } while (cursor.moveToNext());
         }
@@ -111,6 +117,7 @@ public class CartDao {
 
         return cartItems;
     }
+
     public void updateCartItem(Cart cartItem) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
