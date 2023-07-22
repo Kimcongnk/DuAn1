@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import nhom1.fpoly.duan1.R;
-import nhom1.fpoly.duan1.adapter.admin.CartAdapter;
+//import nhom1.fpoly.duan1.adapter.admin.CartAdapter;
 import nhom1.fpoly.duan1.dao.CartDao;
 import nhom1.fpoly.duan1.model.Cart;
 
@@ -21,7 +21,7 @@ public class CartFragment extends Fragment {
 private RecyclerView recyclerViewCart;
 private CartDao cartDao;
 private ArrayList<Cart> cartArrayList;
-private CartAdapter cartAdapter;
+//private CartAdapter cartAdapter;
     public CartFragment() {
         // Required empty public constructor
     }
@@ -40,11 +40,11 @@ private CartAdapter cartAdapter;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
-        recyclerViewCart = view.findViewById(R.id.recyclerView_cart);
-        cartDao = new CartDao(getContext());
-        cartArrayList = (ArrayList<Cart>) cartDao.getAllCarts();
-        cartAdapter = new CartAdapter(cartArrayList, getContext());
-        recyclerViewCart.setAdapter(cartAdapter);
+//        recyclerViewCart = view.findViewById(R.id.recyclerView_cart);
+//        cartDao = new CartDao(getContext());
+//        cartArrayList = (ArrayList<Cart>) cartDao.getAllCarts();
+//        cartAdapter = new CartAdapter(cartArrayList, getContext());
+//        recyclerViewCart.setAdapter(cartAdapter);
 
         return view;
     }
