@@ -90,10 +90,10 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "status text )";
         db.execSQL(tb_Oder);
         String insertOder = "INSERT INTO Oder VALUES " +
-                "(0, 0, '2023-07-17', 300000, 'Đang giao hàng'), " +
-                "(1, 0, '2023-07-16', 450000, 'Giao thành công'), " +
-                "(2, 0, '2023-07-16', 450000, 'Giao thành công'), " +
-                "(3, 0, '2023-07-15', 200000, 'Đang giao hàng') ";
+                "(0, 0, '17/07/2023', 300000, 'Đang giao hàng'), " +
+                "(1, 0, '16/07/2023', 450000, 'Giao thành công'), " +
+                "(2, 0, '18/07/2023', 450000, 'Giao thành công'), " +
+                "(3, 0, '16/07/2023', 200000, 'Đang giao hàng') ";
         db.execSQL(insertOder);
 
         String tb_OderDetail = "create table OrderDetail ( " +
