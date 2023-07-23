@@ -27,7 +27,7 @@ public class AddCategoriesFragment extends Fragment {
     Button btn_add_category;
     AddCategoriesAdapter adapter;
     CategoryDao categoryDao;
-    List<Categories> categoriesList;
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -39,21 +39,16 @@ public class AddCategoriesFragment extends Fragment {
         recyclerView_category_admin = view.findViewById(R.id.recyclerView_category_admin);
         btn_add_category = view.findViewById(R.id.btn_add_category);
         recyclerView_category_admin.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)); // set layout recycler view
-        recyclerView_category_admin.setHasFixedSize(true);
+//        recyclerView_category_admin.setHasFixedSize(true);
 
-        categoryDao = new CategoryDao(requireContext());
+        categoryDao = new CategoryDao(getContext());
 
-        categoriesList = new ArrayList<>();
-//        categoriesList = categoryDao.getAllCategories();
-        // fake data for category
-        List<Categories> categoriesList = new ArrayList<>();
-        categoriesList.add(new Categories(0, "Cà phê", "https://vi.m.wikipedia.org/wiki/T%E1%BA%ADp_tin:Caf%C3%A9_con_leche.jpg"));
-        categoriesList.add(new Categories(1, "Trà sữa", "https://www.bachhoaxanh.com/kinh-nghiem-hay/hoc-cach-pha-tra-sua-o-long-dai-loan-thom-ngon-chuan-vi-ai-cung-me-1374160"));
-        categoriesList.add(new Categories(2, "Nước ngọt", "https://ecare.vn/blogs/bai-blog-moi/anh-huong-cua-nuoc-ngot-voi-suc-khoe-rang-mieng"));
-
-        adapter = new AddCategoriesAdapter(categoriesList, requireContext());
+        ArrayList<Categories> categoriesList = categoryDao.getAllCategories();
+        AddCategoriesAdapter adapter = new AddCategoriesAdapter(categoriesList,getContext());
         recyclerView_category_admin.setAdapter(adapter);
-        adapter.notifyDataSetChanged(); // update categories adapter
+
+
+
 
 
         btn_add_category.setOnClickListener(click -> {

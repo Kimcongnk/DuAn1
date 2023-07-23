@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
         recyclerView_category.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 2)); // set layout recycler view
         recyclerView.setHasFixedSize(true);
-        recyclerView.setHasFixedSize(true);
+
         productsDao = new ProductsDao(getContext());
 
 

@@ -44,6 +44,20 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull AddProductAdapter.ViewHolder holder, int position) {
         Product product = productList.get(position);
+        holder.txt_name_product.setText(product.getName_product());
+        holder.txt_price_product.setText(String.valueOf(product.getPrice()));
+        Picasso.get().load(product.getImg_product()).into(holder.img_product
+                , new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Log.e("Error", e.getMessage());
+                    }
+                });
     }
 
     @Override
@@ -53,7 +67,7 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img_product;
-        TextView txt_name_product;
+        TextView txt_name_product,txt_price_product;
         ProgressBar progressBar;
         CardView cardView;
 
@@ -61,6 +75,7 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.Vi
             super(itemView);
             img_product = (ImageView) itemView.findViewById(R.id.image_product);
             txt_name_product = (TextView) itemView.findViewById(R.id.txt_name_product);
+            txt_price_product = (TextView) itemView.findViewById(R.id.txt_price_product);
             progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar_product);
         }
     }

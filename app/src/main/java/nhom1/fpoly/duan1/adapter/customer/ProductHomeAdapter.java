@@ -1,14 +1,19 @@
 package nhom1.fpoly.duan1.adapter.customer;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -43,7 +48,18 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
         Product product = productList.get(position);
         holder.txt_name_product_home.setText(product.getName_product());
         holder.txt_price_product_home.setText(String.valueOf(product.getPrice()));
-        holder.img_product_home.setImageResource(R.drawable.ic_home);
+        Picasso.get().load(product.getImg_product()).into(holder.img_product_home
+                , new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Log.e("Error", e.getMessage());
+                    }
+                });
         holder.cardView.setOnClickListener(click -> {
             detailOnClick.showDetails(product);
         });
@@ -58,12 +74,14 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
         TextView txt_name_product_home, txt_price_product_home;
         ImageView img_product_home;
         CardView cardView;
+        ProgressBar progressBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txt_name_product_home = (TextView) itemView.findViewById(R.id.txt_name_product);
             txt_price_product_home = (TextView) itemView.findViewById(R.id.txt_price_product);
             img_product_home = (ImageView) itemView.findViewById(R.id.image_product);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar_product);
             cardView = (CardView) itemView.findViewById(R.id.cardView_product);
         }
     }

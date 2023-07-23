@@ -30,6 +30,7 @@
         android:paddingRight="32dp">
 
         <EditText
+            android:text="admin"
             android:id="@+id/edt_login_username"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -47,6 +48,7 @@
             android:singleLine="true" />
 
         <EditText
+            android:text="admin"
             android:id="@+id/edt_login_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"

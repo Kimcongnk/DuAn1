@@ -47,9 +47,9 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "image_url text )";
         db.execSQL(tb_category);
         String insert_category = "insert into Category values " +
-                "(0, 'Cà phê', 'https://vi.m.wikipedia.org/wiki/T%E1%BA%ADp_tin:Caf%C3%A9_con_leche.jpg'), " +
-                "(1, 'Trà sữa', 'https://www.bachhoaxanh.com/kinh-nghiem-hay/hoc-cach-pha-tra-sua-o-long-dai-loan-thom-ngon-chuan-vi-ai-cung-me-1374160'), " +
-                "(2, 'Nước ngọt', 'https://ecare.vn/blogs/bai-blog-moi/anh-huong-cua-nuoc-ngot-voi-suc-khoe-rang-mieng') ";
+                "(0, 'Cà phê', 'https://img1.kienthucvui.vn/uploads/2021/02/12/hinh-anh-ca-phe-dep-hap-dan_045435553.jpg'), " +
+                "(1, 'Trà sữa', 'https://toigingiuvedep.vn/wp-content/uploads/2021/06/hinh-anh-tra-sua-dep-ngon.jpeg'), " +
+                "(2, 'Nước ngọt', 'https://cdn2.tieudungplus.vn/media/uploaded/13/2016/01/25/nuoc_ngot.png') ";
         db.execSQL(insert_category);
 
         String tb_product = "create table Products ( " +
@@ -61,12 +61,12 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "price integer )";
         db.execSQL(tb_product);
         String insert_product = "insert into Products values " +
-                "(0, 0, 'Cà phê sữa đá', 'Cà phê sữa đá là một loại thức uống thông dụng ở Việt Nam. Cà phê sữa đá truyền thống được làm từ cà phê nguyên chất đựng trong phin với sữa đặc có đường và bỏ đá vào trong một cái ly bằng thủy tinh rồi thưởng thức.', 'https://conducmegiadinh.myharavan.com/products/ca-phe-sua', 150000), " +
-                "(1, 1, 'Trà sữa chân châu đường đen', 'Trà sữa trân châu đường đen được yêu thích nhờ sự kết hợp hết sức hoàn hảo giữa vị trà sữa thơm béo và trân châu đường đen mềm, ngọt.', 'https://tiki.vn/tra-sua-tran-chau-duong-den-leader-22g-6-goi-bot-tran-chau-an-lien-50g-6-goi-hop-2-hop-p93748472.html', 250000), " +
-                "(2,2, 'Sting', 'Sting là sản phẩm nước tăng lực với mùi vị thơm ngon, sảng khoái. Nước tăng lực Sting giúp cơ thể bù đắp nước, bổ sung năng lượng, vitamin C và E, giúp xua tan cơn khát và cảm giác mệt mỏi.', 'https://sieuthiducthanh.com/nn-s-ting-dau-pet-330ml', 10000), " +
-                "(3,2, 'Coca cola', 'Coca-Cola (hay còn gọi là Coca, Coke) là một thương hiệu nước ngọt có ga chứa nước cacbon dioxide bão hòa được sản xuất bởi Công ty Coca-Cola. Coca-Cola được điều chế bởi dược sĩ John Pemberton vào cuối thế kỷ XIX với mục đích ban đầu là trở thành một loại biệt dược.', 'https://losupply.vn/3133838-nuoc-ngot/66821253-nuoc-ngot-coca-cola-lon-320ml-24-lon', 10000), " +
-                "(4,2, 'trà ô long Tea+ plus', 'Trà Ô Long TEA+ Plus là sản phẩm mang thương hiệu Suntory đầu tiên được ra mắt tại thị trường Việt Nam từ tháng 8 từ tháng 8 năm 2013. OTPP trong Trà Ô Long TEA+ (Plus) hạn chế hấp thu chất béo, sẽ giúp bạn luôn cảm thấy người nhẹ nhàng, dáng thanh tao. - Vị trà Ô Long thanh mát đem lại cho bạn cảm giác nhẹ nhàng.', 'https://www.suntory.vn/vi/what_we_do/tea_plus_oolong_tea.html', 10000), " +
-                "(5,2, 'Pepsi', 'Thức uống có gas Pepsi có hương vị lôi cuốn, vị ngọt nhẹ, không gắt, mang đến cảm giác sảng khoái trong những ngày hè nóng bức và sau những giờ hoạt động mạnh.', 'https://farmersmarket.vn/products/nuoc-ngot-pepsi', 10000)";
+                "(0, 0, 'Cà phê sữa đá', 'Cà phê sữa đá là một loại thức uống thông dụng ở Việt Nam. Cà phê sữa đá truyền thống được làm từ cà phê nguyên chất đựng trong phin với sữa đặc có đường và bỏ đá vào trong một cái ly bằng thủy tinh rồi thưởng thức.', 'https://howdaily.com/wp-content/uploads/2016/11/cafe-sua-da-640x960.jpg', 150000), " +
+                "(1, 1, 'Trà sữa chân châu', 'Trà sữa trân châu đường đen được yêu thích nhờ sự kết hợp hết sức hoàn hảo giữa vị trà sữa thơm béo và trân châu đường đen mềm, ngọt.', 'https://img4.thuthuatphanmem.vn/uploads/2020/05/07/anh-tra-sua-tran-chau-duong-den_062227684.jpg', 250000), " +
+                "(2,2, 'Sting', 'Sting là sản phẩm nước tăng lực với mùi vị thơm ngon, sảng khoái. Nước tăng lực Sting giúp cơ thể bù đắp nước, bổ sung năng lượng, vitamin C và E, giúp xua tan cơn khát và cảm giác mệt mỏi.', 'https://hutiuthanhdat.vn/data/Product/nuoc-ngot-sting.jpg', 10000), " +
+                "(3,2, 'Coca cola', 'Coca-Cola (hay còn gọi là Coca, Coke) là một thương hiệu nước ngọt có ga chứa nước cacbon dioxide bão hòa được sản xuất bởi Công ty Coca-Cola. Coca-Cola được điều chế bởi dược sĩ John Pemberton vào cuối thế kỷ XIX với mục đích ban đầu là trở thành một loại biệt dược.', 'https://www.dailyplanetadelaide.com/wp-content/uploads/2015/06/600ml-coke-570x760.jpg', 10000), " +
+                "(4,2, 'trà ô long Tea+ plus', 'Trà Ô Long TEA+ Plus là sản phẩm mang thương hiệu Suntory đầu tiên được ra mắt tại thị trường Việt Nam từ tháng 8 từ tháng 8 năm 2013. OTPP trong Trà Ô Long TEA+ (Plus) hạn chế hấp thu chất béo, sẽ giúp bạn luôn cảm thấy người nhẹ nhàng, dáng thanh tao. - Vị trà Ô Long thanh mát đem lại cho bạn cảm giác nhẹ nhàng.', 'https://cdn.tgdd.vn/Products/Images/8938/193431/bhx/tra-o-long-tea-plus-chai-350ml-loc-6-chai-3-org.jpg', 10000), " +
+                "(5,2, 'Pepsi', 'Thức uống có gas Pepsi có hương vị lôi cuốn, vị ngọt nhẹ, không gắt, mang đến cảm giác sảng khoái trong những ngày hè nóng bức và sau những giờ hoạt động mạnh.', 'https://toplist.vn/images/800px/pepsi-30115.jpg', 10000)";
         db.execSQL(insert_product);
 
 

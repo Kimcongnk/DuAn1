@@ -42,8 +42,8 @@ public class CategoryDao {
         return database.delete("Category", "id_category=?", new String[]{String.valueOf(categories.getId())});
     }
     @SuppressLint("Range")
-    public List<Categories> getAllCategories() {
-        List<Categories> categoriesList = new ArrayList<>();
+    public ArrayList<Categories> getAllCategories() {
+        ArrayList<Categories> categoriesList = new ArrayList<>();
         Cursor cursor = database.rawQuery("select * from Category", null);
         if (cursor.moveToFirst()){
             do {

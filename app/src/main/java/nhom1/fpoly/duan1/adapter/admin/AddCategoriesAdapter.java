@@ -18,6 +18,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nhom1.fpoly.duan1.R;
@@ -27,11 +28,11 @@ import okhttp3.OkHttpClient;
 
 public class AddCategoriesAdapter extends RecyclerView.Adapter<AddCategoriesAdapter.ViewHolder> {
 
-    List<Categories> categoriesList;
+    ArrayList<Categories> categoriesList;
     Context context;
 
 
-    public AddCategoriesAdapter(List<Categories> categoriesList, Context context) {
+    public AddCategoriesAdapter(ArrayList<Categories> categoriesList, Context context) {
         this.categoriesList = categoriesList;
         this.context = context;
     }
@@ -47,7 +48,8 @@ public class AddCategoriesAdapter extends RecyclerView.Adapter<AddCategoriesAdap
     public void onBindViewHolder(@NonNull AddCategoriesAdapter.ViewHolder holder, int position) {
         Categories categories = categoriesList.get(position);
         holder.txt_name_category.setText(categories.getName_categories());
-        Picasso.get().load(categories.getImg_categories()).into(holder.img_category, new Callback() {
+        Picasso.get().load(categories.getImg_categories()).into(holder.img_category
+     , new Callback() {
             @Override
             public void onSuccess() {
                 holder.progressBar.setVisibility(View.GONE);

@@ -51,7 +51,7 @@ public class Dialog_Add_Category extends DialogFragment {
         });
         btn_add_category.setOnClickListener(add -> {
             // add a new category to Database
-//            addDatabase();
+            addDatabase();
             Log.d("log", img_select.toString());
             dismiss();
         });
