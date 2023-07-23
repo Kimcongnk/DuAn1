@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nhom1.fpoly.duan1.R;
@@ -25,11 +26,11 @@ import nhom1.fpoly.duan1.model.Product;
 
 public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.ViewHolder> {
 
-    List<Product> productList;
+    ArrayList<Product> productList;
     Context context;
 
 
-    public AddProductAdapter(List<Product> productList, Context context) {
+    public AddProductAdapter(ArrayList<Product> productList, Context context) {
         this.productList = productList;
         this.context = context;
     }

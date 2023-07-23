@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class AddCategoriesFragment extends Fragment {
 
 
     RecyclerView recyclerView_category_admin;
-    Button btn_add_category;
+    FloatingActionButton float_add_category;
     AddCategoriesAdapter adapter;
     CategoryDao categoryDao;
 
@@ -37,7 +39,7 @@ public class AddCategoriesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_categories, container, false);
 
         recyclerView_category_admin = view.findViewById(R.id.recyclerView_category_admin);
-        btn_add_category = view.findViewById(R.id.btn_add_category);
+        float_add_category = view.findViewById(R.id.floatAddCategory);
         recyclerView_category_admin.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)); // set layout recycler view
 //        recyclerView_category_admin.setHasFixedSize(true);
 
@@ -51,7 +53,7 @@ public class AddCategoriesFragment extends Fragment {
 
 
 
-        btn_add_category.setOnClickListener(click -> {
+        float_add_category.setOnClickListener(click -> {
             // show dialog add category
             Dialog_Add_Category dialog_add_category = new Dialog_Add_Category();
             dialog_add_category.show(getParentFragmentManager(), dialog_add_category.getTag());

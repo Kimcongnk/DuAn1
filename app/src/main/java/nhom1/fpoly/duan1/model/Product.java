@@ -1,12 +1,12 @@
 package nhom1.fpoly.duan1.model;
 
 public class Product {
-    private int id_product, status, price;
+    private int id_product, price,id_category;
     private String  name_product, category, desc_product, img_product;
 
-    public Product(int id_product, int status, int price, String name_product, String category, String desc_product, String img_product) {
+    public Product(int id_product, int price, String name_product, String category, String desc_product, String img_product,Integer id_category) {
         this.id_product = id_product;
-        this.status = status;
+        this.id_category = id_category;
         this.price = price;
         this.name_product = name_product;
         this.category = category;
@@ -26,13 +26,7 @@ public class Product {
         this.id_product = id_product;
     }
 
-    public int getStatus() {
-        return status;
-    }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     public int getPrice() {
         return price;
@@ -72,5 +66,13 @@ public class Product {
 
     public void setImg_product(String img_product) {
         this.img_product = img_product;
+    }
+
+    public int getId_category() {
+        return id_category;
+    }
+
+    public void setId_category(int id_category) {
+        this.id_category = id_category;
     }
 }

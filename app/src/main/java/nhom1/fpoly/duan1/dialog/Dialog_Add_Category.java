@@ -63,10 +63,11 @@ public class Dialog_Add_Category extends DialogFragment {
         String name = edt_name.getText().toString();
         Categories categories = new Categories();
         categories.setName_categories(name);
-//        categories.setImg_categories(img_select);
+        categories.setImg_categories(String.valueOf(img_select));
         if (categoryDao.addCategory(categories)) {
             Toast.makeText(getContext(), "add successfully", Toast.LENGTH_SHORT).show();
             dismiss();
+            getActivity().recreate();
         } else {
             Toast.makeText(getContext(), "add failed", Toast.LENGTH_SHORT).show();
         }

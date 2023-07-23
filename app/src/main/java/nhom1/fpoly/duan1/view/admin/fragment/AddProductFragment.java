@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +26,11 @@ import nhom1.fpoly.duan1.model.Product;
 
 public class AddProductFragment extends Fragment {
 
-    Button btn_add_product;
+    FloatingActionButton float_add_product;
     RecyclerView recyclerView;
     ProductsDao productsDao;
     AddProductAdapter addProductAdapter;
-    List<Product> productList;
+    ArrayList<Product> productList;
 
 
     @SuppressLint("MissingInflatedId")
@@ -36,27 +38,26 @@ public class AddProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_product, container, false);
-        btn_add_product = (Button) view.findViewById(R.id.btn_add_product);
+        float_add_product =  view.findViewById(R.id.floatAddProduct);
         recyclerView = view.findViewById(R.id.recyclerView_product_admin);
-        recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 2)); // set layout recycler view
-        recyclerView.setHasFixedSize(true);
 
+        loadData();
 
-
-        productsDao = new ProductsDao(getContext());
-        productList = new ArrayList<>();
-        productList = productsDao.getAllProducts();
-        addProductAdapter = new AddProductAdapter(productList, getContext());
-        recyclerView.setAdapter(addProductAdapter);
-        addProductAdapter.notifyDataSetChanged();
-
-
-        btn_add_product.setOnClickListener(click -> {
+        float_add_product.setOnClickListener(click -> {
             Dialog_Add_Product dialog_add_product = new Dialog_Add_Product();
             dialog_add_product.show(getParentFragmentManager(), dialog_add_product.getTag());
+
         });
 
 
         return view;
+    }
+    public void loadData(){
+        productsDao = new ProductsDao(getContext());
+        productList = productsDao.getAllProducts();
+        recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 2)); // set layout recycler view
+        recyclerView.setHasFixedSize(true);
+        addProductAdapter = new AddProductAdapter(productList,getContext());
+        recyclerView.setAdapter(addProductAdapter);
     }
 }
