@@ -28,7 +28,7 @@ public class OrderDetailDao {
         values.put("id_product", orderDetail.getProductId());
         values.put("quantyti", orderDetail.getQuantity());
         long detailId = db.insert("OrderDetail", null, values);
-        db.close();
+
         return detailId;
     }
     @SuppressLint("Range")

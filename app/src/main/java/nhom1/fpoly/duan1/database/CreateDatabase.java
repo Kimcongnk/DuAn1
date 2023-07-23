@@ -86,15 +86,18 @@ public class CreateDatabase extends SQLiteOpenHelper {
         String tb_Oder = "create table Oder ( " +
                 "id_oder integer primary key , " +
                 "id_customer integer references Customer(id_customer), " +
+                "nameCustomerOder text, " +
+                "phoneNumber text, " +
+                "address text, " +
                 "dateOder text, " +
                 "totalMoney integer, " +
                 "status text )";
         db.execSQL(tb_Oder);
         String insertOder = "INSERT INTO Oder VALUES " +
-                "(0, 0, '2023-07-17', 300000, 'Đang giao hàng'), " +
-                "(1, 0, '2023-07-16', 450000, 'Đã giao hàng'), " +
-                "(2, 0, '2023-07-16', 450000, 'Đã giao hàng'), " +
-                "(3, 0, '2023-07-15', 200000, 'Đang giao hàng') ";
+                "(0, 0,'Lê cân','0854754764','fg', '2023-07-17', 300000, 'Đang giao hàng'), " +
+                "(1, 0,'Hồng anh','0987654332','gf', '2023-07-16', 450000, 'Đã giao hàng'), " +
+                "(2, 0,'Tel My','0987654323','ff', '2023-07-16', 450000, 'Đã giao hàng'), " +
+                "(3, 0,'Uyen My','0987654334','đ', '2023-07-15', 200000, 'Đang giao hàng') ";
         db.execSQL(insertOder);
 
         String tb_OderDetail = "create table OrderDetail ( " +

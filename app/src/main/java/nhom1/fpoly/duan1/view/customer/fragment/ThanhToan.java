@@ -61,7 +61,7 @@ public class ThanhToan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thanh_toan);
-//        txtName = findViewById(R.id.txt_order_name);
+        txtName = findViewById(R.id.txt_order_name);
         phoneNumber = findViewById(R.id.txt_order_phone);
         txtaddress = findViewById(R.id.txt_order_address);
         btnOder = findViewById(R.id.btn_thanh_toan_order);
@@ -112,9 +112,9 @@ public class ThanhToan extends AppCompatActivity {
                 order.setDateOder(currentDateAndTime);
                 order.setTotalMoney(totalPrice);
                 order.setStatus(status);
-//                order.setNameOder(txtName.getText().toString());
-//                order.setPhone(phoneNumber.getText().toString());
-//                order.setAddress(txtaddress.getText().toString());
+                order.setNameOder(txtName.getText().toString());
+                order.setPhoneNumber(phoneNumber.getText().toString());
+                order.setAddress(txtaddress.getText().toString());
                 if (orderDao.addOrder(order) > 0) {
                     for (Cart cartItem : selectedItems) {
                         orderDetail = new OrderDetail();

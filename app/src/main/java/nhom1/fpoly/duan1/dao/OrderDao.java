@@ -25,6 +25,9 @@ public class OrderDao {
         ContentValues values = new ContentValues();
         values.put("id_oder", order.getOrderId());
         values.put("id_customer", order.getIdUser());
+        values.put("nameCustomerOder", order.getNameOder());
+        values.put("phoneNumber", order.getPhoneNumber());
+        values.put("address", order.getAddress());
         values.put("dateOder", order.getDateOder());
         values.put("totalMoney", order.getTotalMoney());
         values.put("status", order.getStatus());
@@ -96,6 +99,24 @@ public class OrderDao {
 
         cursor.close();
         return orders;
+    }
+    @SuppressLint("Range")
+    public List<Order> getAllOrdersWithDetails() {
+        String[] projection = {"nameCustomerOder", "phoneNumber", "address"};
+        Cursor cursor = db.query("Oder", projection, null, null, null, null, null);
+        List<Order> orderList = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            Order order = new Order();
+
+            order.setNameOder(cursor.getString(cursor.getColumnIndex("nameCustomerOder")));
+            order.setPhoneNumber(cursor.getString(cursor.getColumnIndex("phoneNumber")));
+            order.setAddress(cursor.getString(cursor.getColumnIndex("address")));
+
+            orderList.add(order);
+        }
+        cursor.close();
+        db.close();
+        return orderList;
     }
 
 
