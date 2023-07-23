@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import nhom1.fpoly.duan1.R;
@@ -36,21 +37,15 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
     public void onBindViewHolder(@NonNull SelectedItemViewHolder holder, int position) {
         Cart item = selectedItems.get(position);
         holder.txtSelectedItemName.setText(item.getProductName());
-        holder.txtSelectedItemPrice.setText(String.valueOf(item.getPrice()));
+        DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
+        String formattedPrice = decimalFormat.format(item.getPrice());
+        holder.txtSelectedItemPrice.setText(formattedPrice);
         holder.txtTotalItems.setText(String.valueOf(item.getTotalTems()));
 
 
     }
 
-    public double calculateTotalPrice() {
-        double totalPrice = 0;
-        for (Cart item : selectedItems) {
-            int quantity = item.getTotalTems();
-            double price = item.getPrice();
-            totalPrice += quantity * price;
-        }
-        return totalPrice;
-    }
+
 
     @Override
     public int getItemCount() {

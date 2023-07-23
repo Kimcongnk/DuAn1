@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,11 @@ import nhom1.fpoly.duan1.model.Customer;
 public class CustomerDao {
     private CreateDatabase dbHelper;
     private SQLiteDatabase db;
+    private Context context;
 
+    private  SessionManager sessionManager;
     public CustomerDao(Context context) {
+        this.context = context;
         dbHelper = new CreateDatabase(context);
         db = dbHelper.getWritableDatabase();
     }
@@ -93,10 +97,15 @@ public class CustomerDao {
         String[] projection = { "username", "password"};
         String selection = "username = ? AND password = ?";
         String[] selectionArgs = {username, password};
-        Cursor cursor = db.query("Customer", projection, selection, selectionArgs, null, null, null);
+        Cursor cursor = db.query("Customer", null, selection, selectionArgs, null, null, null);
+        int customerId = -1;
 
         boolean isPasswordCorrect = cursor.moveToFirst();
-
+        if (isPasswordCorrect) {
+            customerId = cursor.getInt(cursor.getColumnIndexOrThrow("id_customer"));
+            sessionManager = new SessionManager(context);
+            sessionManager.setLoggedInCustomer(customerId);
+        }
         cursor.close();
         db.close();
         return isPasswordCorrect;

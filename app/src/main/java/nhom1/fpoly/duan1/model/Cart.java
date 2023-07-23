@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Cart implements Parcelable {
-    private int cartId, productId, userId, totalTems, price, id_product;
+    private int cartId, userId, totalTems, price, id_product;
     private String productName;
     private boolean isChecked;
 
@@ -32,13 +32,7 @@ public class Cart implements Parcelable {
         this.cartId = cartId;
     }
 
-    public int getProductId() {
-        return productId;
-    }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
 
     public int getUserId() {
         return userId;
@@ -97,7 +91,7 @@ public class Cart implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(cartId);
-        dest.writeInt(productId);
+        dest.writeInt(id_product);
         dest.writeInt(userId);
         dest.writeInt(totalTems);
         dest.writeInt(price);
@@ -119,7 +113,7 @@ public class Cart implements Parcelable {
 
     private Cart(Parcel in) {
         cartId = in.readInt();
-        productId = in.readInt();
+        id_product = in.readInt();
         userId = in.readInt();
         totalTems = in.readInt();
         price = in.readInt();

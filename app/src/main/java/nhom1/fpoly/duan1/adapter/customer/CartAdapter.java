@@ -13,10 +13,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import nhom1.fpoly.duan1.R;
+import nhom1.fpoly.duan1.dao.CartDao;
 import nhom1.fpoly.duan1.model.Cart;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
@@ -24,7 +26,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private List<Cart> cartItems;
     private Context context;
     private OnQuantityChangeListener onQuantityChangeListener;
-    private List<Cart> selectedItems = new ArrayList<>();
+private CartDao cartDao;
+
+    public CartAdapter() {
+        notifyDataSetChanged();
+    }
 
     public CartAdapter(List<Cart> cartItems, Context context, OnQuantityChangeListener listener) {
         this.cartItems = cartItems;
@@ -45,12 +51,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         Cart item = cartItems.get(position);
         holder.txtTotalItems.setText(String.valueOf(item.getTotalTems()));
         holder.txtItemName.setText(item.getProductName());
-        holder.txtItemPrice.setText(String.valueOf(item.getPrice()));
+        DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
+        String formattedPrice = decimalFormat.format(item.getPrice());
+        holder.txtItemPrice.setText(formattedPrice);
 
-        // Set click listeners for cong (increase) and tru (decrease) buttons
         holder.increase.setOnClickListener(view -> {
             if (onQuantityChangeListener != null) {
                 onQuantityChangeListener.onIncreaseClick(position);
+
             }
         });
 
@@ -72,15 +80,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return cartItems.size();
     }
 
-    public double calculateTotalPrice() {
-        double totalPrice = 0;
-        for (Cart item : cartItems) {
-            int quantity = item.getTotalTems();
-            double price = item.getPrice();
-            totalPrice += quantity * price;
-        }
-        return totalPrice;
-    }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
         ImageView itemImage, delete, decrease, increase;
@@ -107,5 +106,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         void onItemCheckedChange(int position, boolean isChecked);
     }
-
+    public void deleteCartItem(int position) {
+        cartDao = new CartDao(context);
+        cartDao.deleteCart(position);
+        notifyItemRemoved(position);
+    }
 }

@@ -24,69 +24,86 @@ public class CartDao {
     public long addCart(Cart cart) {
         ContentValues values = new ContentValues();
         values.put("user_id", cart.getUserId());
-        values.put("product_id", cart.getProductId());
+        values.put("product_id", cart.getId_product());
         values.put("totaItem", cart.getTotalTems());
         long cartId = db.insert("Cart", null, values);
         db.close();
         return cartId;
     }
 
-    @SuppressLint("Range")
-    public Cart getCartById(long cartId) {
-        String[] projection = {"cart_id", "user_id", "product_id", "totaItem"};
-        String selection = "cart_id = ?";
-        String[] selectionArgs = {String.valueOf(cartId)};
-        Cursor cursor = db.query("Cart", projection, selection, selectionArgs, null, null, null);
+//    @SuppressLint("Range")
+//    public Cart getCartById(long cartId) {
+//        String[] projection = {"cart_id", "user_id", "product_id", "totaItem"};
+//        String selection = "cart_id = ?";
+//        String[] selectionArgs = {String.valueOf(cartId)};
+//        Cursor cursor = db.query("Cart", projection, selection, selectionArgs, null, null, null);
+//
+//        Cart cart = null;
+//        if (cursor.moveToFirst()) {
+//            cart = new Cart();
+//            cart.setCartId(cursor.getInt(cursor.getColumnIndex("cart_id")));
+//            cart.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
+//            cart.setId_product(cursor.getInt(cursor.getColumnIndex("product_id")));
+//            cart.setTotalTems(cursor.getInt(cursor.getColumnIndex("totaItem")));
+//        }
+//        cursor.close();
+//        db.close();
+//        return cart;
+//    }
 
-        Cart cart = null;
-        if (cursor.moveToFirst()) {
-            cart = new Cart();
-            cart.setCartId(cursor.getInt(cursor.getColumnIndex("cart_id")));
-            cart.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
-            cart.setProductId(cursor.getInt(cursor.getColumnIndex("product_id")));
-            cart.setTotalTems(cursor.getInt(cursor.getColumnIndex("totaItem")));
-        }
-        cursor.close();
-        db.close();
-        return cart;
-    }
+//    @SuppressLint("Range")
+//    public List<Cart> getAllCarts() {
+//        String[] projection = {"cart_id", "user_id", "product_id", "totaItem"};
+//        Cursor cursor = db.query("Cart", projection, null, null, null, null, null);
+//        List<Cart> cartList = new ArrayList<>();
+//        while (cursor.moveToNext()) {
+//            Cart cart = new Cart();
+//            cart.setCartId(cursor.getInt(cursor.getColumnIndex("cart_id")));
+//            cart.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
+//            cart.setId_product(cursor.getInt(cursor.getColumnIndex("product_id")));
+//            cart.setTotalTems(cursor.getInt(cursor.getColumnIndex("totaItem")));
+//            cartList.add(cart);
+//        }
+//        cursor.close();
+//        db.close();
+//        return cartList;
+//    }
 
-    @SuppressLint("Range")
-    public List<Cart> getAllCarts() {
-        String[] projection = {"cart_id", "user_id", "product_id", "totaItem"};
-        Cursor cursor = db.query("Cart", projection, null, null, null, null, null);
-        List<Cart> cartList = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            Cart cart = new Cart();
-            cart.setCartId(cursor.getInt(cursor.getColumnIndex("cart_id")));
-            cart.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
-            cart.setProductId(cursor.getInt(cursor.getColumnIndex("product_id")));
-            cart.setTotalTems(cursor.getInt(cursor.getColumnIndex("totaItem")));
-            cartList.add(cart);
-        }
-        cursor.close();
-        db.close();
-        return cartList;
-    }
-
-    public int updateCart(Cart cart) {
-        ContentValues values = new ContentValues();
-        values.put("user_id", cart.getUserId());
-        values.put("product_id", cart.getProductId());
-        values.put("totaItem", cart.getTotalTems());
-        String whereClause = "cart_id = ?";
-        String[] whereArgs = {String.valueOf(cart.getCartId())};
-        int rowsAffected = db.update("Cart", values, whereClause, whereArgs);
-        db.close();
-        return rowsAffected;
-    }
-
+    //    public int updateCart(Cart cart) {
+//        ContentValues values = new ContentValues();
+//        values.put("user_id", cart.getUserId());
+//        values.put("product_id", cart.getId_product());
+//        values.put("totaItem", cart.getTotalTems());
+//        String whereClause = "cart_id = ?";
+//        String[] whereArgs = {String.valueOf(cart.getCartId())};
+//        int rowsAffected = db.update("Cart", values, whereClause, whereArgs);
+//        db.close();
+//        return rowsAffected;
+//    }
+//
     public int deleteCart(int cartId) {
         String whereClause = "cart_id = ?";
         String[] whereArgs = {String.valueOf(cartId)};
         int rowsAffected = db.delete("Cart", whereClause, whereArgs);
         db.close();
         return rowsAffected;
+    }
+
+    public void deleteCarts(List<Cart> carts) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.beginTransaction();
+        try {
+            for (Cart cart : carts) {
+                int cartId = cart.getCartId();
+                String whereClause = "cart_id = ?";
+                String[] whereArgs = {String.valueOf(cartId)};
+                db.delete("Cart", whereClause, whereArgs);
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
     }
 
     @SuppressLint("Range")
@@ -121,10 +138,8 @@ public class CartDao {
     public void updateCartItem(Cart cartItem) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        // Update the "totalItem" column with the new quantity
         values.put("totaItem", cartItem.getTotalTems());
 
-        // Update the cart item in the database based on its ID
         db.update("Cart", values, "cart_id=?", new String[]{String.valueOf(cartItem.getCartId())});
         db.close();
     }
