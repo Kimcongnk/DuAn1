@@ -16,9 +16,9 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 import nhom1.fpoly.duan1.R;
-import nhom1.fpoly.duan1.dao.ThongKeDao;
+import nhom1.fpoly.duan1.dao.StatisticalDao;
 
-public class ThongKeFragment extends Fragment {
+public class StatisticalFragment extends Fragment {
 
 
     @Override
@@ -104,10 +104,10 @@ public class ThongKeFragment extends Fragment {
         btnThongKe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ThongKeDao thongKeDAO = new ThongKeDao(getContext());
+                StatisticalDao statisticalDAO = new StatisticalDao(getContext());
                 String ngaybatdau = txtStart.getText().toString();
                 String ngayketthuc = txtEnd.getText().toString();
-                int doanhthu = thongKeDAO.getDoanhThu(ngaybatdau,ngayketthuc);
+                int doanhthu = statisticalDAO.getDoanhThu(ngaybatdau,ngayketthuc);
                 txtKq.setText(doanhthu+" vnd");
 
             }

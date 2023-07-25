@@ -3,8 +3,8 @@ package nhom1.fpoly.duan1.model;
 import java.io.Serializable;
 
 public class Product implements Serializable {
-    private int id_product, status;
-    private String  name_product, category, desc_product, img_product, price;
+    private int id_product, status, id_category;
+    private String  name_product, category, desc_product, img_product, price, conHang;
 
     public Product() {
     }
@@ -73,5 +73,20 @@ public class Product implements Serializable {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+    public int getId_category() {
+        return id_category;
+    }
+
+    public void setId_category(int id_category) {
+        this.id_category = id_category;
+    }
+
+    public String getConHang() {
+        return conHang;
+    }
+
+    public void setConHang(String conHang) {
+        this.conHang = conHang;
     }
 }

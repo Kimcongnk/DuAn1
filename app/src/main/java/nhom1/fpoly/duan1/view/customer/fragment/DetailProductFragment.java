@@ -53,13 +53,18 @@ public class DetailProductFragment extends Fragment {
         btn_by_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(product.getConHang().equals("Hết hàng")){
+                    Toast.makeText(getContext(), "Sản phẩm này hiện đang " + product.getConHang(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                Cart product1 = new Cart();
                product1.setProductName(product.getName_product());
                int price = Integer.parseInt(product.getPrice());
                product1.setPrice(price);
                product1.setTotalTems(1);
+               selectedItems.clear();
                selectedItems.add(product1);
-                Intent intent  = new Intent(getContext(), ThanhToan.class);
+                Intent intent  = new Intent(getContext(), PayOder.class);
                 intent.putParcelableArrayListExtra("SELECTED_ITEMS", (ArrayList<Cart>) selectedItems);
                 startActivity(intent);
             }
@@ -70,6 +75,10 @@ public class DetailProductFragment extends Fragment {
                 cartDao = new CartDao(getContext());
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.button_scale_animation);
                 v.startAnimation(anim);
+                if(product.getConHang().equals("Hết hàng")){
+                    Toast.makeText(getContext(), "Sản phẩm này hiện đang " + product.getConHang(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (cartDao.cartExists(sessionManager.getLoggedInCustomerId(), product.getId_product())) {
 
                     Toast.makeText(getContext(), "Sản phẩm này đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();

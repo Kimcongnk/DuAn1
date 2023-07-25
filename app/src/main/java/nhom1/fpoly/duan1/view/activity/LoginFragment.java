@@ -40,14 +40,16 @@ public class LoginFragment extends Fragment {
         btn_login.setOnClickListener(login -> {
             String username = edt_login_username.getText().toString().trim();
             String password = edt_login_password.getText().toString().trim();
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireActivity(), "", Toast.LENGTH_SHORT).show();
+            if (username.isEmpty()) {
+              edt_login_username.setError("Không để trống");
+            } if (password.isEmpty()) {
+              edt_login_password.setError("Không để trống");
             } else {
                 adminDao = new AdminDao(getContext());
                 customerDao = new CustomerDao(getContext());
                 if (adminDao.checkUserPasswordAdmin(username, password)) {
                     Toast.makeText(requireActivity(), "login admin success", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(requireActivity(), AdminActivity.class));
+                    startActivity(new Intent(requireActivity(), CustomerActivity.class));
                 } else if (customerDao.checkUserPasswordCustomer(username, password)){
                     Toast.makeText(requireActivity(), "login customer success", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(requireActivity(), CustomerActivity.class));

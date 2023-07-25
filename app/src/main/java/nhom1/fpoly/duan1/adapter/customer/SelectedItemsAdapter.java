@@ -51,7 +51,13 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
 
     }
 
-
+    public int getTotalQuantity() {
+        int totalQuantity = 0;
+        for (Cart item : selectedItems) {
+            totalQuantity += item.getTotalTems();
+        }
+        return totalQuantity;
+    }
     @Override
     public int getItemCount() {
         return selectedItems.size();

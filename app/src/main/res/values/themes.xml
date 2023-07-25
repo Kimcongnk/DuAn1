@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.ỨngDụngĐặtĐồUống" parent="Base.Theme.ỨngDụngĐặtĐồUống" />
+    <style name="dialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out_bottom</item>
+    </style>
 </resources>

@@ -14,7 +14,6 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.customer.OrderDetailAdapter;
@@ -24,7 +23,7 @@ import nhom1.fpoly.duan1.dao.SessionManager;
 import nhom1.fpoly.duan1.model.Order;
 import nhom1.fpoly.duan1.model.OrderDetail;
 
-public class OrderDetailActivity extends AppCompatActivity {
+public class OrderAlreadyActivity extends AppCompatActivity {
 
     private ListView listView;
     private OrderDetailDao orderDetailDao;
@@ -61,7 +60,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             xoaOder.setText("Hủy đơn hàng");
 
         } else {
-            xoaOder.setText("Xác nhận" + " " + id_Order);
+            xoaOder.setText("Xác nhận");
 
         }
 
@@ -76,7 +75,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                 if (sessionManager.isLoggedIn() == true) {
                     orderDao.deleteOrder(id_Order);
 
-                    Toast.makeText(OrderDetailActivity.this, "Đã hủy đơn: " + id_Order, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OrderAlreadyActivity.this, "Đã hủy đơn: " + id_Order, Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
 

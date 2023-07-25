@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,23 +18,16 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import nhom1.fpoly.duan1.R;
 
 import nhom1.fpoly.duan1.adapter.customer.CartAdapter;
 import nhom1.fpoly.duan1.adapter.customer.SwipeToDeleteCallback;
 import nhom1.fpoly.duan1.dao.CartDao;
-import nhom1.fpoly.duan1.dao.OrderDao;
 import nhom1.fpoly.duan1.dao.SessionManager;
 import nhom1.fpoly.duan1.model.Cart;
-import nhom1.fpoly.duan1.model.Order;
-import nhom1.fpoly.duan1.model.OrderDetail;
 import nhom1.fpoly.duan1.view.customer.CustomerActivity;
-
-import java.util.Calendar;
 
 public class CartFragment extends Fragment implements CartAdapter.OnQuantityChangeListener {
 
@@ -73,7 +65,7 @@ showData();
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ThanhToan.class);
+                Intent intent = new Intent(getContext(), PayOder.class);
                 if(selectedItems.isEmpty()){
                     Toast.makeText(getContext(), "Vui lòng chọn sản phẩm để mua", Toast.LENGTH_SHORT).show();
                 }else {
@@ -113,7 +105,7 @@ showData();
         swipeToDeleteCallback.setSwipeActionListener(new SwipeToDeleteCallback.SwipeActionListener() {
             @Override
             public void onItemDeleted() {
-                showData(); // Call showData() to update the UI after item deletion
+                showData();
             }
         });
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
@@ -171,12 +163,6 @@ showData();
         txtTotalPrice.setText( formattedPrice+ "VND");
 
     }
-    public void deleteCartItem(int position) {
-        cartDao = new CartDao(getContext());
-//        cartDao.deleteCart(item.getCartId());
-        cartDao.deleteCart(cartItem.getCartId());
 
-
-    }
 }
 

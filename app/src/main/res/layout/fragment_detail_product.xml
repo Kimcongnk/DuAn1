@@ -48,13 +48,16 @@
         android:layout_below="@id/txt_name_product_detail"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:text="10.000đ"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/txt_desc_product_detail"
+        android:id="@+id/txt_mo_ta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/txt_price_product_detail"
@@ -64,7 +67,22 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:text="Mô tả"
+        android:text="Mô tả:"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txt_desc_product_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_mo_ta"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Môdddd tả"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
@@ -81,6 +99,7 @@
             android:layout_width="52dp"
             android:layout_height="match_parent"
             android:background="@drawable/ic_cart"
+            android:layout_marginLeft="40dp"
             android:text="Thêm giỏ hàng" />
 
         <Button

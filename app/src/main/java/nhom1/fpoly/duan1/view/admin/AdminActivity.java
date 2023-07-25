@@ -1,5 +1,6 @@
 package nhom1.fpoly.duan1.view.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -15,10 +16,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import nhom1.fpoly.duan1.R;
+import nhom1.fpoly.duan1.dao.SessionManager;
+import nhom1.fpoly.duan1.view.activity.MainActivityLogin;
 import nhom1.fpoly.duan1.view.admin.fragment.AddCategoriesFragment;
 import nhom1.fpoly.duan1.view.admin.fragment.AddProductFragment;
-import nhom1.fpoly.duan1.view.admin.fragment.ThongKeFragment;
+import nhom1.fpoly.duan1.view.admin.fragment.StatisticalFragment;
 import nhom1.fpoly.duan1.view.admin.fragment.ViewOrderFragment;
+import nhom1.fpoly.duan1.view.customer.CustomerActivity;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -26,6 +30,7 @@ public class AdminActivity extends AppCompatActivity {
     NavigationView navigationView;
     BottomNavigationView bottomNavigationView;
     ActionBarDrawerToggle toggle;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +40,21 @@ public class AdminActivity extends AppCompatActivity {
 //        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView_admin);
         initViews();
         if (savedInstanceState == null) {
-            replaceFragment(new ThongKeFragment());
+            replaceFragment(new StatisticalFragment());
         }
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_statistic) {
-                replaceFragment(new ThongKeFragment());
+                replaceFragment(new StatisticalFragment());
             } else if (item.getItemId() == R.id.nav_view_order) {
                 replaceFragment(new ViewOrderFragment());
             } else if (item.getItemId() == R.id.nav_add_product) {
                 replaceFragment(new AddProductFragment());
-            } else if (item.getItemId() == R.id.nav_add_category) {
+            }else if (item.getItemId() == R.id.nav_add_category) {
                 replaceFragment(new AddCategoriesFragment());
-            }
+            } else if (item.getItemId() == R.id.nav_login_out) {
+                sessionManager = new SessionManager(getApplication());
+                sessionManager.logoutCustomer();
+                startActivity(new Intent(getApplication(), MainActivityLogin.class));            }
             setTitle(item.getTitle());
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
@@ -86,10 +94,11 @@ public class AdminActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
+//        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+//            drawerLayout.closeDrawer(GravityCompat.START);
+//        } else {
             super.onBackPressed();
-        }
+
+//        }
     }
 }

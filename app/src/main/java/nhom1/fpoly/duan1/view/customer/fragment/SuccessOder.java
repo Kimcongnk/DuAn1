@@ -1,6 +1,9 @@
 package nhom1.fpoly.duan1.view.customer.fragment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +16,15 @@ import com.bumptech.glide.Glide;
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.view.customer.CustomerActivity;
 
-public class ThanhToanOk extends AppCompatActivity {
+public class SuccessOder extends AppCompatActivity {
 private ImageView imageView;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplication(), CustomerActivity.class));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,4 +39,5 @@ private ImageView imageView;
             }
         });
     }
+
 }

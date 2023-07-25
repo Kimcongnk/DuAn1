@@ -2,9 +2,14 @@ package nhom1.fpoly.duan1.view.customer.fragment.Status;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -14,7 +19,6 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.customer.OrderDetailAdapter;
@@ -24,11 +28,16 @@ import nhom1.fpoly.duan1.dao.OrderDetailDao;
 import nhom1.fpoly.duan1.dao.SessionManager;
 import nhom1.fpoly.duan1.model.Order;
 import nhom1.fpoly.duan1.model.OrderDetail;
+import nhom1.fpoly.duan1.view.customer.fragment.PayOder;
 
-public class DangGiaoHang extends AppCompatActivity {
+public class InprogressActivity extends AppCompatActivity {
     private ListView listView;
     private OrderDetailDao orderDetailDao;
-    private TextView txtName, phoneNumber, txtaddress, txtTotal;
+    private TextView txtName;
+    private TextView phoneNumber;
+    private TextView txtaddress;
+    private TextView txtTotal;
+    private String formattedPrice;
     private OrderDao orderDao;
     private OrderDetailAdapter adapter;
     private Button xoaOder;
@@ -54,7 +63,8 @@ public class DangGiaoHang extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();    }
+                finish();
+            }
         });
         if (sessionManager.isLoggedIn() == true) {
             xoaOder.setVisibility(View.GONE);
@@ -73,12 +83,28 @@ public class DangGiaoHang extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (sessionManager.isLoggedIn() == true) {
-
-                    Toast.makeText(DangGiaoHang.this, "Cảm ơn bạn đã ủng hô shop", Toast.LENGTH_SHORT).show();
                 } else {
+                    Dialog dialog = new Dialog(InprogressActivity.this);
 
-                    orderDao.updateOrderStatus(id_Order, "Đã thanh toán");
-                    finish();
+
+                    dialog.setContentView(R.layout.dialog_xac_nhan_dthu);
+                    Window window = dialog.getWindow();
+                    window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                    window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    TextView nameOder = dialog.findViewById(R.id.edt_name_product);
+                    nameOder.setText("Doanh thu đơn này là: " + formattedPrice + "VND");
+                    Button xacNhan = dialog.findViewById(R.id.btn_add);
+                    xacNhan.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            orderDao.updateOrderStatus(id_Order, "Đã thanh toán");
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+                    dialog.show();
+
+
                 }
 
 
@@ -100,7 +126,8 @@ public class DangGiaoHang extends AppCompatActivity {
 
 
         DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
-        String formattedPrice = decimalFormat.format(totalAmount);
-        txtTotal.setText( formattedPrice + "VND");    }
+         formattedPrice = decimalFormat.format(totalAmount);
+        txtTotal.setText(formattedPrice + "VND");
+    }
 
 }

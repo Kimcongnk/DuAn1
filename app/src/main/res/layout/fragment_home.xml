@@ -32,7 +32,10 @@
             android:layout_below="@+id/search_view_home"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp">
 
@@ -55,11 +58,14 @@
             android:layout_below="@id/cardView"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="342dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Danh mục"
@@ -67,6 +73,12 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/addMuc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/ic_menu_add"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -80,7 +92,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 
         <LinearLayout
@@ -90,7 +101,10 @@
             android:layout_below="@id/recycler_view_danh_muc_home"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -102,6 +116,12 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/addSanPham"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/ic_menu_add"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

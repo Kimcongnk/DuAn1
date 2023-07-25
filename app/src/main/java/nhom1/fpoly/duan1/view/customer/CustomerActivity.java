@@ -11,15 +11,17 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import nhom1.fpoly.duan1.R;
+import nhom1.fpoly.duan1.dao.SessionManager;
 import nhom1.fpoly.duan1.view.customer.fragment.AccountFragment;
 import nhom1.fpoly.duan1.view.customer.fragment.CartFragment;
+import nhom1.fpoly.duan1.view.customer.fragment.CategoriesFragment;
 import nhom1.fpoly.duan1.view.customer.fragment.HomeFragment;
 import nhom1.fpoly.duan1.view.customer.fragment.OrderFragment;
 
 public class CustomerActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-
+private SessionManager sessionManager;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -27,7 +29,7 @@ public class CustomerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView_customer);
-
+sessionManager = new SessionManager(getApplication());
         if (savedInstanceState == null) {
             replaceFragment(new HomeFragment());
         }
@@ -36,7 +38,16 @@ public class CustomerActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.nav_home) {
                 replaceFragment(new HomeFragment());
             } else if (item.getItemId() == R.id.nav_cart) {
-                replaceFragment(new CartFragment());
+                if(sessionManager.isLoggedIn() == true){
+                    replaceFragment(new CartFragment());
+
+                }else{
+                    bottomNavigationView.getMenu().findItem(R.id.nav_cart).setTitle("Thống kê");
+
+                    replaceFragment(new CategoriesFragment());
+                }
+
+
             } else if (item.getItemId() == R.id.nav_order) {
                 replaceFragment(new OrderFragment());
             } else if (item.getItemId() == R.id.nav_account) {
@@ -53,4 +64,9 @@ public class CustomerActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 }

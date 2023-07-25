@@ -20,13 +20,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".view.customer.fragment.ThanhToanOk"
+            android:name=".view.customer.fragment.SuccessOder"
             android:exported="false" />
         <activity
-            android:name=".view.customer.fragment.Status.Oderok"
+            android:name=".view.customer.fragment.Status.SuccessOderActivity"
             android:exported="false" />
         <activity
-            android:name=".view.customer.fragment.Status.OrderDetailActivity"
+            android:name=".view.customer.fragment.Status.OrderAlreadyActivity"
             android:exported="false" />
         <activity
             android:name=".view.customer.CustomerActivity"
@@ -44,7 +44,7 @@
 
         </activity>
         <activity
-            android:name=".view.customer.fragment.ThanhToan"
+            android:name=".view.customer.fragment.PayOder"
             android:exported="false" />
         <activity
             android:name=".view.activity.MainActivityLogin"
@@ -56,7 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.customer.fragment.Status.DangGiaoHang"
+            android:name=".view.customer.fragment.Status.InprogressActivity"
             android:exported="false" />
     </application>
 

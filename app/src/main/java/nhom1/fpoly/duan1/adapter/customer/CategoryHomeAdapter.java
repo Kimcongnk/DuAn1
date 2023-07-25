@@ -1,6 +1,7 @@
 package nhom1.fpoly.duan1.adapter.customer;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -47,8 +48,7 @@ public class CategoryHomeAdapter extends RecyclerView.Adapter<CategoryHomeAdapte
     public void onBindViewHolder(@NonNull CategoryHomeAdapter.ViewHolder holder, int position) {
         Categories categories1 = categories.get(position);
         holder.txt_name_category_home.setText(categories1.getName_categories());
-        String imageUrl = categories1.getImg_categories();
-        Picasso.get().load(imageUrl).into(holder.img_category_home);
+        Picasso.get().load(categories1.getImg_categories()).into(holder.img_category_home);
         holder.itemView.setOnClickListener(click -> {
             detailOnClick.showDetails(categories1);
         });

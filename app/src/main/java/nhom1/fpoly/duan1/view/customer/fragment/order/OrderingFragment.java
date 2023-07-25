@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ import nhom1.fpoly.duan1.adapter.customer.OrderAdapter;
 import nhom1.fpoly.duan1.dao.OrderDao;
 import nhom1.fpoly.duan1.dao.SessionManager;
 import nhom1.fpoly.duan1.model.Order;
-import nhom1.fpoly.duan1.view.customer.fragment.Status.OrderDetailActivity;
+import nhom1.fpoly.duan1.view.customer.fragment.Status.OrderAlreadyActivity;
 
 public class OrderingFragment extends Fragment implements OrderAdapter.OnItemClickListener {
 
@@ -28,12 +29,25 @@ public class OrderingFragment extends Fragment implements OrderAdapter.OnItemCli
     private Order order;
     private ArrayList<Order> orderList = new ArrayList<Order>();
     private SessionManager sessionManager;
+    private View odernull;
 
     @Override
     public void onResume() {
-        super.onResume(); orderDao = new OrderDao(getContext());
+        super.onResume();
+        orderDao = new OrderDao(getContext());
+        if (sessionManager.isLoggedIn() == true) {
 
-        orderList = orderDao.getOrdersByStatusAndCustomerId(sessionManager.getLoggedInCustomerId(), "Đã đặt hàng");
+            orderList = orderDao.getOrdersByStatusAndCustomerId(sessionManager.getLoggedInCustomerId(), "Đã đặt hàng");
+
+        } else {
+            orderList = orderDao.getOrdersByStatus("Đã đặt hàng");
+        }
+        if (orderList.isEmpty()) {
+            odernull.setVisibility(View.VISIBLE);
+        } else {
+            odernull.setVisibility(View.GONE);
+
+        }
         adapter = new OrderAdapter(orderList, getContext(), this);
         recyclerView_order.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -44,13 +58,11 @@ public class OrderingFragment extends Fragment implements OrderAdapter.OnItemCli
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ordering, container, false);
         recyclerView_order = view.findViewById(R.id.recycler_view_ordering);
+        odernull = view.findViewById(R.id.no_oder);
         recyclerView_order.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView_order.setHasFixedSize(true);
 
-
-sessionManager = new SessionManager(getContext());
-
-
+        sessionManager = new SessionManager(getContext());
 
 
         return view;
@@ -59,7 +71,7 @@ sessionManager = new SessionManager(getContext());
     @Override
     public void onItemClick(int position) {
         order = orderList.get(position);
-        Intent intent = new Intent(getContext(), OrderDetailActivity.class);
+        Intent intent = new Intent(getContext(), OrderAlreadyActivity.class);
         intent.putExtra("order_id", order.getOrderId());
         startActivity(intent);
     }

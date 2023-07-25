@@ -102,9 +102,9 @@ public class AddProductFragment extends Fragment {
         edt_name_product = view.findViewById(R.id.edt_name_product);
         edt_desc_product = view.findViewById(R.id.edt_desc_product);
         edt_price_product=view.findViewById(R.id.edt_price_product);
-           Spinner spnLoai = view.findViewById(R.id.spin_loai_sp);
+        Spinner spnLoai = view.findViewById(R.id.spin_loai_sp);
         btn_add_product = (Button) view.findViewById(R.id.btn_add);
-        img_select = (ImageView) view.findViewById(R.id.img_select);
+//        img_select = (ImageView) view.findViewById(R.id.img_select);
 
         SimpleAdapter simpleAdapter = new SimpleAdapter(
                 getContext(),
@@ -128,13 +128,13 @@ public class AddProductFragment extends Fragment {
                 HashMap<String,Object> hs  = (HashMap<String, Object>) spnLoai.getSelectedItem();
                 int maloai = (int) hs.get("id_category");
 
-                boolean check = productsDao.themProduct(name,imagePath,maloai,price,desc);
-                if (check){
-                    Toast.makeText(getContext(), "thanh cong", Toast.LENGTH_SHORT).show();
-                    loadData();
-                }else{
-                    Toast.makeText(getContext(), "khong thanh cong", Toast.LENGTH_SHORT).show();
-                }
+//                boolean check = productsDao.themProduct(name,imagePath,maloai,price,desc);
+//                if (check){
+//                    Toast.makeText(getContext(), "thanh cong", Toast.LENGTH_SHORT).show();
+//                    loadData();
+//                }else{
+//                    Toast.makeText(getContext(), "khong thanh cong", Toast.LENGTH_SHORT).show();
+//                }
 
 
 

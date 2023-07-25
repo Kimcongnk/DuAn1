@@ -22,14 +22,15 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "fullName text, " +
                 "username text, " +
                 "password text, " +
+                "email text, " +
                 "address text, " +
                 "phone text )";
         db.execSQL(tb_user);
         String insert_user = "insert into Customer values " +
-                "(0, 'Nguyễn Văn A', 'user_test', 'test@123',  'Hà Nội', '012345687' ), " +
-                "(1, 'Nguyễn Văn B', 'user_test1', 'test@123', 'Hà Nội', '012345687' ), " +
-                "(2, 'Nguyễn Văn C', 'user_test2', 'test@123',  'Hà Nội', '012345687' ), " +
-                "(3, 'Nguyễn Văn D', 'user_test3', 'test@123',  'Hà Nội', '012345687' ) ";
+                "(0, 'Nguyễn Văn A', 'user_test', 'test@123', 'user@gmail.com', 'Hà Nội', '012345687' ), " +
+                "(1, 'Nguyễn Văn B', 'c', '1', 'user1@gmail.com', 'Hà Nội', '012345687' ), " +
+                "(2, 'Nguyễn Văn C', 'user_test2', 'test@123', 'user2@gmail.com', 'Hà Nội', '012345687' ), " +
+                "(3, 'Nguyễn Văn D', 'user_test3', 'test@123', 'user3@gmail.com', 'Hà Nội', '012345687' ) ";
         db.execSQL(insert_user);
 
         String tb_admin = "create table Admin ( " +
@@ -47,9 +48,9 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "image_url text )";
         db.execSQL(tb_category);
         String insert_category = "insert into Category values " +
-                "(0, 'Cà phê', 'https://img1.kienthucvui.vn/uploads/2021/02/12/hinh-anh-ca-phe-dep-hap-dan_045435553.jpg'), " +
-                "(1, 'Trà sữa', 'https://toigingiuvedep.vn/wp-content/uploads/2021/06/hinh-anh-tra-sua-dep-ngon.jpeg'), " +
-                "(2, 'Nước ngọt', 'https://cdn2.tieudungplus.vn/media/uploaded/13/2016/01/25/nuoc_ngot.png') ";
+                "(0, 'Cà phê', 'https://product.hstatic.net/1000405326/product/1-ca-phe-sua-1586320543_db6b2889d0754ecdbd256999a539985c_abdd8d86faeb4c57b99c40c4845c929a_1024x1024.jpg'), " +
+                "(1, 'Trà sữa', 'https://xingfutangvietnam.com/wp-content/uploads/2021/10/Hoa-la%CC%80i-1-e1634878229267-768x737.png'), " +
+                "(2, 'Nước ngọt', 'https://file.hstatic.net/1000152954/file/su-thuc-gay-soc-ve-nuoc-ngot-1_grande.png') ";
         db.execSQL(insert_category);
 
         String tb_product = "create table Products ( " +
@@ -58,15 +59,16 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 "name text, " +
                 "description text, " +
                 "image_url text, " +
+                "hetHang text, " +
                 "price integer )";
         db.execSQL(tb_product);
         String insert_product = "insert into Products values " +
-                "(0, 0, 'Cà phê sữa đá', 'Cà phê sữa đá là một loại thức uống thông dụng ở Việt Nam. Cà phê sữa đá truyền thống được làm từ cà phê nguyên chất đựng trong phin với sữa đặc có đường và bỏ đá vào trong một cái ly bằng thủy tinh rồi thưởng thức.', 'https://howdaily.com/wp-content/uploads/2016/11/cafe-sua-da-640x960.jpg', 150000), " +
-                "(1, 1, 'Trà sữa chân châu', 'Trà sữa trân châu đường đen được yêu thích nhờ sự kết hợp hết sức hoàn hảo giữa vị trà sữa thơm béo và trân châu đường đen mềm, ngọt.', 'https://img4.thuthuatphanmem.vn/uploads/2020/05/07/anh-tra-sua-tran-chau-duong-den_062227684.jpg', 250000), " +
-                "(2,2, 'Sting', 'Sting là sản phẩm nước tăng lực với mùi vị thơm ngon, sảng khoái. Nước tăng lực Sting giúp cơ thể bù đắp nước, bổ sung năng lượng, vitamin C và E, giúp xua tan cơn khát và cảm giác mệt mỏi.', 'https://hutiuthanhdat.vn/data/Product/nuoc-ngot-sting.jpg', 10000), " +
-                "(3,2, 'Coca cola', 'Coca-Cola (hay còn gọi là Coca, Coke) là một thương hiệu nước ngọt có ga chứa nước cacbon dioxide bão hòa được sản xuất bởi Công ty Coca-Cola. Coca-Cola được điều chế bởi dược sĩ John Pemberton vào cuối thế kỷ XIX với mục đích ban đầu là trở thành một loại biệt dược.', 'https://www.dailyplanetadelaide.com/wp-content/uploads/2015/06/600ml-coke-570x760.jpg', 10000), " +
-                "(4,2, 'trà ô long Tea+ plus', 'Trà Ô Long TEA+ Plus là sản phẩm mang thương hiệu Suntory đầu tiên được ra mắt tại thị trường Việt Nam từ tháng 8 từ tháng 8 năm 2013. OTPP trong Trà Ô Long TEA+ (Plus) hạn chế hấp thu chất béo, sẽ giúp bạn luôn cảm thấy người nhẹ nhàng, dáng thanh tao. - Vị trà Ô Long thanh mát đem lại cho bạn cảm giác nhẹ nhàng.', 'https://cdn.tgdd.vn/Products/Images/8938/193431/bhx/tra-o-long-tea-plus-chai-350ml-loc-6-chai-3-org.jpg', 10000), " +
-                "(5,2, 'Pepsi', 'Thức uống có gas Pepsi có hương vị lôi cuốn, vị ngọt nhẹ, không gắt, mang đến cảm giác sảng khoái trong những ngày hè nóng bức và sau những giờ hoạt động mạnh.', 'https://toplist.vn/images/800px/pepsi-30115.jpg', 10000)";
+                "(0, 0, 'Cà phê sữa đá', 'Cà phê sữa đá là một loại thức uống thông dụng ở Việt Nam. Cà phê sữa đá truyền thống được làm từ cà phê nguyên chất đựng trong phin với sữa đặc có đường và bỏ đá vào trong một cái ly bằng thủy tinh rồi thưởng thức.', 'https://product.hstatic.net/1000405326/product/1-ca-phe-sua-1586320543_db6b2889d0754ecdbd256999a539985c_abdd8d86faeb4c57b99c40c4845c929a_1024x1024.jpg','Còn hàng', 150000), " +
+                "(1, 1, 'Trà sữa chân châu đường đen', 'Trà sữa trân châu đường đen được yêu thích nhờ sự kết hợp hết sức hoàn hảo giữa vị trà sữa thơm béo và trân châu đường đen mềm, ngọt.', 'https://xingfutangvietnam.com/wp-content/uploads/2021/10/Hoa-la%CC%80i-1-e1634878229267-768x737.png','Còn hàng', 25000), " +
+                "(2,2, 'Sting', 'Sting là sản phẩm nước tăng lực với mùi vị thơm ngon, sảng khoái. Nước tăng lực Sting giúp cơ thể bù đắp nước, bổ sung năng lượng, vitamin C và E, giúp xua tan cơn khát và cảm giác mệt mỏi.', 'https://bizweb.dktcdn.net/thumb/large/100/469/765/products/nuoc-tang-luc-sting-huong-dau-330ml-201909031559004919.jpg','Còn Hàng', 10000), " +
+                "(3,2, 'Coca cola', 'Coca-Cola (hay còn gọi là Coca, Coke) là một thương hiệu nước ngọt có ga chứa nước cacbon dioxide bão hòa được sản xuất bởi Công ty Coca-Cola. Coca-Cola được điều chế bởi dược sĩ John Pemberton vào cuối thế kỷ XIX với mục đích ban đầu là trở thành một loại biệt dược.', 'https://tea-3.lozi.vn/v1/ship/resized/losupply-quang-binh-thanh-pho-dong-hoi-quang-binh-1648800335595208737-nuoc-ngot-coca-cola-lon-320ml-0-1659606461?w=480&type=o','Còn Hàng', 10000), " +
+                "(4,2, 'trà ô long Tea+ plus', 'Trà Ô Long TEA+ Plus là sản phẩm mang thương hiệu Suntory đầu tiên được ra mắt tại thị trường Việt Nam từ tháng 8 từ tháng 8 năm 2013. OTPP trong Trà Ô Long TEA+ (Plus) hạn chế hấp thu chất béo, sẽ giúp bạn luôn cảm thấy người nhẹ nhàng, dáng thanh tao. - Vị trà Ô Long thanh mát đem lại cho bạn cảm giác nhẹ nhàng.', 'https://www.suntory.vn/vi/what_we_do/img/oolong_20230324.png','Hết hàng', 10000), " +
+                "(5,2, 'Pepsi', 'Thức uống có gas Pepsi có hương vị lôi cuốn, vị ngọt nhẹ, không gắt, mang đến cảm giác sảng khoái trong những ngày hè nóng bức và sau những giờ hoạt động mạnh.', 'https://product.hstatic.net/1000141988/product/nuoc_ngot_pepsi_36daafe416c7499aacd53694c72ef692_1024x1024.jpg','Còn hàng', 10000)";
         db.execSQL(insert_product);
 
 
@@ -83,17 +85,20 @@ public class CreateDatabase extends SQLiteOpenHelper {
         db.execSQL(insert_Cart);
 
         String tb_Oder = "create table Oder ( " +
-                "id_oder integer primary key autoincrement, " +
+                "id_oder integer primary key , " +
                 "id_customer integer references Customer(id_customer), " +
+                "nameCustomerOder text, " +
+                "phoneNumber text, " +
+                "address text, " +
                 "dateOder text, " +
                 "totalMoney integer, " +
                 "status text )";
         db.execSQL(tb_Oder);
         String insertOder = "INSERT INTO Oder VALUES " +
-                "(0, 0, '17/07/2023', 300000, 'Đang giao hàng'), " +
-                "(1, 0, '16/07/2023', 450000, 'Giao thành công'), " +
-                "(2, 0, '18/07/2023', 450000, 'Giao thành công'), " +
-                "(3, 0, '16/07/2023', 200000, 'Đang giao hàng') ";
+                "(0, 0,'Lê cân','0854754764','fg', '2023-07-17', 300000, 'Đang giao hàng'), " +
+                "(1, 0,'Hồng anh','0987654332','gf', '2023-07-16', 450000, 'Đã giao hàng'), " +
+                "(2, 0,'Tel My','0987654323','ff', '2023-07-16', 450000, 'Đã giao hàng'), " +
+                "(3, 0,'Uyen My','0987654334','đ', '2023-07-15', 200000, 'Đang giao hàng') ";
         db.execSQL(insertOder);
 
         String tb_OderDetail = "create table OrderDetail ( " +

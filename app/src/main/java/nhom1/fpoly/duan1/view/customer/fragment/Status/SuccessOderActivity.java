@@ -9,12 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.customer.OrderDetailAdapter;
@@ -24,7 +22,7 @@ import nhom1.fpoly.duan1.dao.SessionManager;
 import nhom1.fpoly.duan1.model.Order;
 import nhom1.fpoly.duan1.model.OrderDetail;
 
-public class Oderok extends AppCompatActivity {
+public class SuccessOderActivity extends AppCompatActivity {
     private ListView listView;
     private OrderDetailDao orderDetailDao;
     private TextView txtName, phoneNumber, txtaddress, txtTotal;

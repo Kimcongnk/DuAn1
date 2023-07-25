@@ -4,46 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0BACF4"
     android:orientation="vertical"
-    android:background="#4FB3E1"
     tools:context=".view.activity.MainActivityLogin">
 
-   <ImageView
-       android:layout_width="wrap_content"
-       android:layout_height="190dp"
-       android:background="@drawable/img2"
-       >
-   </ImageView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="190dp"
+        android:background="@drawable/img2"></ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/style_layout_middle"
+        android:orientation="vertical">
 
 
-        <LinearLayout
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_login"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/style_layout_middle"
+            app:tabBackground="?attr/actionBarItemBackground"
+            app:tabIndicatorColor="#2196F3"
+            app:tabSelectedTextColor="#03A9F4"
+            app:tabTextColor="#9ECFE6">
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager2_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:background="@drawable/style_layout_middle"
-            android:orientation="vertical">
+            android:layout_marginTop="10px">
 
+        </androidx.viewpager2.widget.ViewPager2>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout_login"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/style_layout_middle"
-                app:tabBackground="?attr/actionBarItemBackground"
-                app:tabIndicatorColor="#2196F3"
-                app:tabSelectedTextColor="#03A9F4"
-                app:tabTextColor="#9ECFE6">
-
-            </com.google.android.material.tabs.TabLayout>
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewpager2_login"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10px">
-
-            </androidx.viewpager2.widget.ViewPager2>
-
-        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

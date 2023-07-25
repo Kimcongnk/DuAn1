@@ -50,7 +50,7 @@ public class AddCategoriesAdapter extends RecyclerView.Adapter<AddCategoriesAdap
         Picasso.get().load(categories.getImg_categories()).into(holder.img_category, new Callback() {
             @Override
             public void onSuccess() {
-                holder.progressBar.setVisibility(View.GONE);
+
             }
 
             @Override
