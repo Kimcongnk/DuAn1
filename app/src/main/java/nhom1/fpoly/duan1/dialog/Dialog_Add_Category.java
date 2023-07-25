@@ -34,6 +34,7 @@ public class Dialog_Add_Category extends DialogFragment {
     String imgURL;
     Uri uri;
     CategoryDao categoryDao;
+    String imagePath;
 
     @SuppressLint("MissingInflatedId")
     @Nullable
@@ -51,19 +52,21 @@ public class Dialog_Add_Category extends DialogFragment {
         });
         btn_add_category.setOnClickListener(add -> {
             // add a new category to Database
-            addDatabase();
-            Log.d("log", img_select.toString());
+            addDatabase(imagePath);
+
+            Log.d("123","path: "+ img_select.toString());
             dismiss();
         });
 
         return view;
     }
 
-    private void addDatabase() {
+    private void addDatabase(String ImagePath) {
         String name = edt_name.getText().toString();
         Categories categories = new Categories();
         categories.setName_categories(name);
-        categories.setImg_categories(String.valueOf(img_select));
+        categories.setImg_categories(ImagePath);
+
         if (categoryDao.addCategory(categories)) {
             Toast.makeText(getContext(), "add successfully", Toast.LENGTH_SHORT).show();
             dismiss();
@@ -77,9 +80,7 @@ public class Dialog_Add_Category extends DialogFragment {
 
     // pick a image from the library
     private void SelectImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
@@ -89,12 +90,11 @@ public class Dialog_Add_Category extends DialogFragment {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             // Get the Uri of data
             uri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), uri);
-                img_select.setImageBitmap(bitmap);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-            }
+
+            img_select.setImageURI(uri);
+            imagePath = uri.toString();
+
+
         }
     }
 

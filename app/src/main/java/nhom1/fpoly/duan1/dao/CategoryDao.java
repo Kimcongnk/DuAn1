@@ -35,7 +35,10 @@ public class CategoryDao {
         values.put("name", categories.getName_categories());
         values.put("image_url", categories.getImg_categories());
         long check = database.update("Category", values, "id_category=?", new String[]{String.valueOf(categories.getId())});
-        return check != -1;
+        if (check==-1){
+            return false;
+        }
+        return true;
     }
 
     public int deleteCategory(Categories categories) {

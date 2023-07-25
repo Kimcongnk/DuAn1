@@ -2,7 +2,8 @@ package nhom1.fpoly.duan1.model;
 
 public class Categories {
     private int id;
-    private String name_categories, img_categories;
+    private String name_categories,img_categories;
+
 
     public Categories(int id, String name_categories, String img_categories) {
         this.id = id;

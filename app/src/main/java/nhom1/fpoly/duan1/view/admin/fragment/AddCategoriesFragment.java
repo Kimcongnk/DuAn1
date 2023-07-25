@@ -46,7 +46,7 @@ public class AddCategoriesFragment extends Fragment {
         categoryDao = new CategoryDao(getContext());
 
         ArrayList<Categories> categoriesList = categoryDao.getAllCategories();
-        AddCategoriesAdapter adapter = new AddCategoriesAdapter(categoriesList,getContext());
+         adapter = new AddCategoriesAdapter(categoriesList,getContext());
         recyclerView_category_admin.setAdapter(adapter);
 
 
