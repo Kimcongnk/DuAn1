@@ -79,6 +79,8 @@
             android:id="@+id/btn_add_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#03A9F4"
+
             android:text="Thêm giỏ hàng"/>
 
         <Button

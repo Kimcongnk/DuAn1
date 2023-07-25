@@ -29,11 +29,11 @@ public class OrderFragment extends Fragment {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 if (position == 0) {
-                    tab.setText("Đang giao");
+                    tab.setText("Đã đặt hàng");
                 } else if (position == 1){
-                    tab.setText("Đã giao");
+                    tab.setText("Đang giao hàng");
                 } else if (position == 2){
-                    tab.setText("Đã hủy");
+                    tab.setText("Đã nhận hàng");
                 }
             }
         }).attach();

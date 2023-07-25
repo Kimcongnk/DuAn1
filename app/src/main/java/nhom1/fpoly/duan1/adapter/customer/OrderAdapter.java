@@ -40,15 +40,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         Order order = orders.get(position);
 
         // Set order data to the views in the layout
-        holder.tvOrderId.setText("Order ID: " + order.getOrderId());
-        holder.tvDate.setText("Date: " + order.getDateOder());
-        holder.tvTotalMoney.setText("Total Money: " + order.getTotalMoney());
-        holder.tvStatus.setText("Status: " + order.getStatus());
+        holder.tvOrderId.setText("ID: " + order.getOrderId());
+        holder.tvDate.setText("Ngày: " + order.getDateOder());
+        holder.tvTotalMoney.setText("Tổng tiền: " + order.getTotalMoney());
+        holder.tvStatus.setText("Trạng thái: " + order.getStatus());
 
         holder.itemView.setOnClickListener(view -> {
             if (itemClickListener != null) {
                 itemClickListener.onItemClick(position);
-                Toast.makeText(context, "okr", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -65,7 +64,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         OrderViewHolder(@NonNull View itemView) {
             super(itemView);
             tvOrderId = itemView.findViewById(R.id.tvOrderId);
-            tvCustomerName = itemView.findViewById(R.id.tvCustomerName);
+
             tvDate = itemView.findViewById(R.id.tvDate);
             tvTotalMoney = itemView.findViewById(R.id.tvTotalMoney);
             tvStatus = itemView.findViewById(R.id.tvStatus);

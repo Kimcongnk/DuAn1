@@ -10,15 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.customer.OrderAdapter;
 import nhom1.fpoly.duan1.dao.OrderDao;
 import nhom1.fpoly.duan1.model.Order;
+import nhom1.fpoly.duan1.view.customer.fragment.Status.OrderDetailActivity;
 
 public class OrderingFragment extends Fragment implements OrderAdapter.OnItemClickListener {
 
@@ -26,7 +25,7 @@ public class OrderingFragment extends Fragment implements OrderAdapter.OnItemCli
     OrderAdapter adapter;
     OrderDao orderDao;
     private Order order;
-   private ArrayList<Order> orderList = new ArrayList<Order>();
+    private ArrayList<Order> orderList = new ArrayList<Order>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,7 +37,7 @@ public class OrderingFragment extends Fragment implements OrderAdapter.OnItemCli
         orderDao = new OrderDao(getContext());
 
 
-        orderList = orderDao.getOrdersByStatus("Đang giao hàng");
+        orderList = orderDao.getOrdersByStatus("Đã đặt hàng");
 
         adapter = new OrderAdapter(orderList, getContext(), this);
         recyclerView_order.setAdapter(adapter);

@@ -39,8 +39,8 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
         holder.txtSelectedItemName.setText(item.getProductName());
         DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
         String formattedPrice = decimalFormat.format(item.getPrice());
-        holder.txtSelectedItemPrice.setText(formattedPrice);
-        holder.txtTotalItems.setText(String.valueOf(item.getTotalTems()));
+        holder.txtSelectedItemPrice.setText(formattedPrice+ "VND");
+        holder.txtTotalItems.setText(String.valueOf(item.getTotalTems() ));
 
 
     }

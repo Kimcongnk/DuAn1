@@ -5,12 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ import nhom1.fpoly.duan1.model.Cart;
 import nhom1.fpoly.duan1.model.Customer;
 import nhom1.fpoly.duan1.model.Order;
 import nhom1.fpoly.duan1.model.OrderDetail;
+import nhom1.fpoly.duan1.view.customer.fragment.order.OrderingFragment;
 
 public class ThanhToan extends AppCompatActivity {
     private SelectedItemsAdapter selectedItemsAdapter;
@@ -50,6 +53,7 @@ public class ThanhToan extends AppCompatActivity {
     private OrderDetail orderDetail;
     private CartDao cartDao;
     private double totalPrice = 0;
+    private ImageView imgBack;
 
     Calendar calendar = Calendar.getInstance();
     int year = calendar.get(Calendar.YEAR);
@@ -66,6 +70,7 @@ public class ThanhToan extends AppCompatActivity {
         txtaddress = findViewById(R.id.txt_order_address);
         btnOder = findViewById(R.id.btn_thanh_toan_order);
         txtTotal = findViewById(R.id.txtTotal);
+        imgBack = findViewById(R.id.img_back);
         recyclerViewOder = findViewById(R.id.recycler_view_order);
 
         customerDao = new CustomerDao(getApplication());
@@ -75,9 +80,12 @@ public class ThanhToan extends AppCompatActivity {
         sessionManager = new SessionManager(getApplication());
         customerArrayList = customerDao.getCustomerById(0);
 
-//        txtName.setText("Họ tên: " + customerArrayList.getFullName());
-//        phoneNumber.setText("Phone: " + customerArrayList.getPhoneNumber());
-//        txtaddress.setText("Địa chỉ: " + customerArrayList.getAddress());
+imgBack.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+//        startActivity(new Intent(ThanhToan.this, CartFragment.class));
+    }
+});
 
 
         Intent intent = getIntent();
@@ -105,7 +113,7 @@ public class ThanhToan extends AppCompatActivity {
                 String currentDateAndTime = String.format("%02d/%02d/%04d", day, month, year);
                 int idUser = sessionManager.getLoggedInCustomerId();
 
-                String status = "Đang giao hàng";
+                String status = "Đã đặt hàng";
                 Order order = new Order();
                 order.setOrderId(randomOrderId);
                 order.setIdUser(idUser);
@@ -125,6 +133,7 @@ public class ThanhToan extends AppCompatActivity {
                             cartDao.deleteCarts(selectedItems);
                             Toast.makeText(ThanhToan.this, "Hàng đang được giao", Toast.LENGTH_SHORT).show();
 
+                      startActivity(new Intent(ThanhToan.this, AccountFragment.class));
                         }
                     }
 

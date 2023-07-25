@@ -17,6 +17,8 @@ import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.customer.OrderAdapter;
 import nhom1.fpoly.duan1.dao.OrderDao;
 import nhom1.fpoly.duan1.model.Order;
+import nhom1.fpoly.duan1.view.customer.fragment.Status.Oderok;
+import nhom1.fpoly.duan1.view.customer.fragment.Status.OrderDetailActivity;
 
 
 public class CancelledFrangment extends Fragment implements OrderAdapter.OnItemClickListener {
@@ -37,7 +39,7 @@ public class CancelledFrangment extends Fragment implements OrderAdapter.OnItemC
         orderDao = new OrderDao(getContext());
 
 
-        orderList = orderDao.getOrdersByStatus("Đã hủy hàng");
+        orderList = orderDao.getOrdersByStatus("Đã thanh toán");
 
         adapter = new OrderAdapter(orderList, getContext(), this);
         recyclerView_order.setAdapter(adapter);
@@ -48,7 +50,7 @@ public class CancelledFrangment extends Fragment implements OrderAdapter.OnItemC
     @Override
     public void onItemClick(int position) {
         order = orderList.get(position);
-        Intent intent = new Intent(getContext(), OrderDetailActivity.class);
+        Intent intent = new Intent(getContext(), Oderok.class);
         intent.putExtra("order_id", order.getOrderId());
         startActivity(intent);
     }

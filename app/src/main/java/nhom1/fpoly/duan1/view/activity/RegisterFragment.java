@@ -24,7 +24,7 @@ public class RegisterFragment extends Fragment {
 
     EditText edt_register_username, edt_register_password, edt_register_fullName, edt_register_confirmPassword;
     Button btn_register;
-    TextView txt_login;
+
     ImageView img_back;
     CustomerDao customerDao;
 
@@ -33,13 +33,13 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
-        edt_register_fullName = view.findViewById(R.id.edt_register_fullName);
+
         edt_register_username = view.findViewById(R.id.edt_register_username);
         edt_register_password = view.findViewById(R.id.edt_register_password);
         edt_register_confirmPassword = view.findViewById(R.id.edt_register_confirm_pass);
-        txt_login = (TextView) view.findViewById(R.id.txt_register_login);
+
         btn_register = view.findViewById(R.id.btn_register);
-        img_back = view.findViewById(R.id.img_register_back);
+        
 
         customerDao = new CustomerDao(getContext());
 
@@ -47,12 +47,8 @@ public class RegisterFragment extends Fragment {
         btn_register.setOnClickListener(register -> {
             doRegister();
         });
-        txt_login.setOnClickListener(toLogin -> {
-            getParentFragmentManager().popBackStack();
-        });
-        img_back.setOnClickListener(imgBack -> {
-            getParentFragmentManager().popBackStack();
-        });
+
+
 
 
         return view;

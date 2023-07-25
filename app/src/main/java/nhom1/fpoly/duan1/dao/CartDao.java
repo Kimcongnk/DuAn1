@@ -30,6 +30,17 @@ public class CartDao {
         db.close();
         return cartId;
     }
+    public boolean cartExists(int userId, int productId) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String query = "SELECT cart_id FROM Cart WHERE id_customer = ? AND id_product = ?";
+        String[] selectionArgs = {String.valueOf(userId), String.valueOf(productId)};
+        Cursor cursor = db.rawQuery(query, selectionArgs);
+
+        boolean exists = cursor.moveToFirst();
+
+        return exists;
+    }
+
 
 //    @SuppressLint("Range")
 //    public Cart getCartById(long cartId) {

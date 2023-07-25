@@ -16,7 +16,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".view.customer.fragment.order.OrderDetailActivity"
+            android:name=".view.customer.fragment.Status.Oderok"
+            android:exported="false" />
+        <activity
+            android:name=".view.customer.fragment.Status.OrderDetailActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.SplashActivity"
@@ -26,9 +29,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>  <activity
-        android:name=".view.customer.CustomerActivity"
-      android:exported="false" />
+        </activity>
+        <activity
+            android:name=".view.customer.CustomerActivity"
+            android:exported="false" />
         <activity
             android:name=".view.admin.AdminActivity"
             android:exported="false" />
@@ -37,6 +41,12 @@
             android:exported="false" />
         <activity
             android:name=".view.customer.fragment.ThanhToan"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.MainActivityLogin"
+            android:exported="false" />
+        <activity
+            android:name=".view.customer.fragment.Status.DangGiaoHang"
             android:exported="false" />
     </application>
 

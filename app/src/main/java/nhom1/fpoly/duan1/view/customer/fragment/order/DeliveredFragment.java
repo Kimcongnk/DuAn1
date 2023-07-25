@@ -17,6 +17,7 @@ import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.customer.OrderAdapter;
 import nhom1.fpoly.duan1.dao.OrderDao;
 import nhom1.fpoly.duan1.model.Order;
+import nhom1.fpoly.duan1.view.customer.fragment.Status.DangGiaoHang;
 
 
 public class DeliveredFragment extends  Fragment implements OrderAdapter.OnItemClickListener {
@@ -37,19 +38,19 @@ public class DeliveredFragment extends  Fragment implements OrderAdapter.OnItemC
                 orderDao = new OrderDao(getContext());
 
 
-                orderList = orderDao.getOrdersByStatus("Đã giao hàng");
+                orderList = orderDao.getOrdersByStatus("Đang giao hàng");
 
-        adapter = new OrderAdapter(orderList, getContext(), this);
-        recyclerView_order.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        return view;
+                adapter = new OrderAdapter(orderList, getContext(), this);
+                recyclerView_order.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return view;
         }
 
-@Override
-public void onItemClick(int position) {
-        order = orderList.get(position);
-        Intent intent = new Intent(getContext(), OrderDetailActivity.class);
-        intent.putExtra("order_id", order.getOrderId());
-        startActivity(intent);
+        @Override
+        public void onItemClick(int position) {
+                order = orderList.get(position);
+                Intent intent = new Intent(getContext(), DangGiaoHang.class);
+                intent.putExtra("order_id", order.getOrderId());
+                startActivity(intent);
         }
-        }
+}

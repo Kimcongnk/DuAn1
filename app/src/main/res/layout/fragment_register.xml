@@ -5,61 +5,15 @@
     android:layout_height="match_parent"
     tools:context="view.activity.RegisterFragment">
 
-    <ImageView
-        android:id="@+id/img_register_back"
-        android:layout_width="36dp"
-        android:layout_height="38dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/ic_back" />
-
-    <TextView
-        android:id="@+id/txt_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="0dp"
-        android:gravity="center"
-        android:text="Đăng ký"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_login"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:orientation="vertical"
         android:paddingLeft="32dp"
-        android:paddingRight="32dp">
-
-        <EditText
-            android:id="@+id/edt_register_fullName"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/bg_edit"
-            android:drawablePadding="10dp"
-            android:hint="Họ tên"
-            android:inputType="text"
-            android:paddingStart="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:singleLine="true" />
+        android:paddingRight="32dp"
+        >
 
         <EditText
             android:id="@+id/edt_register_username"
@@ -125,6 +79,7 @@
             android:text="Đăng ký"
             android:textAlignment="center"
             android:textColor="@color/white"
+            android:backgroundTint="#03A9F4"
             android:textSize="16sp" />
 
         <LinearLayout
@@ -132,22 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bạn đã có tài khoản?"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/txt_register_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" Đăng nhập"
-                android:textColor="@color/design_default_color_secondary_variant"
-                android:textSize="16sp" />
-        </LinearLayout>
+            android:orientation="horizontal"/>
     </LinearLayout>
 
 </RelativeLayout>

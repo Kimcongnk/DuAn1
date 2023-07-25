@@ -138,11 +138,21 @@ public class OrderDao {
         db.close();
         return rowsAffected;
     }
-
-    public int deleteOrder(long orderId) {
+    public int updateOrderStatus(long orderId, String newStatus) {
+        ContentValues values = new ContentValues();
+        values.put("status", newStatus);
         String whereClause = "id_oder = ?";
         String[] whereArgs = {String.valueOf(orderId)};
-        int rowsAffected = db.delete("Order", whereClause, whereArgs);
+        int rowsAffected = db.update("Oder", values, whereClause, whereArgs);
+        db.close();
+        return rowsAffected;
+    }
+
+
+    public int deleteOrder(int orderId) {
+        String whereClause = "id_oder = ?";
+        String[] whereArgs = {String.valueOf(orderId)};
+        int rowsAffected = db.delete("Oder", whereClause, whereArgs);
         db.close();
         return rowsAffected;
     }
