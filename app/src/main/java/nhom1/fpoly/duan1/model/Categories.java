@@ -1,6 +1,8 @@
 package nhom1.fpoly.duan1.model;
 
-public class Categories {
+import java.io.Serializable;
+
+public class Categories implements Serializable {
     private int id;
     private String name_categories, img_categories;
 
