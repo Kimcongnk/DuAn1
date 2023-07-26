@@ -111,7 +111,7 @@ public class AddCategoriesAdapter extends RecyclerView.Adapter<AddCategoriesAdap
         img_select_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog_Add_Category dialog_add_category = new Dialog_Add_Category();
+
 
             }
         });
@@ -122,24 +122,7 @@ public class AddCategoriesAdapter extends RecyclerView.Adapter<AddCategoriesAdap
         AlertDialog alertDialog = builder.create();
         alertDialog.setCancelable(false);
         alertDialog.show();
-//        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String tenloai = edSuaLoai.getText().toString();
-//                int namxb = Integer.parseInt(edSuaNamXB.getText().toString());
-//                maloai = loaiSach.getId();
-//                LoaiSach loaiSach1 = new LoaiSach(maloai,tenloai,namxb);
-//                LoaiSachDAO loaiSachDAO = new LoaiSachDAO(context);
-//                if (loaiSachDAO.suaLoaiSach(loaiSach1)){
-//                    list = loaiSachDAO.getDSLoaiSach();
-//                    notifyDataSetChanged();
-//                    alertDialog.cancel();
-//                }else{
-//                    Toast.makeText(context, "Cap nhat khong thanh cong", Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
+
     }
 
 

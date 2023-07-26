@@ -16,7 +16,8 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="5dp"
-        tools:listitem="@layout/item_category_admin" />
+        tools:listitem="@layout/item_category_admin"
+         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatAddCategory"
