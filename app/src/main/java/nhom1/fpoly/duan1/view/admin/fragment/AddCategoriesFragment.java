@@ -1,12 +1,22 @@
 package nhom1.fpoly.duan1.view.admin.fragment;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,11 +34,12 @@ import nhom1.fpoly.duan1.model.Categories;
 
 public class AddCategoriesFragment extends Fragment {
 
-
+    private final int PICK_IMAGE_REQUEST = 22;
     RecyclerView recyclerView_category_admin;
     FloatingActionButton float_add_category;
     AddCategoriesAdapter adapter;
     CategoryDao categoryDao;
+    Uri uri;
 
 
 
@@ -62,4 +73,5 @@ public class AddCategoriesFragment extends Fragment {
 
         return view;
     }
+
 }

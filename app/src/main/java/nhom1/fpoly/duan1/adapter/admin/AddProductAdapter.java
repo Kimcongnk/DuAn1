@@ -6,11 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nhom1.fpoly.duan1.R;
+import nhom1.fpoly.duan1.dao.ProductsDao;
+import nhom1.fpoly.duan1.dialog.Dialog_Edit_Category;
+import nhom1.fpoly.duan1.dialog.Dialog_Edit_Product;
 import nhom1.fpoly.duan1.model.Categories;
 import nhom1.fpoly.duan1.model.Product;
 
@@ -38,7 +44,7 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.Vi
     @NonNull
     @Override
     public AddProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_admin, parent, false);
         return new ViewHolder(view);
     }
 
@@ -59,6 +65,40 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.Vi
                         Log.e("Error", e.getMessage());
                     }
                 });
+        holder.img_edit_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Product product = productList.get(holder.getAdapterPosition());
+                showDialogEditProduct(product);
+            }
+        });
+        holder.img_del_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProductsDao productsDao = new ProductsDao(context);
+                int check = productsDao.xoaProduct(productList.get(holder.getAdapterPosition()).getId_product());
+                switch (check){
+                    case 1:
+                        Toast.makeText(context, "xoa thanh cong", Toast.LENGTH_SHORT).show();
+                        productList.clear();
+                        productList = productsDao.getAllProducts();
+                        notifyDataSetChanged();
+                        break;
+                    case 0:
+                        Toast.makeText(context, "xoa ko thanh cong", Toast.LENGTH_SHORT).show();
+
+                        break;
+                    case -1:
+                        Toast.makeText(context, "xoa ko thanh cong vi san pham co trong gio hang", Toast.LENGTH_SHORT).show();
+
+                        break;
+                    default:
+                        break;
+
+
+                }
+            }
+        });
     }
 
     @Override
@@ -67,17 +107,47 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView img_product;
+        ImageView img_product,img_edit_product,img_del_product;
         TextView txt_name_product,txt_price_product;
         ProgressBar progressBar;
         CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            img_product = (ImageView) itemView.findViewById(R.id.image_product);
-            txt_name_product = (TextView) itemView.findViewById(R.id.txt_name_product);
-            txt_price_product = (TextView) itemView.findViewById(R.id.txt_price_product);
-            progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar_product);
+            img_product = (ImageView) itemView.findViewById(R.id.image_product_admin);
+            txt_name_product = (TextView) itemView.findViewById(R.id.txt_name_product_admin);
+            txt_price_product = (TextView) itemView.findViewById(R.id.txt_price_product_admin);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar_product_admin);
+            img_edit_product = itemView.findViewById(R.id.img_edit_product);
+            img_del_product = itemView.findViewById(R.id.img_del_product);
         }
+    }
+    private void showDialogEditProduct(Product product){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                .setNegativeButton("Cap nhat",null)
+                .setPositiveButton("Huy",null);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.dialog_edit_product,null);
+        EditText edSuaLoai = view.findViewById(R.id.edt_name_product_edit);
+
+        ImageView img_select_edit = view.findViewById(R.id.img_select_edit);
+
+        img_select_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog_Edit_Category dialog_edit_category = new Dialog_Edit_Category();
+                dialog_edit_category.show(dialog_edit_category.getFragmentManager(), dialog_edit_category.getTag());
+
+
+            }
+        });
+
+
+        builder.setView(view);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
     }
 }

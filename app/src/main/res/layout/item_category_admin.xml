@@ -47,7 +47,7 @@
                 android:layout_width="127dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="67dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginEnd="33dp"
                 android:layout_toEndOf="@+id/category_image_admin"
                 android:gravity="center"
@@ -55,7 +55,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
             <ImageView
-                android:id="@+id/img_edit_category"
+                android:id="@+id/img_edit_category_admin"
                 android:src="@drawable/baseline_edit_24"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -63,12 +63,12 @@
                 />
             <ImageView
                 android:layout_marginTop="10dp"
-                android:id="@+id/img_del_category"
+                android:id="@+id/img_del_category_admin"
                 android:src="@drawable/baseline_delete_24"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_toRightOf="@+id/category_name_admin"
-                android:layout_below="@+id/img_edit_category"
+                android:layout_below="@+id/img_edit_category_admin"
                 />
 
 

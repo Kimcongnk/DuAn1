@@ -26,18 +26,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import nhom1.fpoly.duan1.R;
-import nhom1.fpoly.duan1.adapter.admin.AddProductAdapter;
 import nhom1.fpoly.duan1.dao.CategoryDao;
 import nhom1.fpoly.duan1.dao.ProductsDao;
 import nhom1.fpoly.duan1.model.Categories;
 import nhom1.fpoly.duan1.model.Product;
-import nhom1.fpoly.duan1.view.admin.fragment.AddProductFragment;
 
-public class Dialog_Add_Product extends DialogFragment {
+public class Dialog_Edit_Product extends DialogFragment {
 
     private final int PICK_IMAGE_REQUEST = 22;
     EditText edt_name_product,edt_price_product,edt_desc_product;
-    Button btn_add_product;
+    Button btn_edit_product;
     ImageView img_select;
     String imgURL;
     Spinner spnLoai;
@@ -52,26 +50,26 @@ public class Dialog_Add_Product extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.dialog_add_product, container, false);
-        edt_name_product = view.findViewById(R.id.edt_name_product);
-        edt_desc_product = view.findViewById(R.id.edt_desc_product);
-        edt_price_product=view.findViewById(R.id.edt_price_product);
-        spnLoai = view.findViewById(R.id.spin_loai_sp);
+        View view = inflater.inflate(R.layout.dialog_edit_product, container, false);
+        edt_name_product = view.findViewById(R.id.edt_name_product_edit);
+        edt_desc_product = view.findViewById(R.id.edt_desc_product_edit);
+        edt_price_product=view.findViewById(R.id.edt_price_product_edit);
+        spnLoai = view.findViewById(R.id.spin_loai_sp_edit);
         productsDao = new ProductsDao(getContext());
 
 
-        btn_add_product = (Button) view.findViewById(R.id.btn_add);
-        img_select = (ImageView) view.findViewById(R.id.img_select);
+        btn_edit_product = (Button) view.findViewById(R.id.btn_edit);
+        img_select = (ImageView) view.findViewById(R.id.img_select_edit);
 
         img_select.setOnClickListener(img -> {
             SelectImage();
         });
         getDataLoaiSP(spnLoai);
-        btn_add_product.setOnClickListener(add -> {
+        btn_edit_product.setOnClickListener(add -> {
             // add a new product to Database
             HashMap<String,Object> hsLoai = (HashMap<String, Object>) spnLoai.getSelectedItem();
             int id_loai = (int) hsLoai.get("id_category");
-            themSP(id_loai,imagePath);
+//            themSP(id_loai,imagePath);
 
 
 

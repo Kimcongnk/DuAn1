@@ -3,8 +3,9 @@ package nhom1.fpoly.duan1.dialog;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -26,11 +27,10 @@ import nhom1.fpoly.duan1.adapter.admin.AddCategoriesAdapter;
 import nhom1.fpoly.duan1.dao.CategoryDao;
 import nhom1.fpoly.duan1.model.Categories;
 
-public class Dialog_Add_Category extends DialogFragment {
-
+public class Dialog_Edit_Category extends DialogFragment {
     private final int PICK_IMAGE_REQUEST = 22;
     EditText edt_name;
-    Button btn_add_category;
+    Button btn_edit_category;
     ImageView img_select;
     String imgURL;
     Uri uri;
@@ -38,24 +38,26 @@ public class Dialog_Add_Category extends DialogFragment {
     String imagePath;
     AddCategoriesAdapter adapter;
 
+
+
     @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.dialog_add_category, container, false);
-        edt_name = (EditText) view.findViewById(R.id.edt_name_category);
-        btn_add_category = (Button) view.findViewById(R.id.btn_add);
-        img_select = (ImageView) view.findViewById(R.id.img_select);
+        View view = inflater.inflate(R.layout.dialog_edit_category, container, false);
+        edt_name = (EditText) view.findViewById(R.id.edt_name_category_edit);
+        btn_edit_category = (Button) view.findViewById(R.id.btn_update);
+        img_select = (ImageView) view.findViewById(R.id.img_select_edit);
 
         categoryDao = new CategoryDao(getContext());
 
         img_select.setOnClickListener(img -> {
             SelectImage();
         });
-        btn_add_category.setOnClickListener(add -> {
+        btn_edit_category.setOnClickListener(add -> {
             // add a new category to Database
-            addDatabase(imagePath);
+//            addDatabase(imagePath);
 
             Log.d("123","path: "+ img_select.toString());
             dismiss();
@@ -101,6 +103,4 @@ public class Dialog_Add_Category extends DialogFragment {
 
         }
     }
-
-
 }
