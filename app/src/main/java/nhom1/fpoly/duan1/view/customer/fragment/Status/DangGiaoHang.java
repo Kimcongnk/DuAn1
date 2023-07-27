@@ -16,7 +16,7 @@ import java.util.Locale;
 
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.customer.OrderDetailAdapter;
-import nhom1.fpoly.duan1.adapter.customer.SwipeToUnlockButton;
+
 import nhom1.fpoly.duan1.dao.OrderDao;
 import nhom1.fpoly.duan1.dao.OrderDetailDao;
 import nhom1.fpoly.duan1.dao.SessionManager;
@@ -31,9 +31,9 @@ public class DangGiaoHang extends AppCompatActivity {
     private OrderDetailAdapter adapter;
     private Button xoaOder;
     private ArrayList<Order> orderArrayList = new ArrayList<>();
-    private  int id_Order = 0;
+    private int id_Order = 0;
     private SessionManager sessionManager;
-    private SwipeToUnlockButton swipeToUnlockButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +48,10 @@ public class DangGiaoHang extends AppCompatActivity {
         orderDao = new OrderDao(this);
         sessionManager = new SessionManager(getApplicationContext());
 
-        if(sessionManager.isLoggedIn() == true){
+        if (sessionManager.isLoggedIn() == true) {
             xoaOder.setText("Đã nhân được hàng");
 
-        }else {
+        } else {
             xoaOder.setText("Đã thanh toán");
 
         }
@@ -60,23 +60,22 @@ public class DangGiaoHang extends AppCompatActivity {
 
         if (intent != null) {
             id_Order = intent.getIntExtra("order_id", -1);
-        }xoaOder.setOnClickListener(new View.OnClickListener() {
+        }
+        xoaOder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sessionManager.isLoggedIn() == true){
+                if (sessionManager.isLoggedIn() == true) {
 
                     Toast.makeText(DangGiaoHang.this, "Cảm ơn bạn đã ủng hô shop", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
 
                     orderDao.updateOrderStatus(id_Order, "Đã thanh toán");
-                    Toast.makeText(DangGiaoHang.this, "Admin", Toast.LENGTH_SHORT).show();
-
+                    finish();
                 }
 
 
             }
         });
-
 
 
         orderArrayList = (ArrayList<Order>) orderDao.getAllOrdersWithDetailsById(id_Order);

@@ -43,11 +43,11 @@ public class ViewOrderFragment extends Fragment {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 if (position == 0) {
-                    tab.setText("Chờ xác nhận");
+                    tab.setText("Đã đặt hàng");
                 } else if (position == 1){
-                    tab.setText("Thanh toán");
+                    tab.setText("Đang giao hàng");
                 } else if (position == 2){
-                    tab.setText("Giao thành công");
+                    tab.setText("Đã nhận hàng");
                 }
             }
         }).attach();

@@ -26,6 +26,16 @@ public class OrderingFragment extends Fragment implements OrderAdapter.OnItemCli
     OrderDao orderDao;
     private Order order;
     private ArrayList<Order> orderList = new ArrayList<Order>();
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        orderList = orderDao.getOrdersByStatus("Đã đặt hàng");
+        adapter = new OrderAdapter(orderList, getContext(), this);
+        recyclerView_order.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,11 +47,9 @@ public class OrderingFragment extends Fragment implements OrderAdapter.OnItemCli
         orderDao = new OrderDao(getContext());
 
 
-        orderList = orderDao.getOrdersByStatus("Đã đặt hàng");
 
-        adapter = new OrderAdapter(orderList, getContext(), this);
-        recyclerView_order.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
+
         return view;
     }
 

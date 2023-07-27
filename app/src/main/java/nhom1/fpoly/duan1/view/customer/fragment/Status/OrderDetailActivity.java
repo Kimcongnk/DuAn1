@@ -66,7 +66,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                     orderDao.deleteOrder(id_Order);
 
                     Toast.makeText(OrderDetailActivity.this, "Đã hủy đơn: " + id_Order, Toast.LENGTH_SHORT).show();
-
+                    finish();
                 }else {
 
                     orderDao.updateOrderStatus(id_Order, "Đang giao hàng");

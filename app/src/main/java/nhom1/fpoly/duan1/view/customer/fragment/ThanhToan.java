@@ -132,8 +132,7 @@ imgBack.setOnClickListener(new View.OnClickListener() {
                         if (orderDetailDao.addOrderDetail(orderDetail) > 0) {
                             cartDao.deleteCarts(selectedItems);
                             Toast.makeText(ThanhToan.this, "Hàng đang được giao", Toast.LENGTH_SHORT).show();
-
-                      startActivity(new Intent(ThanhToan.this, AccountFragment.class));
+                            finish();
                         }
                     }
 

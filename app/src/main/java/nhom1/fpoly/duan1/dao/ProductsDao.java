@@ -19,6 +19,23 @@ public class ProductsDao {
         createDatabase = new CreateDatabase(context);
         database = createDatabase.getWritableDatabase();
     }
+    @SuppressLint("Range")
+    public List<Product> getProductById(int productId) {
+        List<Product> product = new ArrayList<Product>();
+        Cursor cursor = database.rawQuery("SELECT * FROM Products WHERE id_product = ?", new String[]{String.valueOf(productId)});
+
+        if (cursor.moveToFirst()) {
+            Product products = new Product();
+            products.setId_product(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_product"))));
+            products.setName_product(cursor.getString(cursor.getColumnIndex("name")));
+            products.setDesc_product(cursor.getString(cursor.getColumnIndex("description")));
+            products.setImg_product(cursor.getString(cursor.getColumnIndex("image_url")));
+            products.setPrice(cursor.getString(cursor.getColumnIndex("price")));
+        }
+
+        cursor.close();
+        return product;
+    }
 
     @SuppressLint("Range")
     public List<Product> getAllProducts() {

@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import nhom1.fpoly.duan1.R;
@@ -37,7 +39,7 @@ public class CategoryHomeAdapter extends RecyclerView.Adapter<CategoryHomeAdapte
     @NonNull
     @Override
     public CategoryHomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.item_category, null);
+        View view = View.inflate(context, R.layout.item_category_home, null);
         return new ViewHolder(view);
     }
 
@@ -45,8 +47,9 @@ public class CategoryHomeAdapter extends RecyclerView.Adapter<CategoryHomeAdapte
     public void onBindViewHolder(@NonNull CategoryHomeAdapter.ViewHolder holder, int position) {
         Categories categories1 = categories.get(position);
         holder.txt_name_category_home.setText(categories1.getName_categories());
-        holder.img_category_home.setImageResource(R.drawable.ic_home);
-        holder.cardView.setOnClickListener(click -> {
+        String imageUrl = categories1.getImg_categories();
+        Picasso.get().load(imageUrl).into(holder.img_category_home);
+        holder.itemView.setOnClickListener(click -> {
             detailOnClick.showDetails(categories1);
         });
     }
@@ -64,7 +67,6 @@ public class CategoryHomeAdapter extends RecyclerView.Adapter<CategoryHomeAdapte
         public ViewHolder(@NonNull View view) {
             super(view);
             txt_name_category_home = view.findViewById(R.id.category_name);
-            progressBar = view.findViewById(R.id.progressbar_category);
             img_category_home = view.findViewById(R.id.category_image);
             cardView = view.findViewById(R.id.card_view_category);
 

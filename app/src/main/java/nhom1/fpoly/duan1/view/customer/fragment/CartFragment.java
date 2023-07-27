@@ -111,7 +111,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
         currentQuantity++;
         cartItem.setTotalTems(currentQuantity);
         cartDao.updateCartItem(cartItem);
-        cartAdapter.notifyItemChanged(position);
+        cartAdapter.notifyDataSetChanged();
         updateTotalPrice();
     }
 
@@ -124,7 +124,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
             cartItem.setTotalTems(currentQuantity);
             cartDao.updateCartItem(cartItem);
             updateTotalPrice();
-            cartAdapter.notifyItemChanged(position);
+            cartAdapter.notifyDataSetChanged();
         }
     }
 

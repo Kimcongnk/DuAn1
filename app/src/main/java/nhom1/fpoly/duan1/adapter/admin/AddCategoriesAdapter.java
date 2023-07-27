@@ -76,7 +76,7 @@ public class AddCategoriesAdapter extends RecyclerView.Adapter<AddCategoriesAdap
             super(itemView);
             img_category = (ImageView) itemView.findViewById(R.id.category_image);
             txt_name_category = (TextView) itemView.findViewById(R.id.category_name);
-            progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar_category);
+
             cardView = (CardView) itemView.findViewById(R.id.card_view_category);
         }
     }
