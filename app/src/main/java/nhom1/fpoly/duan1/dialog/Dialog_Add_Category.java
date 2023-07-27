@@ -21,6 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.ArrayList;
+
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.admin.AddCategoriesAdapter;
 import nhom1.fpoly.duan1.dao.CategoryDao;
@@ -37,6 +39,7 @@ public class Dialog_Add_Category extends DialogFragment {
     CategoryDao categoryDao;
     String imagePath;
     AddCategoriesAdapter adapter;
+    ArrayList<Categories> list;
 
     @SuppressLint("MissingInflatedId")
     @Nullable
@@ -69,11 +72,18 @@ public class Dialog_Add_Category extends DialogFragment {
         Categories categories = new Categories();
         categories.setName_categories(name);
         categories.setImg_categories(ImagePath);
+        list = new ArrayList<>();
+        list.add(categories);
+
+
+
 
         if (categoryDao.addCategory(categories)) {
             Toast.makeText(getContext(), "add successfully", Toast.LENGTH_SHORT).show();
             dismiss();
             getActivity().recreate();
+            adapter = new AddCategoriesAdapter(list,getContext());
+            adapter.notifyDataSetChanged();
         } else {
             Toast.makeText(getContext(), "add failed", Toast.LENGTH_SHORT).show();
         }

@@ -40,16 +40,16 @@ public class ProductsDao {
         cursor.close();
         return productList;
     }
-    public boolean themProduct(Product product){
+    public boolean themProduct(String name_product,String image,int category_id,int price,String desc){
         SQLiteDatabase sqLiteDatabase = createDatabase.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
 
-        contentValues.put("name",product.getName_product());
-        contentValues.put("image_url",product.getImg_product());
-        contentValues.put("category_id",product.getId_category());
-        contentValues.put("description",product.getDesc_product());
-        contentValues.put("price",product.getPrice());
+        contentValues.put("name",name_product);
+        contentValues.put("image_url",image);
+        contentValues.put("category_id",category_id);
+        contentValues.put("description",desc);
+        contentValues.put("price",price);
 
         long check = sqLiteDatabase.insert("Products",null,contentValues);
         if (check==-1){
@@ -70,5 +70,19 @@ public class ProductsDao {
 
         }
         return 1;
+    }
+    public boolean capNhatProduct(int id_product,String name_product,String image,int category_id,int price,String desc){
+        SQLiteDatabase sqLiteDatabase = createDatabase.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name",name_product);
+        contentValues.put("image_url",image);
+        contentValues.put("category_id",category_id);
+        contentValues.put("description",desc);
+        contentValues.put("price",price);
+        long check = sqLiteDatabase.update("Products" ,contentValues,"id_product=?",new String[]{String.valueOf(id_product)});
+        if (check ==-1){
+            return false;
+        }
+        return true;
     }
 }

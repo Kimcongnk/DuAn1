@@ -13,7 +13,7 @@ import nhom1.fpoly.duan1.database.CreateDatabase;
 import nhom1.fpoly.duan1.model.Categories;
 
 public class CategoryDao {
-    private final SQLiteDatabase database;
+    private final   SQLiteDatabase database;
     CreateDatabase createDatabase;
 
     public CategoryDao(Context context) {
@@ -51,17 +51,15 @@ public class CategoryDao {
             return 0;
         return 1;
     }
-    @SuppressLint("Range")
+
     public ArrayList<Categories> getAllCategories() {
         ArrayList<Categories> categoriesList = new ArrayList<>();
-        Cursor cursor = database.rawQuery("select * from Category", null);
-        if (cursor.moveToFirst()){
+        SQLiteDatabase sqLiteDatabase = createDatabase.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from Category", null);
+        if (cursor.getCount()!=0){
+            cursor.moveToFirst();
             do {
-                Categories categories = new Categories();
-                categories.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_category"))));
-                categories.setName_categories(cursor.getString(cursor.getColumnIndex("name")));
-                categories.setImg_categories((cursor.getString(cursor.getColumnIndex("image_url"))));
-                categoriesList.add(categories);
+                categoriesList.add(new Categories(cursor.getInt(0),cursor.getString(1),cursor.getString(2)));
             }while (cursor.moveToNext());
         }
         cursor.close();

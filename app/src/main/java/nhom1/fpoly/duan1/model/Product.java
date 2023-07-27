@@ -4,12 +4,20 @@ public class Product {
     private int id_product, price,id_category;
     private String  name_product, category, desc_product, img_product;
 
-    public Product(int id_product, int price, String name_product, String category, String desc_product, String img_product,Integer id_category) {
+    public Product(int id_product, int price, String name_product,  String desc_product, Integer id_category,String img_product) {
         this.id_product = id_product;
         this.id_category = id_category;
         this.price = price;
         this.name_product = name_product;
-        this.category = category;
+        this.img_product = img_product;
+        this.desc_product = desc_product;
+
+    }
+
+    public Product(int price, int id_category, String name_product, String desc_product, String img_product) {
+        this.price = price;
+        this.id_category = id_category;
+        this.name_product = name_product;
         this.desc_product = desc_product;
         this.img_product = img_product;
     }
