@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="100dp"
+                    android:layout_marginTop="50dp"
                     android:layout_marginEnd="40dp"
                     android:orientation="horizontal">
 
@@ -56,14 +56,15 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Tổng tiền: "
-                        android:textSize="16sp" />
+
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txt_total_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="#E922FF"
+                        android:textColor="#FF9800"
                         android:textSize="16sp" />
                 </LinearLayout>
 

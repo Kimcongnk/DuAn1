@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -51,13 +54,18 @@ public class OrderDetailAdapter extends BaseAdapter {
         TextView tvProductName = view.findViewById(R.id.tvProductName);
         TextView tvProductPrice = view.findViewById(R.id.tvProductPrice);
         TextView tvQuantity = view.findViewById(R.id.tvQuantity);
+        ImageView itemImage = view.findViewById(R.id.img_back);
 
         // Get the OrderDetail at the specified position
         OrderDetail orderDetail = orderDetailList.get(position);
 
         // Set the data to the views
         tvProductName.setText(orderDetail.getProductName());
-        tvProductPrice.setText(String.valueOf(orderDetail.getPrice()));
+        DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
+        String formattedPrice = decimalFormat.format(orderDetail.getPrice());
+        tvProductPrice.setText(String.valueOf(formattedPrice));
+        String imageUrl = orderDetail.getImg_product();
+        Picasso.get().load(imageUrl).into(itemImage);
         tvQuantity.setText("SL: " + orderDetail.getQuantity());
 
         return view;

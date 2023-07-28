@@ -31,7 +31,7 @@
                     app:cardCornerRadius="5dp">
 
                     <ImageView
-                        android:id="@+id/image"
+                        android:id="@+id/img_back"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginStart="3dp"
@@ -71,7 +71,7 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
 
-                            />
+                            android:buttonTint="#3F51B5" />
                     </LinearLayout>
 
 
@@ -88,7 +88,7 @@
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:text="200.000 đ"
-                            android:textColor="@color/black"
+                            android:textColor="#FF5722"
                             android:textSize="15sp" />
 
                         <LinearLayout
@@ -112,7 +112,7 @@
                                 android:layout_marginTop="3dp"
                                 android:paddingStart="5dp"
                                 android:text="1"
-                                android:textColor="#875000"
+                                android:textColor="#3F51B5"
                                 android:textSize="20sp" />
 
                             <ImageView

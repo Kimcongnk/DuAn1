@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import nhom1.fpoly.duan1.R;
@@ -42,7 +43,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         // Set order data to the views in the layout
         holder.tvOrderId.setText("ID: " + order.getOrderId());
         holder.tvDate.setText("Ngày: " + order.getDateOder());
-        holder.tvTotalMoney.setText("Tổng tiền: " + order.getTotalMoney());
+        DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
+        String formattedPrice = decimalFormat.format(order.getTotalMoney());
+        holder.tvTotalMoney.setText("Tổng tiền: " + formattedPrice +"VND");
         holder.tvStatus.setText("Trạng thái: " + order.getStatus());
 
         holder.itemView.setOnClickListener(view -> {

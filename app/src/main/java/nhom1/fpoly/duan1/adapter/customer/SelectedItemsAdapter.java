@@ -1,13 +1,17 @@
 package nhom1.fpoly.duan1.adapter.customer;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -29,7 +33,7 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
     @Override
     public SelectedItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_cart, parent, false);
+                .inflate(R.layout.list_item_order_detail, parent, false);
         return new SelectedItemViewHolder(view);
     }
 
@@ -42,6 +46,8 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
         holder.txtSelectedItemPrice.setText(formattedPrice+ "VND");
         holder.txtTotalItems.setText(String.valueOf(item.getTotalTems() ));
 
+        String imageUrl = item.getImg_product();
+        Picasso.get().load(imageUrl).into(holder.itemImage);
 
     }
 
@@ -55,14 +61,14 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
     public static class SelectedItemViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtSelectedItemName, txtSelectedItemPrice, txtTotalItems;
-
+ImageView itemImage;
         public SelectedItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
             txtSelectedItemName = itemView.findViewById(R.id.tvProductName);
             txtSelectedItemPrice = itemView.findViewById(R.id.tvProductPrice);
             txtTotalItems = itemView.findViewById(R.id.tvQuantity);
-
+itemImage= itemView.findViewById(R.id.img_back);
         }
     }
 }

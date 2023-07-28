@@ -121,7 +121,7 @@ public class CartDao {
     public List<Cart> getAllCartItemsWithProductInfo() {
         List<Cart> cartItems = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String query = "SELECT c.cart_id, p.id_product, p.name, p.price, c.totaItem " +
+        String query = "SELECT c.cart_id, p.id_product, p.name, p.price, p.image_url,  c.totaItem " +
                 "FROM Cart c " +
                 "INNER JOIN Products p ON c.id_product = p.id_product";
 
@@ -134,8 +134,9 @@ public class CartDao {
                 String productName = cursor.getString(cursor.getColumnIndex("name"));
                 int price = cursor.getInt(cursor.getColumnIndex("price"));
                 int quantity = cursor.getInt(cursor.getColumnIndex("totaItem"));
+                String img = cursor.getString(cursor.getColumnIndex("image_url"));
 
-                Cart cartItem = new Cart(cartId, productId, productName, price, quantity);
+                Cart cartItem = new Cart(cartId, productId, productName, price,img, quantity);
                 cartItems.add(cartItem);
             } while (cursor.moveToNext());
         }

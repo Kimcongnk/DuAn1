@@ -55,18 +55,18 @@ public class RegisterFragment extends Fragment {
     }
 
     private void doRegister() {
-        String fullName = edt_register_fullName.getText().toString();
         String username = edt_register_username.getText().toString();
         String password = edt_register_password.getText().toString();
         String confirmPass = edt_register_confirmPassword.getText().toString();
 
-        if (fullName.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPass.isEmpty()) {
-            Toast.makeText(requireContext(), "", Toast.LENGTH_SHORT).show();
+        if ( username.isEmpty() || password.isEmpty() || confirmPass.isEmpty()) {
+            edt_register_username.setError("Please enter your address");
+            edt_register_password.setError("Please enter your address");
+            edt_register_confirmPassword.setError("Please enter your address");
         } else if (!confirmPass.equals(password)) {
             Toast.makeText(requireContext(), "password do not match", Toast.LENGTH_SHORT).show();
         } else {
             Customer customer = new Customer();
-            customer.setFullName(fullName);
             customer.setUsername(username);
             customer.setPassword(password);
             if (customerDao.insertCustomer(customer)) {

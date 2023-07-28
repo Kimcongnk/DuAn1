@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -31,8 +33,10 @@ public class OrderDetailActivity extends AppCompatActivity {
     private OrderDetailAdapter adapter;
     private Button xoaOder;
     private ArrayList<Order> orderArrayList = new ArrayList<>();
-    private  int id_Order = 0;
+    private int id_Order = 0;
+    private ImageView imgBack;
     private SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,16 +46,22 @@ public class OrderDetailActivity extends AppCompatActivity {
         txtaddress = findViewById(R.id.txt_order_address);
         txtTotal = findViewById(R.id.txtTotal);
         xoaOder = findViewById(R.id.button);
+        imgBack = findViewById(R.id.img_back);
         listView = findViewById(R.id.lisview_view_order);
         orderDetailDao = new OrderDetailDao(this);
         orderDao = new OrderDao(this);
         sessionManager = new SessionManager(getApplicationContext());
-
-        if(sessionManager.isLoggedIn() == true){
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        if (sessionManager.isLoggedIn() == true) {
             xoaOder.setText("Hủy đơn hàng");
 
-        }else {
-            xoaOder.setText("Xác nhận" + " "+ id_Order);
+        } else {
+            xoaOder.setText("Xác nhận" + " " + id_Order);
 
         }
 
@@ -59,19 +69,19 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         if (intent != null) {
             id_Order = intent.getIntExtra("order_id", -1);
-        }xoaOder.setOnClickListener(new View.OnClickListener() {
+        }
+        xoaOder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sessionManager.isLoggedIn() == true){
+                if (sessionManager.isLoggedIn() == true) {
                     orderDao.deleteOrder(id_Order);
 
                     Toast.makeText(OrderDetailActivity.this, "Đã hủy đơn: " + id_Order, Toast.LENGTH_SHORT).show();
                     finish();
-                }else {
+                } else {
 
                     orderDao.updateOrderStatus(id_Order, "Đang giao hàng");
-                    Toast.makeText(OrderDetailActivity.this, "", Toast.LENGTH_SHORT).show();
-
+                    finish();
                 }
 
 
@@ -80,21 +90,20 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         orderArrayList = (ArrayList<Order>) orderDao.getAllOrdersWithDetailsById(id_Order);
         for (Order order : orderArrayList) {
-            txtName.setText(order.getNameOder());
-            phoneNumber.setText(order.getPhoneNumber());
-            txtaddress.setText(order.getAddress());
+            txtName.setText("Tên: " + order.getNameOder());
+            phoneNumber.setText("SDT: " + order.getPhoneNumber());
+            txtaddress.setText("Địa chỉ" + order.getAddress());
         }
-        // Get the list of OrderDetail items with product information
         List<OrderDetail> orderDetailList = orderDetailDao.getOrderDetailsByOrderId(id_Order);
 
-        // Create and set the custom adapter to the ListView
         adapter = new OrderDetailAdapter(this, orderDetailList);
         listView.setAdapter(adapter);
         double totalAmount = adapter.totalOrderDetail();
 
-        // Assuming you have a TextView with ID txtTotal in your layout, set the total amount to it
 
-        txtTotal.setText(String.format(Locale.getDefault(), "%.2f", totalAmount));
+        DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
+        String formattedPrice = decimalFormat.format(totalAmount);
+        txtTotal.setText( formattedPrice + "VND");
     }
 
 }

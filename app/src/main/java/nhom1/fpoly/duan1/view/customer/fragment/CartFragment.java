@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import nhom1.fpoly.duan1.dao.OrderDao;
 import nhom1.fpoly.duan1.model.Cart;
 import nhom1.fpoly.duan1.model.Order;
 import nhom1.fpoly.duan1.model.OrderDetail;
+import nhom1.fpoly.duan1.view.customer.CustomerActivity;
 
 import java.util.Calendar;
 
@@ -41,7 +43,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
     private CartDao cartDao;
 
     private TextView txtTotalPrice;
-    private Button btnThanhToan;
+    private Button btnThanhToan, btbMuaNgay;
 
     private List<Cart> selectedItems = new ArrayList<>();
     private Cart cartItem;
@@ -65,6 +67,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
         recyclerViewCart = view.findViewById(R.id.recyclerView_cart);
         txtTotalPrice = view.findViewById(R.id.txt_total_price);
         btnThanhToan = view.findViewById(R.id.btn_dat_hang);
+        btbMuaNgay = view.findViewById(R.id.muasp);
         cartDao = new CartDao(getContext());
         showData();
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +80,12 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
                     intent.putParcelableArrayListExtra("SELECTED_ITEMS", (ArrayList<Cart>) selectedItems);
                     startActivity(intent);
                 }
+            }
+        });
+        btbMuaNgay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), CustomerActivity.class));
             }
         });
         return view;
@@ -96,12 +105,14 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewCart.setLayoutManager(layoutManager);
 
-        cartAdapter = new CartAdapter(cartArrayList, getContext(), this);
-        recyclerViewCart.setAdapter(cartAdapter);
-
         SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(cartAdapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
         itemTouchHelper.attachToRecyclerView(recyclerViewCart);
+
+        cartAdapter = new CartAdapter(cartArrayList, getContext(), this);
+        recyclerViewCart.setAdapter(cartAdapter);
+
+
     }
 
     @Override

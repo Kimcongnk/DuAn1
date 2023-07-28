@@ -1,6 +1,7 @@
 package nhom1.fpoly.duan1.view.customer.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,11 +89,17 @@ private   List<Product> products = new ArrayList<>();
         categoryHomeAdapter.showProduct(new CategoriesInterface() {
             @Override
             public void showDetails(Categories categories1) {
-                Toast.makeText(getContext(), ""+categories1.getId(), Toast.LENGTH_SHORT).show();
-                products =  productsDao.getProductById(categories1.getId());
+               products =  productsDao.getProductsByCategoryId(categories1.getId());
+
                 productHomeAdapter = new ProductHomeAdapter(requireActivity(), products);
                 recyclerView.setAdapter(productHomeAdapter);
                 productHomeAdapter.notifyDataSetChanged();
+                productHomeAdapter.showProduct(new ProductInterface() {
+                    @Override
+                    public void showDetails(Product product) {
+                        goToDetails(product);
+                    }
+                });
             }
         });
         productHomeAdapter.showProduct(new ProductInterface() {

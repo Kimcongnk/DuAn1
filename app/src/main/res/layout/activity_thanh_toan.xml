@@ -53,7 +53,6 @@
         android:layout_marginTop="-2dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/phongbi"
         android:orientation="horizontal">
 
         <LinearLayout

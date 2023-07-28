@@ -80,12 +80,12 @@ public class ThanhToan extends AppCompatActivity {
         sessionManager = new SessionManager(getApplication());
         customerArrayList = customerDao.getCustomerById(0);
 
-imgBack.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-//        startActivity(new Intent(ThanhToan.this, CartFragment.class));
-    }
-});
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         Intent intent = getIntent();
@@ -109,6 +109,26 @@ imgBack.setOnClickListener(new View.OnClickListener() {
         btnOder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = txtName.getText().toString().trim();
+                String phone = phoneNumber.getText().toString().trim();
+                String address = txtaddress.getText().toString().trim();
+                String phonePattern = "^[0-9]{10}$";
+                if (name.isEmpty()) {
+                    txtName.setError("Không để trống tên");
+                    return;
+                }
+
+                if (phone.isEmpty()) {
+                    phoneNumber.setError("Điện thoại không được để trống");
+//                }else if( phone.matches(phonePattern)){
+//                    phoneNumber.setError("Số không đúng định dạng");
+                    return;
+                }
+
+                if (address.isEmpty()) {
+                    txtaddress.setError("Địa chỉ không được để trống");
+                    return;
+                }
                 int randomOrderId = generateRandomOrderId();
                 String currentDateAndTime = String.format("%02d/%02d/%04d", day, month, year);
                 int idUser = sessionManager.getLoggedInCustomerId();
@@ -131,7 +151,6 @@ imgBack.setOnClickListener(new View.OnClickListener() {
                         orderDetail.setQuantity(cartItem.getTotalTems());
                         if (orderDetailDao.addOrderDetail(orderDetail) > 0) {
                             cartDao.deleteCarts(selectedItems);
-                            Toast.makeText(ThanhToan.this, "Hàng đang được giao", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }

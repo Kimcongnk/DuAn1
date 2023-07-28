@@ -93,7 +93,7 @@ public class OrderDetailDao {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String query = "SELECT od.id_oderDetail, od.id_oder, od.id_product, od.quantyti, " +
-                "p.name, p.price " +
+                "p.name, p.price,p.image_url " +
                 "FROM OrderDetail od " +
                 "INNER JOIN Products p ON od.id_product = p.id_product " +
                 "WHERE od.id_oder = " + orderId;
@@ -107,8 +107,9 @@ public class OrderDetailDao {
                 String productName = cursor.getString(cursor.getColumnIndex("name"));
                 int price = cursor.getInt(cursor.getColumnIndex("price"));
                 int quantity = cursor.getInt(cursor.getColumnIndex("quantyti"));
+                String img = cursor.getString(cursor.getColumnIndex("image_url"));
 
-                OrderDetail orderDetail = new OrderDetail(orderDetailId,productId,productName,price,quantity);
+                OrderDetail orderDetail = new OrderDetail(orderDetailId,productId,productName,price,img,quantity);
 
 
                 orderDetailList.add(orderDetail);

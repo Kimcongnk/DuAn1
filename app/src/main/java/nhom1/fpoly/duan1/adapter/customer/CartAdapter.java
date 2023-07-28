@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private List<Cart> cartItems;
     private Context context;
     private OnQuantityChangeListener onQuantityChangeListener;
-private CartDao cartDao;
+    private CartDao cartDao;
 
     public CartAdapter() {
         notifyDataSetChanged();
@@ -51,6 +53,8 @@ private CartDao cartDao;
         DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
         String formattedPrice = decimalFormat.format(item.getPrice());
         holder.txtItemPrice.setText(formattedPrice);
+        String imageUrl = item.getImg_product();
+        Picasso.get().load(imageUrl).into(holder.itemImage);
 
         holder.increase.setOnClickListener(view -> {
             if (onQuantityChangeListener != null) {
@@ -70,6 +74,7 @@ private CartDao cartDao;
             }
         });
 
+
     }
 
     @Override
@@ -85,7 +90,7 @@ private CartDao cartDao;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemImage = itemView.findViewById(R.id.image);
+            itemImage = itemView.findViewById(R.id.img_back);
             decrease = itemView.findViewById(R.id.tru);
             increase = itemView.findViewById(R.id.cong);
             txtItemName = itemView.findViewById(R.id.tvProductName);
@@ -103,6 +108,7 @@ private CartDao cartDao;
 
         void onItemCheckedChange(int position, boolean isChecked);
     }
+
     public void deleteCartItem(int position) {
         cartDao = new CartDao(context);
         cartDao.deleteCart(position);

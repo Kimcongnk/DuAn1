@@ -1,6 +1,7 @@
 package nhom1.fpoly.duan1.adapter.customer;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -48,6 +49,8 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
         holder.txt_price_product_home.setText(String.valueOf(product.getPrice()));
         String imageUrl = product.getImg_product();
         Picasso.get().load(imageUrl).into(holder.img_product_home);
+
+
         holder.cardView.setOnClickListener(click -> {
             detailOnClick.showDetails(product);
         });

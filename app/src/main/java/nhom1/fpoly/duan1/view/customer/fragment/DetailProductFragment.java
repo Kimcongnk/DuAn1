@@ -1,6 +1,7 @@
 package nhom1.fpoly.duan1.view.customer.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,9 @@ import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.dao.CartDao;
 import nhom1.fpoly.duan1.dao.SessionManager;
@@ -23,14 +27,15 @@ import nhom1.fpoly.duan1.model.Product;
 public class DetailProductFragment extends Fragment {
 
     TextView txt_name_product_detail, txt_description, txt_price;
-    ImageView img_detail;
-    Button btn_add_cart, btn_by_now;
+    ImageView btn_add_cart;
+    Button  btn_by_now;
 
     private CartDao cartDao;
     private Cart cart;
     private Product product;
     private SessionManager sessionManager;
     private ImageView imageView;
+    private List<Product> selectedItems = new ArrayList<>();
 
     @SuppressLint({"SetTextI18n", "MissingInflatedId"})
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,8 +46,20 @@ public class DetailProductFragment extends Fragment {
         txt_price = (TextView) view.findViewById(R.id.txt_price_product_detail);
         imageView = view.findViewById(R.id.image_product_detail);
         btn_add_cart = view.findViewById(R.id.btn_add_cart);
+        btn_by_now = view.findViewById(R.id.btn_by);
         sessionManager = new SessionManager(getContext());
-// Inside the onClick method of btn_add_cart
+        btn_by_now.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Product product1 = new Product();
+               product1.setName_product(product.getName_product());
+               product1.setPrice(product.getPrice());
+               selectedItems.add(product1);
+                Intent intent  = new Intent(getContext(), ThanhToan.class);
+//                intent.putParcelableArrayListExtra("SELECTED_ITEMS", (ArrayList<Product>) selectedItems);
+                startActivity(intent);
+            }
+        });
         btn_add_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,25 +4,22 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Cart implements Parcelable {
-    private int cartId, userId, totalTems, price, id_product;
-    private String productName;
+    private int cartId, userId, totalTems, price, id_product ;
+    private String productName,img_product;
     private boolean isChecked;
 
     public Cart() {
     }
 
-    public Cart(int cartId, int id_product, String productName, int price, int totalTems) {
+    public Cart(int cartId, int id_product, String productName, int price,String img_product,  int totalTems) {
         this.cartId = cartId;
         this.id_product = id_product;
         this.productName = productName;
         this.price = price;
+        this.img_product = img_product;
         this.totalTems = totalTems;
     }
 
-    public Cart(String productName, int price) {
-        this.price = price;
-        this.productName = productName;
-    }
 
     public int getCartId() {
         return cartId;
@@ -82,6 +79,14 @@ public class Cart implements Parcelable {
         isChecked = checked;
     }
 
+    public String getImg_product() {
+        return img_product;
+    }
+
+    public void setImg_product(String img_product) {
+        this.img_product = img_product;
+    }
+
     // Implement the Parcelable methods
     @Override
     public int describeContents() {
@@ -95,6 +100,7 @@ public class Cart implements Parcelable {
         dest.writeInt(userId);
         dest.writeInt(totalTems);
         dest.writeInt(price);
+        dest.writeString(img_product);
         dest.writeString(productName);
         dest.writeByte((byte) (isChecked ? 1 : 0));
     }
@@ -117,7 +123,9 @@ public class Cart implements Parcelable {
         userId = in.readInt();
         totalTems = in.readInt();
         price = in.readInt();
+        img_product = in.readString();
         productName = in.readString();
+
         isChecked = in.readByte() != 0;
     }
 }
