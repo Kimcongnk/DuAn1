@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.customer.OrderAdapter;
 import nhom1.fpoly.duan1.dao.OrderDao;
+import nhom1.fpoly.duan1.dao.SessionManager;
 import nhom1.fpoly.duan1.model.Order;
 import nhom1.fpoly.duan1.view.customer.fragment.Status.OrderDetailActivity;
 
@@ -26,11 +27,13 @@ public class OrderingFragment extends Fragment implements OrderAdapter.OnItemCli
     OrderDao orderDao;
     private Order order;
     private ArrayList<Order> orderList = new ArrayList<Order>();
+    private SessionManager sessionManager;
 
     @Override
     public void onResume() {
-        super.onResume();
-        orderList = orderDao.getOrdersByStatus("Đã đặt hàng");
+        super.onResume(); orderDao = new OrderDao(getContext());
+
+        orderList = orderDao.getOrdersByStatusAndCustomerId(sessionManager.getLoggedInCustomerId(), "Đã đặt hàng");
         adapter = new OrderAdapter(orderList, getContext(), this);
         recyclerView_order.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -44,8 +47,8 @@ public class OrderingFragment extends Fragment implements OrderAdapter.OnItemCli
         recyclerView_order.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView_order.setHasFixedSize(true);
 
-        orderDao = new OrderDao(getContext());
 
+sessionManager = new SessionManager(getContext());
 
 
 

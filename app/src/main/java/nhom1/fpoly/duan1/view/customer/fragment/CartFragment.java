@@ -1,5 +1,6 @@
 package nhom1.fpoly.duan1.view.customer.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -28,6 +29,7 @@ import nhom1.fpoly.duan1.adapter.customer.CartAdapter;
 import nhom1.fpoly.duan1.adapter.customer.SwipeToDeleteCallback;
 import nhom1.fpoly.duan1.dao.CartDao;
 import nhom1.fpoly.duan1.dao.OrderDao;
+import nhom1.fpoly.duan1.dao.SessionManager;
 import nhom1.fpoly.duan1.model.Cart;
 import nhom1.fpoly.duan1.model.Order;
 import nhom1.fpoly.duan1.model.OrderDetail;
@@ -48,16 +50,13 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
     private List<Cart> selectedItems = new ArrayList<>();
     private Cart cartItem;
     private View view;
+    private SessionManager sessionManager;
 
-
+private Context context;
     public CartFragment() {
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,7 +68,8 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
         btnThanhToan = view.findViewById(R.id.btn_dat_hang);
         btbMuaNgay = view.findViewById(R.id.muasp);
         cartDao = new CartDao(getContext());
-        showData();
+        sessionManager = new SessionManager(getContext());
+showData();
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +92,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
     }
     public void showData(){
 
-        cartArrayList = (ArrayList<Cart>) cartDao.getAllCartItemsWithProductInfo();
+        cartArrayList = (ArrayList<Cart>) cartDao.getAllCartItemsWithProductInfo(sessionManager.getLoggedInCustomerId());
         if (cartArrayList.isEmpty()) {
             view.findViewById(R.id.layout_dat_hang).setVisibility(View.GONE);
             view.findViewById(R.id.layout_sum).setVisibility(View.GONE);
@@ -105,12 +105,19 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewCart.setLayoutManager(layoutManager);
 
-        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(cartAdapter);
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerViewCart);
-
         cartAdapter = new CartAdapter(cartArrayList, getContext(), this);
         recyclerViewCart.setAdapter(cartAdapter);
+
+// Set up swipe-to-delete functionality using SwipeToDeleteCallback
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(cartAdapter);
+        swipeToDeleteCallback.setSwipeActionListener(new SwipeToDeleteCallback.SwipeActionListener() {
+            @Override
+            public void onItemDeleted() {
+                showData(); // Call showData() to update the UI after item deletion
+            }
+        });
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerViewCart);
 
 
     }
@@ -143,6 +150,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
     public void onItemCheckedChange(int position, boolean isChecked) {
         cartItem = cartArrayList.get(position);
         cartItem.setChecked(isChecked);
+
         if (cartItem.isChecked()) {
             selectedItems.add(cartItem);
         } else {
@@ -161,6 +169,13 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
         DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
         String formattedPrice = decimalFormat.format(totalPrice);
         txtTotalPrice.setText( formattedPrice+ "VND");
+
+    }
+    public void deleteCartItem(int position) {
+        cartDao = new CartDao(getContext());
+//        cartDao.deleteCart(item.getCartId());
+        cartDao.deleteCart(cartItem.getCartId());
+
 
     }
 }

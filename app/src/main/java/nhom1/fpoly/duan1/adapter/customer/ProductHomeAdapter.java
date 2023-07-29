@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+
+import java.text.DecimalFormat;
 import java.util.List;
 
 import nhom1.fpoly.duan1.R;
@@ -46,7 +48,9 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
         Product product = productList.get(position);
 
         holder.txt_name_product_home.setText(product.getName_product());
-        holder.txt_price_product_home.setText(String.valueOf(product.getPrice()));
+//        DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
+//        String formattedPrice = decimalFormat.format(product.getPrice());
+        holder.txt_price_product_home.setText(product.getPrice());
         String imageUrl = product.getImg_product();
         Picasso.get().load(imageUrl).into(holder.img_product_home);
 

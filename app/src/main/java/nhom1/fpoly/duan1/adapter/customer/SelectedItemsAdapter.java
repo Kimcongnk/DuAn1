@@ -43,14 +43,13 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
         holder.txtSelectedItemName.setText(item.getProductName());
         DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
         String formattedPrice = decimalFormat.format(item.getPrice());
-        holder.txtSelectedItemPrice.setText(formattedPrice+ "VND");
-        holder.txtTotalItems.setText(String.valueOf(item.getTotalTems() ));
+        holder.txtSelectedItemPrice.setText(formattedPrice);
+        holder.txtTotalItems.setText(String.valueOf(item.getTotalTems()));
 
         String imageUrl = item.getImg_product();
         Picasso.get().load(imageUrl).into(holder.itemImage);
 
     }
-
 
 
     @Override
@@ -61,14 +60,15 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
     public static class SelectedItemViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtSelectedItemName, txtSelectedItemPrice, txtTotalItems;
-ImageView itemImage;
+        ImageView itemImage;
+
         public SelectedItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
             txtSelectedItemName = itemView.findViewById(R.id.tvProductName);
             txtSelectedItemPrice = itemView.findViewById(R.id.tvProductPrice);
             txtTotalItems = itemView.findViewById(R.id.tvQuantity);
-itemImage= itemView.findViewById(R.id.img_back);
+            itemImage = itemView.findViewById(R.id.img_back);
         }
     }
 }

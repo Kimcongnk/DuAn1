@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,10 +27,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private Context context;
     private OnQuantityChangeListener onQuantityChangeListener;
     private CartDao cartDao;
+    private Cart item;
 
-    public CartAdapter() {
-        notifyDataSetChanged();
-    }
 
     public CartAdapter(List<Cart> cartItems, Context context, OnQuantityChangeListener listener) {
         this.cartItems = cartItems;
@@ -47,7 +46,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        Cart item = cartItems.get(position);
+        item = cartItems.get(position);
+
         holder.txtTotalItems.setText(String.valueOf(item.getTotalTems()));
         holder.txtItemName.setText(item.getProductName());
         DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
@@ -73,7 +73,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 onQuantityChangeListener.onItemCheckedChange(position, isChecked);
             }
         });
-
 
     }
 
@@ -111,7 +110,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public void deleteCartItem(int position) {
         cartDao = new CartDao(context);
-        cartDao.deleteCart(position);
+        cartDao.deleteCart(item.getCartId());
+
         notifyItemRemoved(position);
+        notifyDataSetChanged();
+
     }
 }

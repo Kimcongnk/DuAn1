@@ -35,6 +35,21 @@ public class OrderDao {
         db.close();
         return orderId;
     }
+    public int updateOrder(Order order) {
+        ContentValues values = new ContentValues();
+        values.put("nameCustomerOder", order.getNameOder());
+        values.put("phoneNumber", order.getPhoneNumber());
+        values.put("address", order.getAddress());
+
+        String whereClause = "id_oder = ?";
+        String[] whereArgs = {String.valueOf(order.getOrderId())};
+
+        int rowsAffected = db.update("Oder", values, whereClause, whereArgs);
+        db.close();
+
+        return rowsAffected;
+    }
+
     @SuppressLint("Range")
     public Order getOrderById(long orderId) {
         String[] projection = {"id_oder", "id_customer", "dateOder", "totalMoney", "status"};
@@ -75,13 +90,12 @@ public class OrderDao {
     }
     @SuppressLint("Range")
 
-    public ArrayList<Order> getOrdersByStatus(String status) {
+    public ArrayList<Order> getOrdersByStatusAndCustomerId(int id_customer, String status) {
         ArrayList<Order> orders = new ArrayList<>();
 
-
         String[] columns = {"id_oder", "id_customer", "dateOder", "totalMoney", "status"};
-        String selection = "status = ?";
-        String[] selectionArgs = {status};
+        String selection = "id_customer = ? AND status = ?";
+        String[] selectionArgs = {String.valueOf(id_customer), status};
 
         Cursor cursor = db.query("Oder", columns, selection, selectionArgs, null, null, null);
 
@@ -100,6 +114,7 @@ public class OrderDao {
         cursor.close();
         return orders;
     }
+
     @SuppressLint("Range")
     public List<Order> getAllOrdersWithDetailsById(int orderId) {
         String[] projection = {"id_oder", "id_customer", "nameCustomerOder", "phoneNumber", "address"};
@@ -126,18 +141,7 @@ public class OrderDao {
 
 
 
-    public int updateOrder(Order order) {
-        ContentValues values = new ContentValues();
-        values.put("id_customer", order.getOrderId());
-        values.put("orderDate", order.getDateOder());
-        values.put("totalMoney", order.getTotalMoney());
-        values.put("status", order.getStatus());
-        String whereClause = "id_oder = ?";
-        String[] whereArgs = {String.valueOf(order.getOrderId())};
-        int rowsAffected = db.update("Order", values, whereClause, whereArgs);
-        db.close();
-        return rowsAffected;
-    }
+
     public int updateOrderStatus(long orderId, String newStatus) {
         ContentValues values = new ContentValues();
         values.put("status", newStatus);

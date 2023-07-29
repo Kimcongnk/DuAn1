@@ -33,14 +33,17 @@ import nhom1.fpoly.duan1.model.Product;
 import nhom1.fpoly.duan1.my_interface.CategoriesInterface;
 import nhom1.fpoly.duan1.my_interface.ProductInterface;
 
+
+// Imports are here...
+
 public class HomeFragment extends Fragment {
-    RecyclerView recyclerView, recyclerView_category;
-    ProductHomeAdapter productHomeAdapter;
-    CategoryHomeAdapter categoryHomeAdapter;
-    ImageSlider imageViewSlider;
-    ProductsDao productsDao;
-    CategoryDao categoryDao;
-private   List<Product> products = new ArrayList<>();
+    private RecyclerView recyclerView, recyclerView_category;
+    private ProductHomeAdapter productHomeAdapter;
+    private CategoryHomeAdapter categoryHomeAdapter;
+    private ImageSlider imageViewSlider;
+    private ProductsDao productsDao;
+    private CategoryDao categoryDao;
+    private List<Product> products = new ArrayList<>();
 
     @Override
     public void onResume() {
@@ -51,35 +54,27 @@ private   List<Product> products = new ArrayList<>();
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_san_pham_home);
+        recyclerView = view.findViewById(R.id.recycler_view_san_pham_home);
         recyclerView_category = view.findViewById(R.id.recycler_view_danh_muc_home);
-        recyclerView_category.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 2)); // set layout recycler view
-        recyclerView.setHasFixedSize(true);
-        productsDao = new ProductsDao(getContext());
-        categoryDao = new CategoryDao(getContext());
         imageViewSlider = view.findViewById(R.id.imageSlider);
 
-        ArrayList<SlideModel> slideModels = new ArrayList<SlideModel>();
+        recyclerView_category.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 2));
+        recyclerView.setHasFixedSize(true);
+
+        productsDao = new ProductsDao(getContext());
+        categoryDao = new CategoryDao(getContext());
+
+        ArrayList<SlideModel> slideModels = new ArrayList<>();
         slideModels.add(new SlideModel(R.drawable.img1, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.img2, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.img3, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.img5, ScaleTypes.FIT));
         imageViewSlider.setImageList(slideModels, ScaleTypes.FIT);
 
-
         products = productsDao.getAllProducts();
-        List<Categories> categories = new ArrayList<>();
-        categories = categoryDao.getAllCategories();
+        List<Categories> categories = categoryDao.getAllCategories();
 
-//
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
-//        products.add(new Product(1, 1, 1500, "abc", "q", "ầ", ""));
         productHomeAdapter = new ProductHomeAdapter(requireActivity(), products);
         recyclerView.setAdapter(productHomeAdapter);
         productHomeAdapter.notifyDataSetChanged();
@@ -89,7 +84,7 @@ private   List<Product> products = new ArrayList<>();
         categoryHomeAdapter.showProduct(new CategoriesInterface() {
             @Override
             public void showDetails(Categories categories1) {
-               products =  productsDao.getProductsByCategoryId(categories1.getId());
+                products = productsDao.getProductsByCategoryId(categories1.getId());
 
                 productHomeAdapter = new ProductHomeAdapter(requireActivity(), products);
                 recyclerView.setAdapter(productHomeAdapter);
@@ -102,12 +97,14 @@ private   List<Product> products = new ArrayList<>();
                 });
             }
         });
+
         productHomeAdapter.showProduct(new ProductInterface() {
             @Override
             public void showDetails(Product product) {
                 goToDetails(product);
             }
         });
+
         return view;
     }
 

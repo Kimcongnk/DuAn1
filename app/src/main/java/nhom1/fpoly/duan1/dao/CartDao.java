@@ -15,8 +15,10 @@ import nhom1.fpoly.duan1.model.Cart;
 public class CartDao {
     private CreateDatabase dbHelper;
     private SQLiteDatabase db;
+    private Context context;
 
     public CartDao(Context context) {
+        this.context = context;
         dbHelper = new CreateDatabase(context);
         db = dbHelper.getWritableDatabase();
     }
@@ -118,12 +120,14 @@ public class CartDao {
     }
 
     @SuppressLint("Range")
-    public List<Cart> getAllCartItemsWithProductInfo() {
+    public List<Cart> getAllCartItemsWithProductInfo(int customerId) {
+
         List<Cart> cartItems = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String query = "SELECT c.cart_id, p.id_product, p.name, p.price, p.image_url,  c.totaItem " +
+        String query = "SELECT c.cart_id, p.id_product, p.name, p.price, p.image_url, c.totaItem " +
                 "FROM Cart c " +
-                "INNER JOIN Products p ON c.id_product = p.id_product";
+                "INNER JOIN Products p ON c.id_product = p.id_product " +
+                "WHERE c.id_customer = " + customerId;
 
         Cursor cursor = db.rawQuery(query, null);
 

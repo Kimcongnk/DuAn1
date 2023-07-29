@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.adapter.customer.OrderAdapter;
 import nhom1.fpoly.duan1.dao.OrderDao;
+import nhom1.fpoly.duan1.dao.SessionManager;
 import nhom1.fpoly.duan1.model.Order;
 import nhom1.fpoly.duan1.view.customer.fragment.Status.Oderok;
 import nhom1.fpoly.duan1.view.customer.fragment.Status.OrderDetailActivity;
@@ -28,6 +29,17 @@ public class CancelledFrangment extends Fragment implements OrderAdapter.OnItemC
     OrderDao orderDao;
     private Order order;
     private ArrayList<Order> orderList = new ArrayList<Order>();
+    private SessionManager sessionManager;
+    @Override
+    public void onResume() {
+        super.onResume();
+        orderList = orderDao.getOrdersByStatusAndCustomerId(sessionManager.getLoggedInCustomerId(),"Đã thanh toán");
+
+        adapter = new OrderAdapter(orderList, getContext(), this);
+        recyclerView_order.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,13 +49,7 @@ public class CancelledFrangment extends Fragment implements OrderAdapter.OnItemC
         recyclerView_order.setHasFixedSize(true);
 
         orderDao = new OrderDao(getContext());
-
-
-        orderList = orderDao.getOrdersByStatus("Đã thanh toán");
-
-        adapter = new OrderAdapter(orderList, getContext(), this);
-        recyclerView_order.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        sessionManager = new SessionManager(getContext());
         return view;
     }
 

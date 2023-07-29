@@ -54,6 +54,7 @@ public class ThanhToan extends AppCompatActivity {
     private CartDao cartDao;
     private double totalPrice = 0;
     private ImageView imgBack;
+    private CartFragment cartFragment;
 
     Calendar calendar = Calendar.getInstance();
     int year = calendar.get(Calendar.YEAR);
@@ -151,7 +152,8 @@ public class ThanhToan extends AppCompatActivity {
                         orderDetail.setQuantity(cartItem.getTotalTems());
                         if (orderDetailDao.addOrderDetail(orderDetail) > 0) {
                             cartDao.deleteCarts(selectedItems);
-                            finish();
+
+                            startActivity(new Intent(getApplication(), ThanhToanOk.class));
                         }
                     }
 

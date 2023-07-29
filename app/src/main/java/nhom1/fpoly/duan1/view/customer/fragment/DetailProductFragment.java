@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,7 +37,7 @@ public class DetailProductFragment extends Fragment {
     private Product product;
     private SessionManager sessionManager;
     private ImageView imageView;
-    private List<Product> selectedItems = new ArrayList<>();
+    private List<Cart> selectedItems = new ArrayList<>();
 
     @SuppressLint({"SetTextI18n", "MissingInflatedId"})
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,12 +53,14 @@ public class DetailProductFragment extends Fragment {
         btn_by_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Product product1 = new Product();
-               product1.setName_product(product.getName_product());
-               product1.setPrice(product.getPrice());
+               Cart product1 = new Cart();
+               product1.setProductName(product.getName_product());
+               int price = Integer.parseInt(product.getPrice());
+               product1.setPrice(price);
+               product1.setTotalTems(1);
                selectedItems.add(product1);
                 Intent intent  = new Intent(getContext(), ThanhToan.class);
-//                intent.putParcelableArrayListExtra("SELECTED_ITEMS", (ArrayList<Product>) selectedItems);
+                intent.putParcelableArrayListExtra("SELECTED_ITEMS", (ArrayList<Cart>) selectedItems);
                 startActivity(intent);
             }
         });
@@ -64,7 +68,8 @@ public class DetailProductFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 cartDao = new CartDao(getContext());
-
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.button_scale_animation);
+                v.startAnimation(anim);
                 if (cartDao.cartExists(sessionManager.getLoggedInCustomerId(), product.getId_product())) {
 
                     Toast.makeText(getContext(), "Sản phẩm này đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
