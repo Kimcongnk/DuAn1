@@ -27,11 +27,7 @@
         <activity
             android:name=".view.customer.CustomerActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity> <!-- <activity -->
         <!-- android:name=".view.customer.CustomerActivity" -->
         <!-- android:exported="false" /> -->
@@ -40,13 +36,21 @@
             android:exported="false" />
         <activity
             android:name=".view.activity.LoginAndRegisterActivity"
-            android:exported="false" />
+            android:exported="false" >
+
+        </activity>
         <activity
             android:name=".view.customer.fragment.ThanhToan"
             android:exported="false" />
         <activity
             android:name=".view.activity.MainActivityLogin"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".view.customer.fragment.Status.DangGiaoHang"
             android:exported="false" />

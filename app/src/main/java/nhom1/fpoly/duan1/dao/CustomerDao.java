@@ -110,4 +110,18 @@ public class CustomerDao {
         db.close();
         return isPasswordCorrect;
     }
+    public int capNhatMK(Integer id_customer,String passcu,String passmoi){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT*FROM Customer WHERE id_customer =? AND password=?",new String[]{String.valueOf(id_customer),passcu});
+        if (cursor.getCount()>0){
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("password",passmoi);
+            long check= sqLiteDatabase.update("Customer",contentValues,"id_customer=?",new String[]{String.valueOf(id_customer)});
+            if (check==-1){
+                return -1;
+            }
+            return 1;
+        }
+        return 0;
+    }
 }
