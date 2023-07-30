@@ -1,29 +1,22 @@
 package nhom1.fpoly.duan1.model;
 
-public class Product {
-    private int id_product, price,id_category;
-    private String  name_product, category, desc_product, img_product;
+import java.io.Serializable;
 
-    public Product(int id_product, int price, String name_product,  String desc_product, Integer id_category,String img_product) {
-        this.id_product = id_product;
-        this.id_category = id_category;
-        this.price = price;
-        this.name_product = name_product;
-        this.img_product = img_product;
-        this.desc_product = desc_product;
-
-    }
-
-    public Product(int price, int id_category, String name_product, String desc_product, String img_product) {
-        this.price = price;
-        this.id_category = id_category;
-        this.name_product = name_product;
-        this.desc_product = desc_product;
-        this.img_product = img_product;
-    }
+public class Product implements Serializable {
+    private int id_product, status;
+    private String  name_product, category, desc_product, img_product, price;
 
     public Product() {
+    }
 
+    public Product(int id_product, int status, String name_product, String category, String desc_product, String img_product, String price) {
+        this.id_product = id_product;
+        this.status = status;
+        this.name_product = name_product;
+        this.category = category;
+        this.desc_product = desc_product;
+        this.img_product = img_product;
+        this.price = price;
     }
 
     public int getId_product() {
@@ -34,14 +27,12 @@ public class Product {
         this.id_product = id_product;
     }
 
-
-
-    public int getPrice() {
-        return price;
+    public int getStatus() {
+        return status;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getName_product() {
@@ -76,11 +67,11 @@ public class Product {
         this.img_product = img_product;
     }
 
-    public int getId_category() {
-        return id_category;
+    public String getPrice() {
+        return price;
     }
 
-    public void setId_category(int id_category) {
-        this.id_category = id_category;
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

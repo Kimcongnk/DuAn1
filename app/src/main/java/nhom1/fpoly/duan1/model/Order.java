@@ -2,7 +2,7 @@ package nhom1.fpoly.duan1.model;
 
 public class Order {
     private int orderId, idUser;
-    private String dateOder, Status;
+    private String dateOder, Status, nameOder, phoneNumber, address;
     private double totalMoney;
 
     public Order() {
@@ -46,5 +46,29 @@ public class Order {
 
     public void setTotalMoney(double totalMoney) {
         this.totalMoney = totalMoney;
+    }
+
+    public String getNameOder() {
+        return nameOder;
+    }
+
+    public void setNameOder(String nameOder) {
+        this.nameOder = nameOder;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

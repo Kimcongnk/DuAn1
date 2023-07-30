@@ -34,7 +34,7 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         edt_login_username = view.findViewById(R.id.edt_login_username);
         edt_login_password = view.findViewById(R.id.edt_login_password);
-        txt_register = view.findViewById(R.id.txt_login_register);
+
         btn_login = view.findViewById(R.id.btn_login);
 
         btn_login.setOnClickListener(login -> {
@@ -57,12 +57,6 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        txt_register.setOnClickListener(register -> {
-            FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.login_and_register, new RegisterFragment());
-            transaction.addToBackStack(RegisterFragment.TAG);
-            transaction.commit();
-        });
 
         return view;
     }

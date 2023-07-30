@@ -13,7 +13,6 @@ import nhom1.fpoly.duan1.R;
 
 public class ProductsFragment extends Fragment {
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

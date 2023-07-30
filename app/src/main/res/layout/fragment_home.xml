@@ -67,12 +67,6 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Xem thêm"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -86,6 +80,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
+
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 
         <LinearLayout
@@ -107,13 +102,6 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txt_more_product"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Xem thêm"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
