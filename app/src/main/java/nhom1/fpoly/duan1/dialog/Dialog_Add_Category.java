@@ -92,11 +92,6 @@ public class Dialog_Add_Category extends DialogFragment {
             adapter = new AddCategoriesAdapter(list,getContext());
             adapter.notifyDataSetChanged();
         }
-
-
-
-
-
     }
 
 

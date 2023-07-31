@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView_product"
     android:layout_width="150dp"
-    android:layout_height="280dp"
+    android:layout_height="300dp"
     android:layout_marginStart="10dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="28dp"
@@ -22,7 +22,7 @@
 
             <ImageView
                 android:id="@+id/image_product_admin"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="170dp"
                 android:background="@color/white"
                 android:scaleType="centerCrop" />
@@ -36,8 +36,8 @@
 
         <TextView
             android:id="@+id/txt_name_product_admin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="20dp"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-condensed-light"
             android:paddingStart="5dp"
@@ -85,7 +85,6 @@
                 android:src="@drawable/baseline_edit_24"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-
                 android:layout_below="@+id/txt_price_product_admin"
                 />
 <!--            <ImageView-->
