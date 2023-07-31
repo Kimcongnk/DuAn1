@@ -76,33 +76,7 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.Vi
                 showDialogEditProduct( productList.get(holder.getAdapterPosition()));
             }
         });
-        holder.img_del_product.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProductsDao productsDao = new ProductsDao(context);
-                int check = productsDao.xoaProduct(productList.get(holder.getAdapterPosition()).getId_product());
-                switch (check){
-                    case 1:
-                        Toast.makeText(context, "xoa thanh cong", Toast.LENGTH_SHORT).show();
-                        productList.clear();
-                        productList = productsDao.getAllProducts();
-                        notifyDataSetChanged();
-                        break;
-                    case 0:
-                        Toast.makeText(context, "xoa ko thanh cong", Toast.LENGTH_SHORT).show();
 
-                        break;
-                    case -1:
-                        Toast.makeText(context, "xoa ko thanh cong vi san pham co trong gio hang", Toast.LENGTH_SHORT).show();
-
-                        break;
-                    default:
-                        break;
-
-
-                }
-            }
-        });
     }
 
     @Override
@@ -124,7 +98,7 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.Vi
             txt_loai_product = (TextView) itemView.findViewById(R.id.txt_loai_product_admin);
             progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar_product_admin);
             img_edit_product = itemView.findViewById(R.id.img_edit_product);
-            img_del_product = itemView.findViewById(R.id.img_del_product);
+
         }
     }
     private void showDialogEditProduct(Product product){

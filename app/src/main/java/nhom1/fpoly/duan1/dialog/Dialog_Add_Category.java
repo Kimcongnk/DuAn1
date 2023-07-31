@@ -40,6 +40,7 @@ public class Dialog_Add_Category extends DialogFragment {
     String imagePath;
     AddCategoriesAdapter adapter;
     ArrayList<Categories> list;
+     boolean isButtonClicked = false;
 
     @SuppressLint("MissingInflatedId")
     @Nullable
@@ -55,6 +56,7 @@ public class Dialog_Add_Category extends DialogFragment {
 
         img_select.setOnClickListener(img -> {
             SelectImage();
+            isButtonClicked = true;
         });
         btn_add_category.setOnClickListener(add -> {
             // add a new category to Database
@@ -64,6 +66,7 @@ public class Dialog_Add_Category extends DialogFragment {
             dismiss();
         });
 
+
         return view;
     }
 
@@ -72,21 +75,27 @@ public class Dialog_Add_Category extends DialogFragment {
         Categories categories = new Categories();
         categories.setName_categories(name);
         categories.setImg_categories(ImagePath);
-        list = new ArrayList<>();
-        list.add(categories);
 
 
 
 
-        if (categoryDao.addCategory(categories)) {
-            Toast.makeText(getContext(), "add successfully", Toast.LENGTH_SHORT).show();
+        if (name.equals("")) {
+            Toast.makeText(getContext(), "Vui lòng nhập tên loại", Toast.LENGTH_SHORT).show();
+
+
+        } else if(isButtonClicked==false){
+            Toast.makeText(getContext(), "Vui lòng chọn ảnh", Toast.LENGTH_SHORT).show();
+        }else if (categoryDao.addCategory(categories)){
+            Toast.makeText(getContext(), "Thành công", Toast.LENGTH_SHORT).show();
             dismiss();
             getActivity().recreate();
             adapter = new AddCategoriesAdapter(list,getContext());
             adapter.notifyDataSetChanged();
-        } else {
-            Toast.makeText(getContext(), "add failed", Toast.LENGTH_SHORT).show();
         }
+
+
+
+
 
     }
 

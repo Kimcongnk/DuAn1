@@ -81,13 +81,13 @@ public class AddCategoriesAdapter extends RecyclerView.Adapter<AddCategoriesAdap
                     categoriesList.clear();
                     categoriesList = categoryDao.getAllCategories();
                     notifyDataSetChanged();
-                    Toast.makeText(context, "Xoa thanh cong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                     break;
                 case -1:
-                    Toast.makeText(context, "Khong the xoa vi co san pham thuoc loai nay", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Không thể xóa vì có sản phẩm thuộc loại này", Toast.LENGTH_SHORT).show();
                     break;
                 case 0:
-                    Toast.makeText(context, "Xoa loai sach khong thanh cong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Xóa loại sản phẩm không thành công", Toast.LENGTH_SHORT).show();
                 default:
                     break;
             }
@@ -119,8 +119,8 @@ public class AddCategoriesAdapter extends RecyclerView.Adapter<AddCategoriesAdap
     }
     private void showDialogEditCategory(Categories categories){
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                .setNegativeButton("Cap nhat",null)
-                .setPositiveButton("Huy",null);
+                .setNegativeButton("Cập nhật",null)
+                .setPositiveButton("Hủy",null);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.dialog_edit_category,null);
         EditText edSuaLoai = view.findViewById(R.id.edt_name_category_edit);
@@ -146,7 +146,7 @@ public class AddCategoriesAdapter extends RecyclerView.Adapter<AddCategoriesAdap
                     notifyDataSetChanged();
                     alertDialog.cancel();
                 }else{
-                    Toast.makeText(context, "Cap nhat khong thanh cong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
                 }
 
             }
