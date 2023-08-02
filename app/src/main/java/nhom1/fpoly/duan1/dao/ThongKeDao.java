@@ -15,7 +15,7 @@ public class ThongKeDao {
         ngaybatdau = ngaybatdau.replace("-","");
         ngayketthuc = ngayketthuc.replace("-","");
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT SUM (totalMoney) FROM Oder WHERE substr(dateOder,7)||substr(dateOder,4,2)||substr(dateOder,1,2) BETWEEN ? AND ?",new String[]{ngaybatdau,ngayketthuc});
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT SUM (totalMoney) FROM Oder WHERE substr(dateOder,7)||substr(dateOder,4,2)||substr(dateOder,1,2) AND c='Đã giao hàng' BETWEEN ? AND ?",new String[]{ngaybatdau,ngayketthuc});
         if (cursor.getCount()!=0){
             cursor.moveToFirst();
             return cursor.getInt(0);
