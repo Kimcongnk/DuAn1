@@ -14,7 +14,7 @@ import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.dao.SessionManager;
 import nhom1.fpoly.duan1.view.customer.fragment.AccountFragment;
 import nhom1.fpoly.duan1.view.customer.fragment.CartFragment;
-import nhom1.fpoly.duan1.view.customer.fragment.CategoriesFragment;
+import nhom1.fpoly.duan1.view.admin.CategoriesFragment;
 import nhom1.fpoly.duan1.view.customer.fragment.HomeFragment;
 import nhom1.fpoly.duan1.view.customer.fragment.OrderFragment;
 

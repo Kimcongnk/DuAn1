@@ -1,5 +1,7 @@
 package nhom1.fpoly.duan1.view.customer.fragment;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +40,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnQuantityChan
     private ArrayList<Cart> cartArrayList;
     private CartDao cartDao;
 
-    private TextView txtTotalPrice;
+    private TextView txtTotalPrice, txtVuotXoa;
     private Button btnThanhToan, btbMuaNgay;
 
     private List<Cart> selectedItems = new ArrayList<>();
@@ -57,10 +61,19 @@ private Context context;
          view = inflater.inflate(R.layout.fragment_cart, container, false);
         recyclerViewCart = view.findViewById(R.id.recyclerView_cart);
         txtTotalPrice = view.findViewById(R.id.txt_total_price);
+        txtVuotXoa = view.findViewById(R.id.txtVuotXoa);
         btnThanhToan = view.findViewById(R.id.btn_dat_hang);
         btbMuaNgay = view.findViewById(R.id.muasp);
         cartDao = new CartDao(getContext());
         sessionManager = new SessionManager(getContext());
+        Animation fadeIn = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        Animation fadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
+
+        txtVuotXoa.setAnimation(fadeOut);
+        txtVuotXoa.setVisibility(View.INVISIBLE);
+        txtVuotXoa.startAnimation(fadeIn);
+        txtVuotXoa.setVisibility(View.VISIBLE);
+
 showData();
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override

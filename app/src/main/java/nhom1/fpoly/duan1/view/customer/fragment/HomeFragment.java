@@ -1,14 +1,9 @@
 package nhom1.fpoly.duan1.view.customer.fragment;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,22 +27,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 import nhom1.fpoly.duan1.R;
-import nhom1.fpoly.duan1.adapter.admin.AddCategoriesAdapter;
 import nhom1.fpoly.duan1.adapter.customer.CategoryHomeAdapter;
 import nhom1.fpoly.duan1.adapter.customer.ProductHomeAdapter;
 import nhom1.fpoly.duan1.dao.CategoryDao;
 import nhom1.fpoly.duan1.dao.ProductsDao;
 import nhom1.fpoly.duan1.dao.SessionManager;
-import nhom1.fpoly.duan1.dialog.Dialog_Add_Category;
-import nhom1.fpoly.duan1.dialog.Dialog_Add_Product;
+
 import nhom1.fpoly.duan1.model.Categories;
 import nhom1.fpoly.duan1.model.Product;
 import nhom1.fpoly.duan1.my_interface.CategoriesInterface;

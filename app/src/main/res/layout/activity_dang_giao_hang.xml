@@ -7,19 +7,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="150dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/bannergiao"
         android:orientation="vertical">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Đang chờ xác nhận từ người bán."
-            android:layout_marginTop="10dp">
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:text="Đang chờ xác nhận từ người bán.">-->
 
-        </TextView>
+<!--        </TextView>-->
 
     </LinearLayout>
 

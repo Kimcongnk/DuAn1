@@ -3,19 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".view.customer.fragment.OrderFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_marginTop="60dp"
-        android:background="#2196F3"
+        android:background="@drawable/images"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Chờ xác nhận"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
             android:textSize="17sp">
 
         </TextView>
@@ -98,6 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Họ tên:"
+                android:layout_marginLeft="15dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -106,6 +110,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Số điện thoại: "
+                android:layout_marginLeft="15dp"
+
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -113,11 +119,10 @@
                 android:id="@+id/txt_order_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:singleLine="true"
+
                 android:text="Địa chỉ: "
+                android:layout_marginLeft="15dp"
+
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>

@@ -37,7 +37,7 @@ public class SalesReportAdapter extends RecyclerView.Adapter<SalesReportAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProductSalesReport salesReport = salesReportList.get(position);
         holder.textViewProductName.setText(salesReport.getProductName());
-        holder.textViewQuantitySold.setText("Sl: " + salesReport.getTotalQuantity());
+        holder.textViewQuantitySold.setText("x " + salesReport.getTotalQuantity());
         holder.textViewTotalRevenue.setText("$" + salesReport.getTotalRevenue());
 
         // Load the product image using a library like Picasso or Glide

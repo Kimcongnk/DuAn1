@@ -32,7 +32,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:hint="Tên "
-            android:textSize="16dp"
+            android:textSize="18dp"
 
      />
 
@@ -43,7 +43,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
-            android:textSize="16dp"
+            android:textSize="18dp"
 
             android:hint="Giá" />
 
@@ -54,7 +54,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
-            android:textSize="16dp"
+            android:textSize="18dp"
             android:hint="Mô tả"
           />
 

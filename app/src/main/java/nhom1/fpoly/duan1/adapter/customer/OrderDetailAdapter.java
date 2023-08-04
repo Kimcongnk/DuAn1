@@ -66,7 +66,7 @@ public class OrderDetailAdapter extends BaseAdapter {
         tvProductPrice.setText(String.valueOf(formattedPrice));
         String imageUrl = orderDetail.getImg_product();
         Picasso.get().load(imageUrl).into(itemImage);
-        tvQuantity.setText("SL: " + orderDetail.getQuantity());
+        tvQuantity.setText("x" + orderDetail.getQuantity());
 
         return view;
     }

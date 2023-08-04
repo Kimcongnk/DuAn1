@@ -41,16 +41,7 @@ public class CategoryDao {
         return true;
     }
 
-    public int deleteCategory(int id) {
-        Cursor cursor = database.rawQuery("SELECT *FROM Products WHERE category_id =?",new String[]{String.valueOf(id)});
-        if (cursor.getCount()!=0){
-            return -1;
-        }
-        long check = database.delete("Category","id_category=?",new String[]{String.valueOf(id)} );
-        if (check==-1)
-            return 0;
-        return 1;
-    }
+
 
     public ArrayList<Categories> getAllCategories() {
         ArrayList<Categories> categoriesList = new ArrayList<>();

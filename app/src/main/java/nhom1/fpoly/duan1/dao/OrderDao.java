@@ -35,59 +35,6 @@ public class OrderDao {
         db.close();
         return orderId;
     }
-    public int updateOrder(Order order) {
-        ContentValues values = new ContentValues();
-        values.put("nameCustomerOder", order.getNameOder());
-        values.put("phoneNumber", order.getPhoneNumber());
-        values.put("address", order.getAddress());
-
-        String whereClause = "id_oder = ?";
-        String[] whereArgs = {String.valueOf(order.getOrderId())};
-
-        int rowsAffected = db.update("Oder", values, whereClause, whereArgs);
-        db.close();
-
-        return rowsAffected;
-    }
-
-    @SuppressLint("Range")
-    public Order getOrderById(long orderId) {
-        String[] projection = {"id_oder", "id_customer", "dateOder", "totalMoney", "status"};
-        String selection = "id_oder = ?";
-        String[] selectionArgs = {String.valueOf(orderId)};
-        Cursor cursor = db.query("Order", projection, selection, selectionArgs, null, null, null);
-
-        Order order = null;
-        if (cursor.moveToFirst()) {
-            order = new Order();
-            order.setOrderId(cursor.getInt(cursor.getColumnIndex("id_oder")));
-            order.setIdUser(cursor.getInt(cursor.getColumnIndex("id_customer")));
-            order.setDateOder(cursor.getString(cursor.getColumnIndex("dateOder")));
-            order.setTotalMoney(cursor.getDouble(cursor.getColumnIndex("totalMoney")));
-            order.setStatus(cursor.getString(cursor.getColumnIndex("status")));
-        }
-        cursor.close();
-        db.close();
-        return order;
-    }
-    @SuppressLint("Range")
-    public List<Order> getAllOrders() {
-        String[] projection = {"id_oder", "id_customer", "dateOder", "totalMoney", "status"};
-        Cursor cursor = db.query("Order", projection, null, null, null, null, null);
-        List<Order> orderList = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            Order order = new Order();
-            order.setOrderId(cursor.getInt(cursor.getColumnIndex("id_oder")));
-            order.setIdUser(cursor.getInt(cursor.getColumnIndex("id_customer")));
-            order.setDateOder(cursor.getString(cursor.getColumnIndex("dateOder")));
-            order.setTotalMoney(cursor.getDouble(cursor.getColumnIndex("totalMoney")));
-            order.setStatus(cursor.getString(cursor.getColumnIndex("status")));
-            orderList.add(order);
-        }
-        cursor.close();
-        db.close();
-        return orderList;
-    }
     @SuppressLint("Range")
 
     public ArrayList<Order> getOrdersByStatusAndCustomerId(int id_customer, String status) {

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background"
     tools:context=".view.customer.fragment.OrderFragment">
 
     <FrameLayout
@@ -45,23 +47,20 @@
     <LinearLayout
         android:id="@+id/layout_order_header"
         android:layout_width="381dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_below="@+id/layout_title"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="-2dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="20dp"
+        android:background="@drawable/banns"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginStart="10dp"
+android:padding="10dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_boder_liss"
             android:orientation="vertical">
 
             <TextView
@@ -76,33 +75,36 @@
 
             <EditText
                 android:id="@+id/txt_order_name"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/style_dialog_edittext"
+                android:layout_marginStart="50dp"
+                android:background="@drawable/bg_boder_liss"
                 android:hint="Tên:"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/txt_order_phone"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:hint="Số điện thoại: "
+                android:layout_width="280dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/style_dialog_edittext"
+                android:layout_marginStart="50dp"
+                android:hint="Số điện thoại: "
+                android:background="@drawable/bg_boder_liss"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/txt_order_address"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="50dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:background="@drawable/style_dialog_edittext"
+                android:background="@drawable/bg_boder_liss"
                 android:singleLine="true"
-                android:layout_marginTop="10dp"
 
                 android:hint="Địa chỉ: "
                 android:textColor="@color/black"
@@ -136,7 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/scrollView_order"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="40dp"
         android:orientation="horizontal">

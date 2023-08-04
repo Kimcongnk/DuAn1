@@ -1,4 +1,4 @@
-package nhom1.fpoly.duan1.view.customer.fragment;
+package nhom1.fpoly.duan1.view.admin;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;

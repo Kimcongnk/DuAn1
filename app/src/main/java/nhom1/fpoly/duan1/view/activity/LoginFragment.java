@@ -12,12 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import nhom1.fpoly.duan1.R;
 import nhom1.fpoly.duan1.dao.AdminDao;
 import nhom1.fpoly.duan1.dao.CustomerDao;
-import nhom1.fpoly.duan1.view.admin.AdminActivity;
 import nhom1.fpoly.duan1.view.customer.CustomerActivity;
 
 public class LoginFragment extends Fragment {
