@@ -116,7 +116,7 @@ public class InprogressActivity extends AppCompatActivity {
         for (Order order : orderArrayList) {
             txtName.setText("Tên: " + order.getNameOder());
             phoneNumber.setText("SDT: " + order.getPhoneNumber());
-            txtaddress.setText("Địa chỉ" + order.getAddress());
+            txtaddress.setText("Địa chỉ: " + order.getAddress());
         }
         List<OrderDetail> orderDetailList = orderDetailDao.getOrderDetailsByOrderId(id_Order);
 

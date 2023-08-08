@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import nhom1.fpoly.duan1.view.customer.fragment.order.CancelledFrangment;
-import nhom1.fpoly.duan1.view.customer.fragment.order.DeliveredFragment;
-import nhom1.fpoly.duan1.view.customer.fragment.order.OrderingFragment;
+import nhom1.fpoly.duan1.view.customer.fragment.statusorder.CancelledFrangment;
+import nhom1.fpoly.duan1.view.customer.fragment.statusorder.DeliveredFragment;
+import nhom1.fpoly.duan1.view.customer.fragment.statusorder.OrderingFragment;
 
 public class OrderViewAdapter extends FragmentStateAdapter {
     public OrderViewAdapter(@NonNull FragmentActivity fragmentActivity) {

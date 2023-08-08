@@ -32,14 +32,15 @@
             android:name=".view.customer.CustomerActivity"
             android:exported="true">
 
-        </activity> <!-- <activity -->
-        <!-- android:name=".view.customer.CustomerActivity" -->
-        <!-- android:exported="false" /> -->
-        <activity
-            android:name=".view.admin.AdminActivity"
-            android:exported="false" />
+        </activity>
+
         <activity
             android:name=".view.activity.LoginAndRegisterActivity"
+            android:exported="false" >
+
+        </activity>
+        <activity
+            android:name=".view.activity.MainActivityLogin"
             android:exported="false" >
 
         </activity>
@@ -47,7 +48,7 @@
             android:name=".view.customer.fragment.PayOder"
             android:exported="false" />
         <activity
-            android:name=".view.activity.MainActivityLogin"
+            android:name=".view.activity.SplashActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -29,17 +29,15 @@ public class CategoryDao {
         return check != -1;
     }
 
-    public boolean updateCategory(Categories categories) {
+    public boolean updateCategoryById(int categoryId, String newName, String newImage) {
         ContentValues values = new ContentValues();
-        values.put("id_category", categories.getId());
-        values.put("name", categories.getName_categories());
-        values.put("image_url", categories.getImg_categories());
-        long check = database.update("Category", values, "id_category=?", new String[]{String.valueOf(categories.getId())});
-        if (check==-1){
-            return false;
-        }
-        return true;
+        values.put("name", newName);
+        values.put("image_url", newImage);
+
+        int check = database.update("Category", values, "id_category=?", new String[]{String.valueOf(categoryId)});
+        return check > 0;
     }
+
 
 
 

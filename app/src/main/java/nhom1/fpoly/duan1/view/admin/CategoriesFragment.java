@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.List;
@@ -27,7 +28,8 @@ import nhom1.fpoly.duan1.model.ProductSalesReport;
 public class CategoriesFragment extends Fragment {
     private SalesReportAdapter salesReportAdapter;
     private TextView txtKq;
-private View nullThongKe;
+    private View nullThongKe;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ private View nullThongKe;
         TextView txtStart = view.findViewById(R.id.txtStart);
         TextView txtEnd = view.findViewById(R.id.txtEnd);
         Calendar calendar = Calendar.getInstance();
-nullThongKe = view.findViewById(R.id.no_oder);
+        nullThongKe = view.findViewById(R.id.no_oder);
 
         imgStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,14 +115,16 @@ nullThongKe = view.findViewById(R.id.no_oder);
             public void onClick(View v) {
                 String ngaybatdau = txtStart.getText().toString();
                 String ngayketthuc = txtEnd.getText().toString();
-
+                if (ngaybatdau.isEmpty() || ngayketthuc.isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng chọn ngày muốn thống kê", Toast.LENGTH_SHORT).show();
+                }
                 StatisticalDao orderDetailDao = new StatisticalDao(getContext());
                 List<ProductSalesReport> salesReportList = orderDetailDao.getProductSalesReport(ngaybatdau, ngayketthuc);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
                 recyclerViewSalesReport.setLayoutManager(layoutManager);
-                if(salesReportList.isEmpty()){
+                if (salesReportList.isEmpty()) {
                     nullThongKe.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     nullThongKe.setVisibility(View.GONE);
                 }
                 // Create and set the adapter for the RecyclerView
@@ -135,9 +139,9 @@ nullThongKe = view.findViewById(R.id.no_oder);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewSalesReport.setLayoutManager(layoutManager);
         // Create and set the adapter for the RecyclerView
-        if(salesReportList.isEmpty()){
+        if (salesReportList.isEmpty()) {
             nullThongKe.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             nullThongKe.setVisibility(View.GONE);
         }
         salesReportAdapter = new SalesReportAdapter(getContext(), salesReportList);

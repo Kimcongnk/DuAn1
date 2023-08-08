@@ -19,7 +19,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -82,7 +82,9 @@ android:padding="10dp"
                 android:background="@drawable/bg_boder_liss"
                 android:hint="Tên:"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:gravity="center_vertical|start" />
+
 
             <EditText
                 android:id="@+id/txt_order_phone"

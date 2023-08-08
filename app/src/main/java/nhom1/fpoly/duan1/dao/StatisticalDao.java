@@ -64,7 +64,7 @@ public class StatisticalDao {
                 "FROM OrderDetail od " +
                 "INNER JOIN Products p ON od.id_product = p.id_product " +
                 "INNER JOIN Oder o ON od.id_oder = o.id_oder " +
-                "WHERE o.status = 'Đã thanh toán' " + // Filter products with status 'Đã giao hàng'
+                "WHERE o.status = 'Đã thanh toán' " +
                 "GROUP BY od.id_product, p.name, p.image_url";
 
         Cursor cursor = db.rawQuery(query, null);
@@ -98,7 +98,7 @@ public class StatisticalDao {
                 "FROM OrderDetail od " +
                 "INNER JOIN Products p ON od.id_product = p.id_product " +
                 "INNER JOIN Oder o ON od.id_oder = o.id_oder " +
-                "WHERE o.status = 'Đã thanh toán' " + // Filter products with status 'Đã thanh toán'
+                "WHERE o.status = 'Đã thanh toán' " +
                 "AND o.dateOder >= '" + fromDate + "' AND o.dateOder <= '" + toDate + "' " +
                 "GROUP BY od.id_product, p.name, p.image_url";
 

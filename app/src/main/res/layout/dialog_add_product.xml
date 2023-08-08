@@ -19,7 +19,7 @@
             android:layout_marginBottom="20dp"
             android:background="#03A9F4"
             android:gravity="center"
-            android:text="ADD PRODUCT"
+            android:text="Thêm sản phẩm"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -81,6 +81,7 @@
         android:background="@drawable/style_dialog_edittext"/>
 
     <ImageView
+        android:id="@+id/anh"
         android:layout_width="192dp"
         android:layout_height="171dp"
         android:layout_gravity="center"

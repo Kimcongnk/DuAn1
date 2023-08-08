@@ -31,7 +31,6 @@ public class DetailProductFragment extends Fragment {
     TextView txt_name_product_detail, txt_description, txt_price;
     ImageView btn_add_cart;
     Button  btn_by_now;
-
     private CartDao cartDao;
     private Cart cart;
     private Product product;
@@ -81,7 +80,7 @@ public class DetailProductFragment extends Fragment {
                 }
                 if (cartDao.cartExists(sessionManager.getLoggedInCustomerId(), product.getId_product())) {
 
-                    Toast.makeText(getContext(), "Sản phẩm này đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Sản phẩm đã tồn tại trong giỏ hàng", Toast.LENGTH_SHORT).show();
                 } else {
                     cart = new Cart();
                     cart.setUserId(sessionManager.getLoggedInCustomerId());
@@ -90,7 +89,7 @@ public class DetailProductFragment extends Fragment {
 
                     if (cartDao.addCart(cart) > 0) {
 
-                        Toast.makeText(getContext(), "Sản phẩm"  + product.getName_product() + " đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Sản phẩm "  + product.getName_product() + " đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                     } else {
 
                         Toast.makeText(getContext(), "Failed to add product to cart.", Toast.LENGTH_SHORT).show();

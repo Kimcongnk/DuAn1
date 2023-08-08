@@ -47,8 +47,6 @@ public class PayOder extends AppCompatActivity {
     private RecyclerView recyclerViewOder;
     private EditText txtName, phoneNumber, txtaddress;
     private TextView txtTotal, txtTotalSl;
-    private CustomerDao customerDao;
-    private Customer customerArrayList;
     private ArrayList<Cart> selectedItems;
     private Button btnOder;
     private OrderDao orderDao;
@@ -58,13 +56,11 @@ public class PayOder extends AppCompatActivity {
     private CartDao cartDao;
     private double totalPrice = 0;
     private ImageView imgBack;
-    private CartFragment cartFragment;
-
+    private String formattedPrice;
     Calendar calendar = Calendar.getInstance();
     int year = calendar.get(Calendar.YEAR);
     int month = calendar.get(Calendar.MONTH) + 1;
     int day = calendar.get(Calendar.DAY_OF_MONTH);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,42 +75,54 @@ public class PayOder extends AppCompatActivity {
         imgBack = findViewById(R.id.img_back);
         recyclerViewOder = findViewById(R.id.recycler_view_order);
 
-        customerDao = new CustomerDao(getApplication());
         orderDao = new OrderDao(getApplication());
         orderDetailDao = new OrderDetailDao(getApplication());
         cartDao = new CartDao(getApplication());
         sessionManager = new SessionManager(getApplication());
-        customerArrayList = customerDao.getCustomerById(0);
-
 
         Intent intent = getIntent();
-        if (intent != null) {
-            selectedItems = intent.getParcelableArrayListExtra("SELECTED_ITEMS");
-        }
+        selectedItems = intent.getParcelableArrayListExtra("SELECTED_ITEMS");
+        selectedItemsAdapter = new SelectedItemsAdapter(selectedItems, this);
+        recyclerViewOder.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewOder.setAdapter(selectedItemsAdapter);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        txtToTal();
+        dialogXacNhan();
+    }
+
+    private int generateRandomOrderId() {
+        int minOrderId = 1000;
+        int maxOrderId = 9999;
+        Random random = new Random();
+        return random.nextInt(maxOrderId - minOrderId + 1) + minOrderId;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        selectedItems.clear();
+    }
+
+    public void txtToTal() {
+        int Sl = selectedItemsAdapter.getTotalQuantity();
+        txtTotalSl.setText("Tổng số tiền(" + Sl + "sản phẩm):");
+
         for (Cart item : selectedItems) {
             int quantity = item.getTotalTems();
             double price = item.getPrice();
             totalPrice += quantity * price;
         }
         DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
-        String formattedPrice = decimalFormat.format(totalPrice);
+        formattedPrice = decimalFormat.format(totalPrice);
         txtTotal.setText(formattedPrice);
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    }
 
-                finish();
-            }
-        });
-
-
-        selectedItemsAdapter = new SelectedItemsAdapter(selectedItems, this);
-        recyclerViewOder.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewOder.setAdapter(selectedItemsAdapter);
-        selectedItemsAdapter.notifyDataSetChanged();
-        int Sl = selectedItemsAdapter.getTotalQuantity();
-        txtTotalSl.setText("Tổng số tiền(" + Sl + "sản phẩm):");
-
+    public void dialogXacNhan() {
         btnOder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,12 +148,12 @@ public class PayOder extends AppCompatActivity {
                 }
 
                 Dialog dialog = new Dialog(PayOder.this);
-
-
                 dialog.setContentView(R.layout.dialog_xac_nhan);
                 Window window = dialog.getWindow();
-                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
                 window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
                 TextView nameOder = dialog.findViewById(R.id.edt_name_product);
                 TextView addres = dialog.findViewById(R.id.edt_price_product);
                 TextView phoneNub = dialog.findViewById(R.id.edt_desc_product);
@@ -156,7 +164,7 @@ public class PayOder extends AppCompatActivity {
                 nameOder.setText("Tên: " + name);
                 addres.setText("Địa chỉ: " + address);
                 phoneNub.setText("Phone: " + phone);
-                toatal.setText("Tổng số tiền bạn phải thanh toán khi nhận hàng" + formattedPrice);
+                toatal.setText("Tổng số tiền bạn phải thanh toán khi nhận hàng: " + formattedPrice + "VND");
 
                 xacNhan.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -164,8 +172,8 @@ public class PayOder extends AppCompatActivity {
                         int randomOrderId = generateRandomOrderId();
                         String currentDateAndTime = String.format("%02d/%02d/%04d", day, month, year);
                         int idUser = sessionManager.getLoggedInCustomerId();
-
                         String status = "Đã đặt hàng";
+
                         Order order = new Order();
                         order.setOrderId(randomOrderId);
                         order.setIdUser(idUser);
@@ -175,6 +183,7 @@ public class PayOder extends AppCompatActivity {
                         order.setNameOder(txtName.getText().toString());
                         order.setPhoneNumber(phoneNumber.getText().toString());
                         order.setAddress(txtaddress.getText().toString());
+
                         if (orderDao.addOrder(order) > 0) {
                             for (Cart cartItem : selectedItems) {
                                 orderDetail = new OrderDetail();
@@ -183,7 +192,6 @@ public class PayOder extends AppCompatActivity {
                                 orderDetail.setQuantity(cartItem.getTotalTems());
                                 if (orderDetailDao.addOrderDetail(orderDetail) > 0) {
                                     cartDao.deleteCarts(selectedItems);
-
                                     startActivity(new Intent(getApplication(), SuccessOder.class));
                                 }
                             }
@@ -191,21 +199,16 @@ public class PayOder extends AppCompatActivity {
                         }
                     }
                 });
-
                 dialog.show();
-//                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                dialog.getWindow().getAttributes().windowAnimations = R.style.dialogAnimation;
-//                dialog.getWindow().setGravity(Gravity.BOTTOM);
                 time.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
                     }
                 });
-
                 new CountDownTimer(6000, 700) {
                     int i = 9;
+
                     @Override
                     public void onTick(long millisUntilFinished) {
                         time.setText("Hủy (" + (i) + ")");
@@ -219,32 +222,5 @@ public class PayOder extends AppCompatActivity {
                 }.start();
             }
         });
-
-
-    }
-
-    private int generateRandomOrderId() {
-        int minOrderId = 1000;
-        int maxOrderId = 9999;
-        Random random = new Random();
-        return random.nextInt(maxOrderId - minOrderId + 1) + minOrderId;
-    }
-
-    public void reLoat() {
-        selectedItemsAdapter = new SelectedItemsAdapter(selectedItems, this);
-        recyclerViewOder.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewOder.setAdapter(selectedItemsAdapter);
-        selectedItemsAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        selectedItems.clear();
-        Toast.makeText(this, "back", Toast.LENGTH_SHORT).show();
-    }
-
-    public void dialogXacNhan() {
-
     }
 }

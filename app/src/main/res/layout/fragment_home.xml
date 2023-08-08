@@ -65,7 +65,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="342dp"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Danh mục"
@@ -75,8 +75,9 @@
 
             <ImageView
                 android:id="@+id/addMuc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="41dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:background="@android:drawable/ic_menu_add"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -118,8 +119,8 @@
 
             <ImageView
                 android:id="@+id/addSanPham"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="41dp"
+                android:layout_height="match_parent"
                 android:background="@android:drawable/ic_menu_add"
                 android:textSize="18sp" />
         </LinearLayout>

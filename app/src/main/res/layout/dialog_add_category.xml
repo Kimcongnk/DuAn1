@@ -19,32 +19,33 @@
             android:layout_marginBottom="20dp"
             android:background="#03A9F4"
             android:gravity="center"
-            android:text="ADD CATEGORY"
+            android:text="Thêm Loại"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
 
-    <EditText
-        android:id="@+id/edt_name_category"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:hint="Tên Thể Loại"
-        android:textColor="#000"
-        android:textColorHint="#000" />
-    <EditText
-        android:id="@+id/img_select"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:hint="Url ảnh Thể"
-        android:textColor="#000"
-        android:textColorHint="#000" />
+        <EditText
+            android:id="@+id/edt_name_category"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:hint="Tên loại"
+            android:textColor="#000"
+            android:textColorHint="#000" />
+
+        <EditText
+            android:id="@+id/img_select"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:hint="Url ảnh"
+            android:textColor="#000"
+            android:textColorHint="#000" />
 
     <ImageView
         android:id="@+id/img_Url"

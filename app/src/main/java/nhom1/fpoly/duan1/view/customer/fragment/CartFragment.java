@@ -34,31 +34,25 @@ import nhom1.fpoly.duan1.model.Cart;
 import nhom1.fpoly.duan1.view.customer.CustomerActivity;
 
 public class CartFragment extends Fragment implements CartAdapter.OnQuantityChangeListener {
-
     private RecyclerView recyclerViewCart;
     private CartAdapter cartAdapter;
     private ArrayList<Cart> cartArrayList;
     private CartDao cartDao;
-
     private TextView txtTotalPrice, txtVuotXoa;
     private Button btnThanhToan, btbMuaNgay;
-
     private List<Cart> selectedItems = new ArrayList<>();
     private Cart cartItem;
     private View view;
     private SessionManager sessionManager;
 
-private Context context;
     public CartFragment() {
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         view = inflater.inflate(R.layout.fragment_cart, container, false);
+        view = inflater.inflate(R.layout.fragment_cart, container, false);
         recyclerViewCart = view.findViewById(R.id.recyclerView_cart);
         txtTotalPrice = view.findViewById(R.id.txt_total_price);
         txtVuotXoa = view.findViewById(R.id.txtVuotXoa);
@@ -66,22 +60,17 @@ private Context context;
         btbMuaNgay = view.findViewById(R.id.muasp);
         cartDao = new CartDao(getContext());
         sessionManager = new SessionManager(getContext());
-        Animation fadeIn = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-        Animation fadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
+        Animation fadeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
+        txtVuotXoa.startAnimation(fadeAnimation);
 
-        txtVuotXoa.setAnimation(fadeOut);
-        txtVuotXoa.setVisibility(View.INVISIBLE);
-        txtVuotXoa.startAnimation(fadeIn);
-        txtVuotXoa.setVisibility(View.VISIBLE);
-
-showData();
+        showData();
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), PayOder.class);
-                if(selectedItems.isEmpty()){
-                    Toast.makeText(getContext(), "Vui lòng chọn sản phẩm để mua", Toast.LENGTH_SHORT).show();
-                }else {
+                if (selectedItems.isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng chọn sản phẩm", Toast.LENGTH_SHORT).show();
+                } else {
                     intent.putParcelableArrayListExtra("SELECTED_ITEMS", (ArrayList<Cart>) selectedItems);
                     startActivity(intent);
                 }
@@ -95,7 +84,8 @@ showData();
         });
         return view;
     }
-    public void showData(){
+
+    public void showData() {
 
         cartArrayList = (ArrayList<Cart>) cartDao.getAllCartItemsWithProductInfo(sessionManager.getLoggedInCustomerId());
         if (cartArrayList.isEmpty()) {
@@ -113,7 +103,6 @@ showData();
         cartAdapter = new CartAdapter(cartArrayList, getContext(), this);
         recyclerViewCart.setAdapter(cartAdapter);
 
-// Set up swipe-to-delete functionality using SwipeToDeleteCallback
         SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(cartAdapter);
         swipeToDeleteCallback.setSwipeActionListener(new SwipeToDeleteCallback.SwipeActionListener() {
             @Override
@@ -129,7 +118,7 @@ showData();
 
     @Override
     public void onIncreaseClick(int position) {
-         cartItem = cartArrayList.get(position);
+        cartItem = cartArrayList.get(position);
         int currentQuantity = cartItem.getTotalTems();
         currentQuantity++;
         cartItem.setTotalTems(currentQuantity);
@@ -140,7 +129,7 @@ showData();
 
     @Override
     public void onDecreaseClick(int position) {
-         cartItem = cartArrayList.get(position);
+        cartItem = cartArrayList.get(position);
         int currentQuantity = cartItem.getTotalTems();
         if (currentQuantity > 1) {
             currentQuantity--;
@@ -173,7 +162,7 @@ showData();
         }
         DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
         String formattedPrice = decimalFormat.format(totalPrice);
-        txtTotalPrice.setText( formattedPrice+ "VND");
+        txtTotalPrice.setText(formattedPrice + "VND");
 
     }
 

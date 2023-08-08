@@ -19,9 +19,8 @@ import nhom1.fpoly.duan1.view.customer.fragment.HomeFragment;
 import nhom1.fpoly.duan1.view.customer.fragment.OrderFragment;
 
 public class CustomerActivity extends AppCompatActivity {
-
     BottomNavigationView bottomNavigationView;
-private SessionManager sessionManager;
+    private SessionManager sessionManager;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -29,7 +28,14 @@ private SessionManager sessionManager;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView_customer);
-sessionManager = new SessionManager(getApplication());
+        sessionManager = new SessionManager(getApplication());
+
+        if (sessionManager.isLoggedIn() == true) {
+        } else {
+            bottomNavigationView.getMenu().findItem(R.id.nav_cart).setTitle("Thống kê");
+            bottomNavigationView.getMenu().findItem(R.id.nav_cart).setIcon(R.drawable.ic_statistic);
+        }
+
         if (savedInstanceState == null) {
             replaceFragment(new HomeFragment());
         }
@@ -38,15 +44,11 @@ sessionManager = new SessionManager(getApplication());
             if (item.getItemId() == R.id.nav_home) {
                 replaceFragment(new HomeFragment());
             } else if (item.getItemId() == R.id.nav_cart) {
-                if(sessionManager.isLoggedIn() == true){
+                if (sessionManager.isLoggedIn() == true) {
                     replaceFragment(new CartFragment());
-
-                }else{
-                    bottomNavigationView.getMenu().findItem(R.id.nav_cart).setTitle("Thống kê");
-
+                } else {
                     replaceFragment(new CategoriesFragment());
                 }
-
 
             } else if (item.getItemId() == R.id.nav_order) {
                 replaceFragment(new OrderFragment());
@@ -67,6 +69,7 @@ sessionManager = new SessionManager(getApplication());
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        sessionManager.logoutCustomer();
         finishAffinity();
     }
 }

@@ -49,9 +49,6 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
         Product product = productList.get(position);
 
         holder.txt_name_product_home.setText(product.getName_product());
-//        DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
-//        String formattedPrice = decimalFormat.format(product.getPrice());
-
         holder.txt_price_product_home.setText(product.getPrice());
         String imageUrl = product.getImg_product();
 
@@ -66,10 +63,9 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
         } else {
             holder.txt_status.setVisibility(View.GONE);
         }
-Log.d("123","mot" + product.getName_product());
+
         if (detailOnClick != null) {
             holder.cardView.setOnClickListener(click -> {
-                Toast.makeText(context, "click item", Toast.LENGTH_SHORT).show();
                 detailOnClick.showDetails(product);
             });
         }

@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -27,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,8 +47,6 @@ import nhom1.fpoly.duan1.my_interface.CategoriesInterface;
 import nhom1.fpoly.duan1.my_interface.ProductInterface;
 
 
-// Imports are here...
-
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerView, recyclerView_category;
     private ProductHomeAdapter productHomeAdapter;
@@ -58,11 +58,7 @@ public class HomeFragment extends Fragment {
     private SimpleAdapter simpleAdapter;
     private List<Product> products = new ArrayList<>();
     ArrayList<Categories> list;
-
     private SessionManager sessionManager;
-
-
-
     private ImageView themMuc, themSanPham;
 
 
@@ -76,11 +72,12 @@ public class HomeFragment extends Fragment {
         themMuc = view.findViewById(R.id.addMuc);
 
         themSanPham = view.findViewById(R.id.addSanPham);
-        sessionManager = new SessionManager(getContext());
+
+
         recyclerView_category.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 2));
         recyclerView.setHasFixedSize(true);
-
+        sessionManager = new SessionManager(getContext());
         productsDao = new ProductsDao(getContext());
         categoryDao = new CategoryDao(getContext());
 
@@ -90,12 +87,15 @@ public class HomeFragment extends Fragment {
         slideModels.add(new SlideModel(R.drawable.img3, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.img5, ScaleTypes.FIT));
         imageViewSlider.setImageList(slideModels, ScaleTypes.FIT);
+
         List<Categories> categories = categoryDao.getAllCategories();
-
-
         categoryHomeAdapter = new CategoryHomeAdapter(requireActivity(), categories);
         recyclerView_category.setAdapter(categoryHomeAdapter);
-setData();
+
+        products = productsDao.getAllProducts();
+        productHomeAdapter = new ProductHomeAdapter(requireActivity(), products);
+        recyclerView.setAdapter(productHomeAdapter);
+
 
         if (sessionManager.isLoggedIn() == true) {
             themMuc.setVisibility(View.GONE);
@@ -104,26 +104,28 @@ setData();
             themMuc.setVisibility(View.VISIBLE);
             themSanPham.setVisibility(View.VISIBLE);
         }
-        themSanPham.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addProduct();
-            }
-        });
         themMuc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addCategory();
             }
         });
+        themSanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addProduct();
+            }
+        });
+
+
         categoryHomeAdapter.showProduct(new CategoriesInterface() {
             @Override
             public void showDetails(Categories categories1) {
                 products = productsDao.getProductsByCategoryId(categories1.getId());
-
                 productHomeAdapter = new ProductHomeAdapter(requireActivity(), products);
                 recyclerView.setAdapter(productHomeAdapter);
                 productHomeAdapter.notifyDataSetChanged();
+
                 productHomeAdapter.showProduct(new ProductInterface() {
 
                     @Override
@@ -133,10 +135,13 @@ setData();
                         } else {
                             updateProduct(product);
                         }
-
-
                     }
                 });
+            }
+
+            @Override
+            public void editCategories(Categories categories) {
+                updateCategory(categories);
             }
         });
 
@@ -147,7 +152,6 @@ setData();
                 if (sessionManager.isLoggedIn() == true) {
                     goToDetails(product);
                 } else {
-                    Toast.makeText(requireActivity(), "click item home", Toast.LENGTH_SHORT).show();
                     updateProduct(product);
                 }
             }
@@ -233,31 +237,38 @@ setData();
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
-    private void updateCategory() {
+    private void updateCategory(Categories categories) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_add_category, null);
         builder.setView(view);
 
         EditText tenLoai = view.findViewById(R.id.edt_name_category);
+        EditText urlAnh = view.findViewById(R.id.img_select);
+        TextView txtDialog = view.findViewById(R.id.tvNewItem);
+        txtDialog.setText("Sửa loại sản phẩn");
         Button themLoai = view.findViewById(R.id.btn_add);
-
+        tenLoai.setText(categories.getName_categories());
+        urlAnh.setText(categories.getImg_categories());
 
         themLoai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Categories categories = new Categories();
                 String tenL = tenLoai.getText().toString();
+                String txtAnh = urlAnh.getText().toString();
 
                 if (tenL.isEmpty()) {
                     tenLoai.setError("Không được để trống");
                     return;
                 }
+
                 categories.setName_categories(tenL);
+                categories.setImg_categories(txtAnh);
 //        categories.setImg_categories(ImagePath);
                 list = new ArrayList<>();
                 list.add(categories);
-                if (categoryDao.updateCategory(categories)) {
+                if (categoryDao.updateCategoryById(categories.getId(),tenL, txtAnh)) {
                     Toast.makeText(getContext(), "add successfully", Toast.LENGTH_SHORT).show();
 
                     getActivity().recreate();
@@ -283,11 +294,11 @@ setData();
         EditText edt_name_product = dialog.findViewById(R.id.edt_name_product);
         EditText edt_desc_product = dialog.findViewById(R.id.edt_desc_product);
         EditText edt_price_product = dialog.findViewById(R.id.edt_price_product);
-
+        EditText img_select = dialog.findViewById(R.id.img_select);
         Spinner spnLoai = dialog.findViewById(R.id.spin_loai_sp);
         Button btn_add_product = dialog.findViewById(R.id.btn_add);
-        EditText img_select = dialog.findViewById(R.id.img_select);
         CheckBox chkOutOfStock = dialog.findViewById(R.id.chk_out_of_stock);
+
         chkOutOfStock.setVisibility(View.GONE);
         simpleAdapter = new SimpleAdapter(
                 getContext(),
@@ -297,12 +308,12 @@ setData();
                 new int[]{android.R.id.text1}
 
         );
+
         spnLoai.setAdapter(simpleAdapter);
 
         btn_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String name = edt_name_product.getText().toString();
                 String priceString = edt_price_product.getText().toString();
                 String desc = edt_desc_product.getText().toString();
@@ -353,12 +364,15 @@ setData();
         dialog.setContentView(R.layout.dialog_add_product);
 
         EditText edt_name_product = dialog.findViewById(R.id.edt_name_product);
+        TextView name_dialog = dialog.findViewById(R.id.tvNewItem);
+        name_dialog.setText("Cập nhật");
         EditText edt_desc_product = dialog.findViewById(R.id.edt_desc_product);
         EditText edt_price_product = dialog.findViewById(R.id.edt_price_product);
 
         Spinner spnLoai = dialog.findViewById(R.id.spin_loai_sp);
         Button btn_add_product = dialog.findViewById(R.id.btn_add);
         EditText img_select = dialog.findViewById(R.id.img_select);
+        ImageView anh = dialog.findViewById(R.id.anh);
         CheckBox chkOutOfStock = dialog.findViewById(R.id.chk_out_of_stock);
 
         simpleAdapter = new SimpleAdapter(
@@ -369,10 +383,12 @@ setData();
                 new int[]{android.R.id.text1}
 
         );
+
         edt_name_product.setText(product.getName_product());
         edt_price_product.setText(product.getPrice());
-
         edt_desc_product.setText(product.getDesc_product());
+        img_select.setText(product.getImg_product());
+        Picasso.get().load(product.getImg_product()).into(anh);
         chkOutOfStock.setChecked(product.getConHang().equals("Hết hàng"));
         if (product.getConHang().equals("Hết hàng")) {
             checkProduct = "Hết hàng";
@@ -416,14 +432,13 @@ setData();
                 boolean check = productsDao.capNhatProduct(product.getId_product(), priceString, imagePath, maloai, Integer.parseInt(priceString), desc, checkProduct);
                 if (check) {
                     Toast.makeText(getContext(), "sua thanh cong", Toast.LENGTH_SHORT).show();
-
                     getActivity().recreate();
                 } else {
                     Toast.makeText(getContext(), "khong thanh cong", Toast.LENGTH_SHORT).show();
                 }
 
 
-                dialog.dismiss(); // Dismiss the dialog after updating the product
+                dialog.dismiss();
             }
         });
         dialog.show();
@@ -435,11 +450,6 @@ setData();
 
     public void setData() {
 
-        products = productsDao.getAllProducts();
-        productHomeAdapter = new ProductHomeAdapter(requireActivity(), products);
-        recyclerView.setAdapter(productHomeAdapter);
-
-        productHomeAdapter.notifyDataSetChanged();
     }
 
 }

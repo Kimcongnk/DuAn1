@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -51,6 +52,11 @@ public class CategoryHomeAdapter extends RecyclerView.Adapter<CategoryHomeAdapte
         Picasso.get().load(categories1.getImg_categories()).into(holder.img_category_home);
         holder.itemView.setOnClickListener(click -> {
             detailOnClick.showDetails(categories1);
+        });
+        holder.itemView.setOnLongClickListener(longClick -> {
+            detailOnClick.editCategories(categories1);
+            Toast.makeText(context, "loia", Toast.LENGTH_SHORT).show();
+            return true; // Consume the long click event
         });
     }
 

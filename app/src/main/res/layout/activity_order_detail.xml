@@ -165,14 +165,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tổng thanh toán: "
-
+android:layout_marginLeft="30dp"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/txtTotal"
             android:layout_width="134dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
+            android:layout_marginStart="10dp"
             android:text="10.000.000"
             android:textColor="#FF5722"
             android:textSize="20sp" />

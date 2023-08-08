@@ -60,9 +60,9 @@ public class RegisterFragment extends Fragment {
         String confirmPass = edt_register_confirmPassword.getText().toString();
 
         if ( username.isEmpty() || password.isEmpty() || confirmPass.isEmpty()) {
-            edt_register_username.setError("Please enter your address");
-            edt_register_password.setError("Please enter your address");
-            edt_register_confirmPassword.setError("Please enter your address");
+            edt_register_username.setError("Không được để trống");
+            edt_register_password.setError("Không được để trống");
+            edt_register_confirmPassword.setError("Không được để trống");
         } else if (!confirmPass.equals(password)) {
             Toast.makeText(requireContext(), "password do not match", Toast.LENGTH_SHORT).show();
         } else {
@@ -70,7 +70,7 @@ public class RegisterFragment extends Fragment {
             customer.setUsername(username);
             customer.setPassword(password);
             if (customerDao.insertCustomer(customer)) {
-                Toast.makeText(requireContext(), "Register successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Tạo tài khoản thành công", Toast.LENGTH_SHORT).show();
                 getParentFragmentManager().popBackStack();
             } else {
                 Toast.makeText(requireContext(), "Register failed", Toast.LENGTH_SHORT).show();

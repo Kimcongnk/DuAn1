@@ -82,19 +82,6 @@ public class ProductsDao {
         return true;
 
     }
-    public int xoaProduct(int id){
-        SQLiteDatabase sqLiteDatabase = createDatabase.getWritableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT *FROM Cart WHERE id_product=?",new String[]{String.valueOf(id)});
-        if (cursor.getCount()!=0){
-            return -1;
-        }
-        long check = sqLiteDatabase.delete("Products","id_product=?",new String[]{String.valueOf(id)});
-        if (check==-1){
-            return 0;
-
-        }
-        return 1;
-    }
     public boolean capNhatProduct(int id_product,String name_product,String image,int category_id,int price,String desc, String status){
         SQLiteDatabase sqLiteDatabase = createDatabase.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

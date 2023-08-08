@@ -50,16 +50,13 @@ public class OrderDetailAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.list_item_order_detail, parent, false);
         }
 
-        // Get the views from the layout
         TextView tvProductName = view.findViewById(R.id.tvProductName);
         TextView tvProductPrice = view.findViewById(R.id.tvProductPrice);
         TextView tvQuantity = view.findViewById(R.id.tvQuantity);
         ImageView itemImage = view.findViewById(R.id.img_back);
 
-        // Get the OrderDetail at the specified position
         OrderDetail orderDetail = orderDetailList.get(position);
 
-        // Set the data to the views
         tvProductName.setText(orderDetail.getProductName());
         DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
         String formattedPrice = decimalFormat.format(orderDetail.getPrice());

@@ -168,16 +168,4 @@
             android:textSize="20sp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="327dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_sum_order"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="#03A9F4"
-
-        android:text="Mua lại" />
-
 </RelativeLayout>

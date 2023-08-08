@@ -19,7 +19,7 @@ private Context context;
         this.swipeActionListener = listener;
     }
     public SwipeToDeleteCallback(CartAdapter adapter) {
-        super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT); // Drag directions = 0 (not used here)
+        super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         cartAdapter = adapter;
     }
 

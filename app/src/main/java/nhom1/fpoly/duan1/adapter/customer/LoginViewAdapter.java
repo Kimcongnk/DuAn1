@@ -7,9 +7,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import nhom1.fpoly.duan1.view.activity.LoginFragment;
 import nhom1.fpoly.duan1.view.activity.RegisterFragment;
-import nhom1.fpoly.duan1.view.customer.fragment.order.CancelledFrangment;
-import nhom1.fpoly.duan1.view.customer.fragment.order.DeliveredFragment;
-import nhom1.fpoly.duan1.view.customer.fragment.order.OrderingFragment;
 
 public class LoginViewAdapter extends FragmentStateAdapter {
     public LoginViewAdapter(@NonNull FragmentActivity fragmentActivity) {

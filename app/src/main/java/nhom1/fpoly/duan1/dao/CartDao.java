@@ -15,10 +15,8 @@ import nhom1.fpoly.duan1.model.Cart;
 public class CartDao {
     private CreateDatabase dbHelper;
     private SQLiteDatabase db;
-    private Context context;
 
     public CartDao(Context context) {
-        this.context = context;
         dbHelper = new CreateDatabase(context);
         db = dbHelper.getWritableDatabase();
     }
@@ -43,57 +41,6 @@ public class CartDao {
         return exists;
     }
 
-
-//    @SuppressLint("Range")
-//    public Cart getCartById(long cartId) {
-//        String[] projection = {"cart_id", "user_id", "product_id", "totaItem"};
-//        String selection = "cart_id = ?";
-//        String[] selectionArgs = {String.valueOf(cartId)};
-//        Cursor cursor = db.query("Cart", projection, selection, selectionArgs, null, null, null);
-//c
-//        Cart cart = null;
-//        if (cursor.moveToFirst()) {
-//            cart = new Cart();
-//            cart.setCartId(cursor.getInt(cursor.getColumnIndex("cart_id")));
-//            cart.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
-//            cart.setId_product(cursor.getInt(cursor.getColumnIndex("product_id")));
-//            cart.setTotalTems(cursor.getInt(cursor.getColumnIndex("totaItem")));
-//        }
-//        cursor.close();
-//        db.close();
-//        return cart;
-//    }
-
-//    @SuppressLint("Range")
-//    public List<Cart> getAllCarts() {
-//        String[] projection = {"cart_id", "user_id", "product_id", "totaItem"};
-//        Cursor cursor = db.query("Cart", projection, null, null, null, null, null);
-//        List<Cart> cartList = new ArrayList<>();
-//        while (cursor.moveToNext()) {
-//            Cart cart = new Cart();
-//            cart.setCartId(cursor.getInt(cursor.getColumnIndex("cart_id")));
-//            cart.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
-//            cart.setId_product(cursor.getInt(cursor.getColumnIndex("product_id")));
-//            cart.setTotalTems(cursor.getInt(cursor.getColumnIndex("totaItem")));
-//            cartList.add(cart);
-//        }
-//        cursor.close();
-//        db.close();
-//        return cartList;
-//    }
-
-    //    public int updateCart(Cart cart) {
-//        ContentValues values = new ContentValues();
-//        values.put("user_id", cart.getUserId());
-//        values.put("product_id", cart.getId_product());
-//        values.put("totaItem", cart.getTotalTems());
-//        String whereClause = "cart_id = ?";
-//        String[] whereArgs = {String.valueOf(cart.getCartId())};
-//        int rowsAffected = db.update("Cart", values, whereClause, whereArgs);
-//        db.close();
-//        return rowsAffected;
-//    }
-//
     public int deleteCart(int cartId) {
         String whereClause = "cart_id = ?";
         String[] whereArgs = {String.valueOf(cartId)};
